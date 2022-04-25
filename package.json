@@ -1,8 +1,7 @@
 {
   "name": "mfd-1",
   "version": "1.0.0",
-  "description": "Yandex middle frontend dev first project",
-  "type": "module",  
+  "description": "Yandex middle frontend dev first project",  
   "dependencies": {
     "handlebars": "^4.7.7"
   },
