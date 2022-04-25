@@ -1,0 +1,16 @@
+.avatar {  
+
+    &_chatItem {
+        width: 47px;
+        height: 47px;   
+    }
+
+    &_chatItem &__image {
+        object-fit: cover;
+        border-radius: 50%;
+        width: 47px;
+        height: 47px;        
+    }
+
+    
+}

@@ -1,0 +1,13 @@
+<div class="container container__centered container__fullHeight">
+    <div class="login login__container shadowBox">
+        <span class="login__label">Login</span>
+        {{#> form}}
+        {{> field caption="Login" type="text" name="login" classModifier="field_login"}}
+        {{> field caption="Password" type="password" name="password" classModifier="field_login"}}
+        <div class="login__buttonContainer">
+            {{> button caption="Sign in" classModifier="button_primary" }}
+        </div>
+        {{/form}}
+        {{> link caption="Register" url="/register" classModifier="login__link"}}        
+    </div>
+</div>

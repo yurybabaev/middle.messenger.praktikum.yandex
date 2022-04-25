@@ -1,0 +1,19 @@
+<div class="chatItem">
+    <div class="chatItem__avatarContainer container container__centered">
+        {{> avatar classModifier="avatar_chatItem"}}
+    </div>
+    <div class="chatItem__container">
+        <div class="chatItem__top">
+            <span class="chatItem__user">{{user}}</span>
+            <span class="chatItem__date">{{date}}</span>
+        </div>
+        <div class="chatItem__bottom">
+            <span class="chatItem__text">{{text}}</span>
+            {{#if unreadCount}}
+            <div class="chatItem__unread">                
+                    {{unreadCount}}                
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</div>

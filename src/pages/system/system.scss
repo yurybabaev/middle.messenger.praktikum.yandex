@@ -1,0 +1,18 @@
+@import "../../styles/common.scss";
+@import "../../styles/container.scss";
+
+.system {
+    display: flex;
+    flex-direction: column;
+    font-style: $font-style-base;
+    font-weight: $font-weight-base;
+
+    &__code {
+        @include sameFontAndLineSize(7rem);
+    }
+
+    &__text {
+        @include sameFontAndLineSize(1.65rem);
+        margin-bottom: 6rem;
+    }
+}

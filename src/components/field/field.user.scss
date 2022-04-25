@@ -1,0 +1,31 @@
+@import "../../styles/common.scss";
+@import "./field.scss";
+
+.field {
+    &_user &__label {
+        display: flex;
+        align-items: center;
+        color: $font-color-primary;
+        font-style: $font-style-base;
+        font-weight: $font-weight-base;
+        @include sameFontAndLineSize(1.1rem);
+    }
+
+    &_user &__input {
+        flex: 1 1 auto;
+        color: $font-color-secondary;
+        text-align: end;
+        border: none;
+        @include sameFontAndLineSize(1.1rem);
+    }
+
+    &__separator {
+        &_user {
+            width: 100%;
+            border-width: 0;
+            padding: 0;
+            margin: 10px 0;
+            border-top: 1px solid $background-color-secondary;
+        }
+    }
+}
