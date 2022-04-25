@@ -23,12 +23,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yurybabaev/mfd-1.git"
+    "url": "git+https://github.com/yurybabaev/middle.messenger.praktikum.yandex.git"
   },
   "author": "Yury Babaev",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/yurybabaev/mfd-1/issues"
+    "url": "https://github.com/yurybabaev/middle.messenger.praktikum.yandex/issues"
   },
-  "homepage": "https://github.com/yurybabaev/mfd-1#readme"
+  "homepage": "https://github.com/yurybabaev/middle.messenger.praktikum.yandex#readme"
 }
