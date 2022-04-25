@@ -10,7 +10,7 @@ npm install
 
 To test it locally, run:
 ```
-npm run serve
+npm run dev
 ```
 
 For production build use
