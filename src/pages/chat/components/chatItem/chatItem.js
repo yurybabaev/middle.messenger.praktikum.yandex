@@ -1,8 +1,8 @@
 import Handlebars from "handlebars";
-import tpl from './chatItem.hbs';
+import template from './chatItem.hbs';
 import "./chatItem.scss";
 import avatar from "../../../../components/avatar/avatar";
 
-Handlebars.registerPartial("chatItem", tpl);
+Handlebars.registerPartial("chatItem", template);
 
-export default () => tpl();
+export default () => template();

@@ -3,15 +3,15 @@
   "version": "1.0.0",
   "description": "Yandex middle frontend dev first project",  
   "dependencies": {
-    "handlebars": "^4.7.7"
+    "handlebars": "4.7.7"
   },
   "devDependencies": {
-    "@parcel/config-default": "^2.5.0",
-    "@parcel/transformer-inline-string": "^2.5.0",
-    "@parcel/transformer-sass": "^2.5.0",
-    "express": "^4.17.3",
-    "parcel": "^2.5.0",
-    "parcel-transformer-hbs": "^1.0.4"
+    "@parcel/config-default": "2.5.0",
+    "@parcel/transformer-inline-string": "2.5.0",
+    "@parcel/transformer-sass": "2.5.0",
+    "express": "4.17.3",
+    "parcel": "2.5.0",
+    "parcel-transformer-hbs": "1.0.4"
   },
   "scripts": {
     "clean": "npx rimraf dist",

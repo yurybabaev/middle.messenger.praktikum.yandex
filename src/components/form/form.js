@@ -1,7 +1,7 @@
 import Handlebars from "handlebars";
-import tpl from './form.hbs';
+import template from './form.hbs';
 import "./form.scss";
 
-Handlebars.registerPartial("form", tpl);
+Handlebars.registerPartial("form", template);
 
-export default () => tpl();
+export default () => template();

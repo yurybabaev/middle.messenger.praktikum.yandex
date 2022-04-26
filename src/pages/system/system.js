@@ -1,8 +1,8 @@
 import Handlebars from "handlebars";
-import tpl from './system.hbs'
+import template from './system.hbs'
 import "./system.scss"
 
-export default (code, text) => tpl({
+export default (code, text) => template({
     code: code,
     text: text
 });

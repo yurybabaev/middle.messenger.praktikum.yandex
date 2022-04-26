@@ -1,7 +1,7 @@
 import Handlebars from "handlebars";
-import tpl from './button.hbs';
+import template from './button.hbs';
 import "./button.scss";
 
-Handlebars.registerPartial("button", tpl);
+Handlebars.registerPartial("button", template);
 
-export default () => tpl();
+export default () => template();

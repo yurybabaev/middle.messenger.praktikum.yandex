@@ -1,7 +1,7 @@
 import Handlebars from "handlebars";
-import tpl from './field.hbs';
+import template from './field.hbs';
 import "./field.scss";
 
-Handlebars.registerPartial("field", tpl);
+Handlebars.registerPartial("field", template);
 
-export default () => tpl();
+export default () => template();

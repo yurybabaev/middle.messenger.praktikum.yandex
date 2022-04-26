@@ -1,7 +1,7 @@
 import Handlebars from "handlebars";
-import tpl from './link.hbs';
+import template from './link.hbs';
 import "./link.scss";
 
-Handlebars.registerPartial("link", tpl);
+Handlebars.registerPartial("link", template);
 
-export default () => tpl();
+export default () => template();

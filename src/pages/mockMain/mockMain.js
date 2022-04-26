@@ -1,4 +1,4 @@
-import tpl from './mockMain.hbs';
+import template from './mockMain.hbs';
 import "./mockMain.scss";
 
-export default (links) => tpl(links);
+export default (links) => template(links);

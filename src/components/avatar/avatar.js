@@ -1,13 +1,13 @@
 import Handlebars from "handlebars";
-import tpl from './avatar.hbs';
+import template from './avatar.hbs';
 import "./avatar.scss";
 import defaultAvatar from "url:./defaultAvatar.png"
 
 Handlebars.registerPartial("avatar", (params) => {
-    return tpl({
+    return template({
         ...params,
         defaultAvatar: defaultAvatar
     });
 });
 
-export default () => tpl();
+export default () => template();
