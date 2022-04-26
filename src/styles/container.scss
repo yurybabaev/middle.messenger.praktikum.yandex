@@ -1,0 +1,21 @@
+.container {
+    width: 100%;    
+    display: flex;
+}
+
+.container__fullHeight {
+    height: 100%;        
+}
+
+.container__centered {
+    align-items: center;
+    justify-content: center;
+}
+
+.container__centeredHorizontal {
+     justify-content: center;
+}
+
+.container__centeredVertical {
+    align-items: center; 
+}

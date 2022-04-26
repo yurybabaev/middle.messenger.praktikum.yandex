@@ -1,0 +1,24 @@
+{{#> flyout returnUrl="/user/view"}}
+<div class="userEdit userEdit__container">
+    {{> avatar avatarAlt="User avatar" classModifier="avatar_user"}}    
+    <span class="userEdit__userLabel"></span>
+    {{#> form}}
+    {{> field caption="Email" type="email" value="test@email.com" name="email" classModifier="field_user"}}
+    <hr class="field__separator_user">
+    {{> field caption="Login" type="text" value="ivan" name="login" classModifier="field_user"}}
+    <hr class="field__separator_user">
+    {{> field caption="First name" type="text" value="Ivan" name="first_name" classModifier="field_user"}}
+    <hr class="field__separator_user">
+    {{> field caption="Second name" type="text" value="Ivanov" name="second_name" classModifier="field_user"}}
+    <hr class="field__separator_user">
+    {{> field caption="Nickname" type="text" value="stardestroyer5000" name="nick" classModifier="field_user"}}
+    <hr class="field__separator_user">
+    {{> field caption="Phone" type="text" value="+71112223344" name="phone" classModifier="field_user"}}
+    {{/form}}
+    <div class="userEdit__buttonContainer">
+        {{> button caption="Save" classModifier="button_primary" }}
+    </div>
+
+</div>
+
+{{/flyout}}

@@ -1,0 +1,16 @@
+@import "../../styles/common.scss";
+
+.avatar {
+    position: relative;    
+
+    &__border {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+}
