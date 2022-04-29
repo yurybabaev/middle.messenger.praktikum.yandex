@@ -1,7 +1,8 @@
-import Handlebars from "handlebars";
+import Handlebars from 'handlebars';
 import template from './button.hbs';
-import "./button.scss";
+import './button.scss';
 
-Handlebars.registerPartial("button", template);
+const registerPartial = () => Handlebars.registerPartial('button', template);
+export { registerPartial };
 
 export default () => template();

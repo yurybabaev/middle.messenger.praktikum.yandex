@@ -1,7 +1,4 @@
-import Handlebars from "handlebars";
 import template from './userView.hbs';
-import "./userView.scss";
-import "../../../layouts/flyout";
-import "../../../components/avatar/avatar";
+import './userView.scss';
 
 export default () => template();

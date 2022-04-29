@@ -1,8 +1,7 @@
-import Handlebars from "handlebars";
-import template from './system.hbs'
-import "./system.scss"
+import template from './system.hbs';
+import './system.scss';
 
-export default (code, text) => template({
-    code: code,
-    text: text
+export default (code: string, text: string) => template({
+  code,
+  text,
 });

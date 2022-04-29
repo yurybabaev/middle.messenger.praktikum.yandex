@@ -1,7 +1,4 @@
-import Handlebars from "handlebars";
 import template from './flyout.hbs';
-import "./flyout.scss";
-
-Handlebars.registerPartial("flyout", template);
+import './flyout.scss';
 
 export default () => template();

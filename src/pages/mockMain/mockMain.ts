@@ -1,4 +1,6 @@
 import template from './mockMain.hbs';
-import "./mockMain.scss";
+import './mockMain.scss';
 
-export default (links) => template(links);
+export default (links: { text: string, url: string }[]) => template({
+  links,
+});

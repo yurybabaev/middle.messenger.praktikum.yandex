@@ -1,7 +1,4 @@
-import Handlebars from "handlebars";
 import template from './field.hbs';
-import "./field.scss";
-
-Handlebars.registerPartial("field", template);
+import './field.scss';
 
 export default () => template();

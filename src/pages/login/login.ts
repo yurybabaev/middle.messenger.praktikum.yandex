@@ -1,9 +1,5 @@
-import Handlebars from "handlebars";
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import template from './login.hbs';
-import "./login.scss";
-import form from "../../components/form/form";
-import field from "../../components/field/field";
-import button from "../../components/button/button";
-import button from "../../components/link/link";
+import './login.scss';
 
 export default () => template();
