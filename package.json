@@ -28,7 +28,7 @@
     "dev": "parcel static/index.html",
     "build": "npm run clean && parcel build static/index.html",
     "start": "npm run build && node ./server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx eslint ./**/*.ts"
   },
   "repository": {
     "type": "git",
