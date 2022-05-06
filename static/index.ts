@@ -1,6 +1,6 @@
 import './index.scss';
 import login from '../src/pages/login/login';
-import register from '../src/pages/register/register';
+import Register from '../src/pages/register/register';
 import mockMain from '../src/pages/mockMain/mockMain';
 import userView from '../src/pages/user/userView/userView';
 import userEdit from '../src/pages/user/userEdit/userEdit';
@@ -8,6 +8,8 @@ import userChangePassword from '../src/pages/user/userChangePassword/userChangeP
 import chat from '../src/pages/chat/chat';
 import system from '../src/pages/system/system';
 import registerPartials from '../src/utils/registerPartials';
+import Block from '../src/utils/block';
+import render from '../src/utils/renderDom';
 
 registerPartials();
 
@@ -29,6 +31,12 @@ const setContent = (
   }
 };
 
+const renderPage = (pathStart: string, page: Block) => {
+  if (route === pathStart) {
+    render('#root', page);
+  }
+};
+
 setContent(
   '/',
   mockMain,
@@ -46,7 +54,7 @@ setContent(
 
 );
 setContent('/login', login);
-setContent('/register', register);
+renderPage('/register', new Register());
 setContent('/user/view', userView);
 setContent('/user/edit', userEdit);
 setContent('/user/changepassword', userChangePassword);
