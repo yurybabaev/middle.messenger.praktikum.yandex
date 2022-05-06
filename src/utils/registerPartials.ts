@@ -1,6 +1,6 @@
 import { registerPartial as registerPartialLink } from '../components/link/link';
 import { registerPartial as registerPartialAvatar } from '../components/avatar/avatar';
-import { registerPartial as registerPartialButton } from '../components/button/button';
+// import { registerPartial as registerPartialButton } from '../components/button/button';
 import { registerPartial as registerPartialField } from '../components/field/field';
 import { registerPartial as registerPartialForm } from '../components/form/form';
 import { registerPartial as registerPartialFlyout } from '../layouts/flyout';
@@ -10,7 +10,7 @@ import { registerPartial as registerPartialSearch } from '../pages/chat/componen
 export default () => {
   registerPartialLink();
   registerPartialAvatar();
-  registerPartialButton();
+  // registerPartialButton();
   registerPartialField();
   registerPartialForm();
   registerPartialFlyout();

@@ -10,7 +10,8 @@
             {{> field caption="Password" type="password" name="password" classModifier="field_register"}}
             {{> field caption="Repeat password" type="password" name="password_repeat" classModifier="field_register"}}
             <div class="register__buttonContainer">
-                {{> button caption="Register" classModifier="button_primary" }}
+                {{!-- {{> button caption="Register" classModifier="button_primary" }} --}}
+                <div id="registerBtn"></div>
             </div>
         {{/form}}
         {{> link caption="Sign in" url="/login" classModifier="register__link"}}      

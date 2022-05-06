@@ -9,7 +9,7 @@ import chat from '../src/pages/chat/chat';
 import system from '../src/pages/system/system';
 import registerPartials from '../src/utils/registerPartials';
 import Block from '../src/utils/block';
-import render from '../src/utils/renderDom';
+import renderDom from '../src/utils/renderDom';
 
 registerPartials();
 
@@ -33,7 +33,7 @@ const setContent = (
 
 const renderPage = (pathStart: string, page: Block) => {
   if (route === pathStart) {
-    render('#root', page);
+    renderDom('#root', page);
   }
 };
 
@@ -54,7 +54,13 @@ setContent(
 
 );
 setContent('/login', login);
-renderPage('/register', new Register());
+renderPage('/register', new Register("div",
+  {
+    events: {
+      click: () => console.log("ASAS")
+    }
+  }
+));
 setContent('/user/view', userView);
 setContent('/user/edit', userEdit);
 setContent('/user/changepassword', userChangePassword);

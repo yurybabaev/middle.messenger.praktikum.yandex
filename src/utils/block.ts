@@ -1,3 +1,4 @@
+import { listeners } from 'process';
 import EventBus from './eventBus';
 
 enum EVENTS {
@@ -13,7 +14,7 @@ interface Meta {
   propsChanged: boolean
 }
 
-type Props = Record<string, unknown>;
+type Props = any;
 
 abstract class Block {
   private _element: HTMLElement;
@@ -37,6 +38,32 @@ abstract class Block {
 
     this._registerEvents();
     this._eventBus.emit(EVENTS.INIT);
+  }
+
+  protected get props() {
+    return this._props;
+  }
+
+  _addDomEvents() {
+    const propsEvents: Record<string, () => void> = this.props.events;
+    if (!propsEvents || !this._element) {
+      return;
+    }
+
+    Object.entries(propsEvents).forEach(([event, listener]) => {
+      this._element.addEventListener(event, listener);
+    });
+  }
+
+  _removeDomEvents() {
+    const propsEvents: Record<string, () => void> = this.props.events;
+    if (!propsEvents || !this._element) {
+      return;
+    }
+
+    Object.entries(propsEvents).forEach(([event, listener]) => {
+      this._element.addEventListener(event, listener);
+    });
   }
 
   _registerEvents() {
@@ -89,6 +116,7 @@ abstract class Block {
     }
     this._meta.propsChanged = false;
     Object.assign(this._props, nextProps);
+    this._addDomEvents();
     if (this._meta.propsChanged) {
       this._eventBus.emit(EVENTS.FLOW_CDU, this._meta.prevProps, this._props);
       this._meta.prevProps = { ...this._props };
@@ -100,12 +128,14 @@ abstract class Block {
   }
 
   _render() {
+    this._removeDomEvents();
     const block = this.render();
     // Этот небезопасный метод для упрощения логики
     // Используйте шаблонизатор из npm или напишите свой безопасный
     // Нужно не в строку компилировать (или делать это правильно),
     // либо сразу в DOM-элементы возвращать из compile DOM-ноду
     this._element.innerHTML = block;
+    this._addDomEvents();
   }
 
   // Может переопределять пользователь, необязательно трогать
@@ -122,16 +152,13 @@ abstract class Block {
     const self = this;
 
     return new Proxy(props, {
-      get(target: Props, prop: keyof Props) {
+      get(target: Record<string, unknown>, prop: string) {
         const value = target[prop];
         return (typeof value === 'function') ? value.bind(target) : value;
       },
 
-      set(target: Props, prop: keyof Props, val) {
-        if (!(prop in target)) {
-          return false;
-        }
-        if (target[prop as keyof typeof target] !== val) {
+      set(target: Record<string, unknown>, prop: string, val) {
+        if (target[prop] !== val) {
           self._meta.propsChanged = true;
           // eslint-disable-next-line no-param-reassign
           target[prop] = val;
@@ -144,8 +171,6 @@ abstract class Block {
       },
 
     });
-
-    return props;
   }
 
   static _createDocumentElement(tagName: string) {
