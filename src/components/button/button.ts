@@ -12,10 +12,10 @@ export interface ButtonProps {
 
 export class Button extends Block {
   constructor(props: /* ButtonProps */ any) {
-    super('button', props);
+    super(props);
   }
 
-  protected render(): string {
-    return this.props.caption;
+  protected render() {
+    return this.compile(template, { ...this.props });
   }
 }

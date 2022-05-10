@@ -55,19 +55,11 @@ setContent(
 
 );
 
-const button = new Button({
-  caption: 'click me',
-  events: {
-    click: () => console.log('Btn clckd'),
-  },
+const register = new Register({
 });
 
-setTimeout(() => button.setProps({
-  caption: 'do not click me',  
-}), 2000);
-
 setContent('/login', login);
-renderPage('/register', button);
+renderPage('/register', register);
 setContent('/user/view', userView);
 setContent('/user/edit', userEdit);
 setContent('/user/changepassword', userChangePassword);

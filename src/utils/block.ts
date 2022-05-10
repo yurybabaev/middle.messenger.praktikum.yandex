@@ -1,3 +1,5 @@
+/* eslint-disable class-methods-use-this */
+import { nanoid } from 'nanoid';
 import EventBus from './eventBus';
 
 enum EVENTS {
@@ -8,7 +10,6 @@ enum EVENTS {
 }
 
 interface Meta {
-  tagName: string,
   propsChanged: boolean,
   oldEvents: any
 }
@@ -16,6 +17,8 @@ interface Meta {
 type Props = any;
 
 abstract class Block {
+  public id = nanoid(8);
+
   private _element: HTMLElement;
 
   private _meta: Meta;
@@ -24,11 +27,15 @@ abstract class Block {
 
   private _eventBus: EventBus;
 
-  constructor(tagName: string = 'div', props: Props = {}) {
+  private _children: Record<string, Block>;
+
+  constructor(propsAndChildren: any = {}) {
+    const { props, children } = this._getPropsAndChildren(propsAndChildren);
+
     this._props = this._makePropsProxy(props);
+    this._children = children;
 
     this._meta = {
-      tagName,
       propsChanged: false,
       oldEvents: this._props.events,
     };
@@ -66,6 +73,21 @@ abstract class Block {
     });
   }
 
+  _getPropsAndChildren(propsAndChildren: any) {
+    const children: any = {};
+    const props: any = {};
+
+    Object.entries(propsAndChildren).forEach(([key, value]) => {
+      if (value instanceof Block) {
+        children[key] = value;
+      } else {
+        props[key] = value;
+      }
+    });
+
+    return { props, children };
+  }
+
   _registerEvents() {
     this._eventBus.on(EVENTS.INIT, this.init.bind(this));
     this._eventBus.on(EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
@@ -73,13 +95,7 @@ abstract class Block {
     this._eventBus.on(EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
   }
 
-  _createResources() {
-    const { tagName } = this._meta;
-    this._element = Block._createDocumentElement(tagName);
-  }
-
   init() {
-    this._createResources();
     this._eventBus.emit(EVENTS.FLOW_RENDER);
   }
 
@@ -127,20 +143,24 @@ abstract class Block {
   }
 
   _render() {
-    this._removeDomEvents();
-    const block = this.render();
-    // Этот небезопасный метод для упрощения логики
-    // Используйте шаблонизатор из npm или напишите свой безопасный
-    // Нужно не в строку компилировать (или делать это правильно),
-    // либо сразу в DOM-элементы возвращать из compile DOM-ноду
-    this._element.innerHTML = block;
-    this._addDomEvents();    
+    const fragment = this.render();
+
+    const newElement = fragment.firstChild as HTMLElement;
+
+    if (this._element) {
+      this._removeDomEvents();
+      this._element.replaceWith(newElement);
+    }
+
+    this._element = newElement;
+
+    this._addDomEvents();
   }
 
   // Может переопределять пользователь, необязательно трогать
   // eslint-disable-next-line class-methods-use-this
-  protected render(): string {
-    return '';
+  protected render(): DocumentFragment {
+    return new DocumentFragment();
   }
 
   getContent() {
@@ -183,6 +203,32 @@ abstract class Block {
 
   hide() {
     this.element.style.display = 'none';
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,  class-methods-use-this
+  compile(template: any, context: any) {
+    const fragment = Block._createDocumentElement('template') as HTMLTemplateElement;
+
+    Object.entries(this._children).forEach(([key, child]) => {
+      context[key] = `<div data-id="id-${child.id}"></div>`;
+    });
+
+    const htmlString = template(context);
+
+    fragment.innerHTML = htmlString;
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    Object.entries(this._children).forEach(([_, child]) => {
+      const stub = fragment.content.querySelector(`[data-id="id-${child.id}"]`);
+
+      if (!stub) {
+        return;
+      }
+
+      stub.replaceWith(child.getContent());
+    });
+
+    return fragment.content;
   }
 }
 
