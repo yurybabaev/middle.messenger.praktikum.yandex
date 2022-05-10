@@ -8,7 +8,7 @@ class Register extends Block {
   // eslint-disable-next-line class-methods-use-this
   protected render(): string {
     const btn = new Button({ caption: 'Hello!' });
-    ///renderDom('registerBtn', btn);
+    /// renderDom('registerBtn', btn);
 
     return template();
   }

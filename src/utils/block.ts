@@ -1,4 +1,3 @@
-import { listeners } from 'process';
 import EventBus from './eventBus';
 
 enum EVENTS {
@@ -10,8 +9,8 @@ enum EVENTS {
 
 interface Meta {
   tagName: string,
-  prevProps: unknown,
-  propsChanged: boolean
+  propsChanged: boolean,
+  oldEvents: any
 }
 
 type Props = any;
@@ -26,13 +25,13 @@ abstract class Block {
   private _eventBus: EventBus;
 
   constructor(tagName: string = 'div', props: Props = {}) {
+    this._props = this._makePropsProxy(props);
+
     this._meta = {
       tagName,
-      prevProps: props,
       propsChanged: false,
+      oldEvents: this._props.events,
     };
-
-    this._props = this._makePropsProxy(props);
 
     this._eventBus = new EventBus();
 
@@ -53,16 +52,17 @@ abstract class Block {
     Object.entries(propsEvents).forEach(([event, listener]) => {
       this._element.addEventListener(event, listener);
     });
+    this._meta.oldEvents = this.props.events;
   }
 
   _removeDomEvents() {
-    const propsEvents: Record<string, () => void> = this.props.events;
+    const propsEvents: Record<string, () => void> = this._meta.oldEvents;
     if (!propsEvents || !this._element) {
       return;
     }
 
     Object.entries(propsEvents).forEach(([event, listener]) => {
-      this._element.addEventListener(event, listener);
+      this._element.removeEventListener(event, listener);
     });
   }
 
@@ -110,16 +110,15 @@ abstract class Block {
     return true;
   }
 
-  public SetProps(nextProps: Props) {
+  public setProps(nextProps: Props) {
     if (!nextProps) {
       return;
     }
     this._meta.propsChanged = false;
+    const oldProps = { ...this._props };
     Object.assign(this._props, nextProps);
-    this._addDomEvents();
     if (this._meta.propsChanged) {
-      this._eventBus.emit(EVENTS.FLOW_CDU, this._meta.prevProps, this._props);
-      this._meta.prevProps = { ...this._props };
+      this._eventBus.emit(EVENTS.FLOW_CDU, oldProps, this._props);
     }
   }
 
@@ -135,7 +134,7 @@ abstract class Block {
     // Нужно не в строку компилировать (или делать это правильно),
     // либо сразу в DOM-элементы возвращать из compile DOM-ноду
     this._element.innerHTML = block;
-    this._addDomEvents();
+    this._addDomEvents();    
   }
 
   // Может переопределять пользователь, необязательно трогать

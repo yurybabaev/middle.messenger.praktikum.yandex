@@ -10,6 +10,7 @@ import system from '../src/pages/system/system';
 import registerPartials from '../src/utils/registerPartials';
 import Block from '../src/utils/block';
 import renderDom from '../src/utils/renderDom';
+import { Button } from '../src/components/button/button';
 
 registerPartials();
 
@@ -53,14 +54,20 @@ setContent(
   ],
 
 );
+
+const button = new Button({
+  caption: 'click me',
+  events: {
+    click: () => console.log('Btn clckd'),
+  },
+});
+
+setTimeout(() => button.setProps({
+  caption: 'do not click me',  
+}), 2000);
+
 setContent('/login', login);
-renderPage('/register', new Register("div",
-  {
-    events: {
-      click: () => console.log("ASAS")
-    }
-  }
-));
+renderPage('/register', button);
 setContent('/user/view', userView);
 setContent('/user/edit', userEdit);
 setContent('/user/changepassword', userChangePassword);
