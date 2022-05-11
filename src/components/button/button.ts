@@ -11,11 +11,19 @@ export interface ButtonProps {
 }
 
 export class Button extends Block {
+  public static get ComponentName(): string {
+    return 'Button';
+  }
+
   constructor(props: /* ButtonProps */ any) {
     super(props);
   }
 
   protected render() {
-    return this.compile(template, { ...this.props });
+    return /* html */ `
+    <button class="button {{classModifier}}" type="button">
+    <span class="button__text">{{caption}}</span>
+</button>
+    `;
   }
 }

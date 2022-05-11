@@ -55,8 +55,7 @@ setContent(
 
 );
 
-const register = new Register({
-});
+const register = new Register();
 
 setContent('/login', login);
 renderPage('/register', register);

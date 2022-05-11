@@ -1,6 +1,8 @@
 /* eslint-disable class-methods-use-this */
 import { nanoid } from 'nanoid';
+import Handlebars from 'handlebars';
 import EventBus from './eventBus';
+
 
 enum EVENTS {
   INIT = 'init',
@@ -16,7 +18,11 @@ interface Meta {
 
 type Props = any;
 
-abstract class Block {
+class Block {
+  public static get ComponentName() {
+    return '';
+  }
+
   public id = nanoid(8);
 
   private _element: HTMLElement;
@@ -28,6 +34,10 @@ abstract class Block {
   private _eventBus: EventBus;
 
   private _children: Record<string, Block>;
+
+  public get children(): Record<string, Block> {
+    return this._children;
+  }
 
   constructor(propsAndChildren: any = {}) {
     const { props, children } = this._getPropsAndChildren(propsAndChildren);
@@ -143,9 +153,11 @@ abstract class Block {
   }
 
   _render() {
-    const fragment = this.render();
+    const templateString = this.render();
 
-    const newElement = fragment.firstChild as HTMLElement;
+    const fragment = this.compile(templateString, { ...this.props });
+
+    const newElement = fragment.firstElementChild as HTMLElement;
 
     if (this._element) {
       this._removeDomEvents();
@@ -159,8 +171,8 @@ abstract class Block {
 
   // Может переопределять пользователь, необязательно трогать
   // eslint-disable-next-line class-methods-use-this
-  protected render(): DocumentFragment {
-    return new DocumentFragment();
+  protected render(): string {
+    return '';
   }
 
   getContent() {
@@ -206,14 +218,12 @@ abstract class Block {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars,  class-methods-use-this
-  compile(template: any, context: any) {
+  compile(templateString: string, context: any) {
     const fragment = Block._createDocumentElement('template') as HTMLTemplateElement;
 
-    Object.entries(this._children).forEach(([key, child]) => {
-      context[key] = `<div data-id="id-${child.id}"></div>`;
-    });
+    const template = Handlebars.compile(templateString);
 
-    const htmlString = template(context);
+    const htmlString = template({ ...context, children: this.children });
 
     fragment.innerHTML = htmlString;
 
