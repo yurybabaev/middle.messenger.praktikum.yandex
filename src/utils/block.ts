@@ -1,8 +1,6 @@
-/* eslint-disable class-methods-use-this */
 import { nanoid } from 'nanoid';
 import Handlebars from 'handlebars';
 import EventBus from './eventBus';
-
 
 enum EVENTS {
   INIT = 'init',
@@ -114,7 +112,7 @@ class Block {
   }
 
   // Может переопределять пользователь, необязательно трогать
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, class-methods-use-this
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected componentDidMount(oldProps: Props): void {
 
   }
@@ -131,7 +129,7 @@ class Block {
   }
 
   // Может переопределять пользователь, необязательно трогать
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, , class-methods-use-this
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected componentDidUpdate(oldProps: Props, newProps: Props) {
     return true;
   }
@@ -170,7 +168,6 @@ class Block {
   }
 
   // Может переопределять пользователь, необязательно трогать
-  // eslint-disable-next-line class-methods-use-this
   protected render(): string {
     return '';
   }
@@ -217,7 +214,7 @@ class Block {
     this.element.style.display = 'none';
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars,  class-methods-use-this
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   compile(templateString: string, context: any) {
     const fragment = Block._createDocumentElement('template') as HTMLTemplateElement;
 

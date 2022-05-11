@@ -7,7 +7,8 @@ import './button.scss';
 // export { registerPartial };
 export interface ButtonProps {
   caption: string,
-  class?: string
+  class?: string,
+  onClick: any
 }
 
 export class Button extends Block {
@@ -15,8 +16,13 @@ export class Button extends Block {
     return 'Button';
   }
 
-  constructor(props: /* ButtonProps */ any) {
-    super(props);
+  constructor(props: ButtonProps) {
+    super({
+      ...props,
+      events: {
+        click: props.onClick,
+      },
+    });
   }
 
   protected render() {

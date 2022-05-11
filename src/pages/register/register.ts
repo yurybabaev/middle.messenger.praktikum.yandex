@@ -5,10 +5,11 @@ import './register.scss';
 
 class Register extends Block {
   constructor() {
-    super();
+    super({
+      onRegisterClick: (e) => { alert('wanna register! '); console.log(e); },
+    });
   }
 
-  // eslint-disable-next-line class-methods-use-this
   protected render() {
     return /* html */ `<div class="container container__centered container__fullHeight">
     <div class="register register__container shadowBox">
@@ -23,7 +24,7 @@ class Register extends Block {
       {{> field caption="Repeat password" type="password" name="password_repeat" classModifier="field_register"}}
       <div class="register__buttonContainer">
         {{!-- {{> button caption="Register" classModifier="button_primary" }} --}}
-        {{{Button caption="Register" classModifier="button_primary" }}}
+        {{{Button caption="Register" classModifier="button_primary" onClick=onRegisterClick }}}
       </div>
       {{/form}}
       {{> link caption="Sign in" url="/login" classModifier="register__link"}}
