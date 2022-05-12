@@ -75,7 +75,7 @@ class Block {
         this._element.addEventListener(event, listener);
       }
     });
-    this._meta.oldEvents = this.props.events;
+    this._meta.oldEvents = this._events;
   }
 
   _removeDomEvents() {
@@ -204,6 +204,7 @@ class Block {
 
     fragment.innerHTML = htmlString;
 
+    // plain children elements
     Object.entries(this._children).forEach(([_, child]) => {
       const stub = fragment.content.querySelector(`[data-id="id-${child.id}"]`);
 
@@ -214,6 +215,7 @@ class Block {
       stub.replaceWith(child.getContent());
     });
 
+    // container children elements
     Object.entries(this._children).forEach(([_, child]) => {
       const container = fragment.content.querySelector(`[data-container="id-${child.id}"]`);
 

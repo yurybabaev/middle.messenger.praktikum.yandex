@@ -1,8 +1,18 @@
 import Block from '../../utils/block';
 import template from './form.hbs';
-import './form.scss';
+import * as classes from './form.module.scss';
+
+export interface FormProps {
+  onSubmit: EventListener;
+}
 
 export class Form extends Block {
+
+  constructor(props: FormProps) {
+    super({classes}, {
+      submit: props.onSubmit,
+    });
+  }
 
   public static get ComponentName(): string {
     return 'Form';

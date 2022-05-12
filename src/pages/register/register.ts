@@ -1,12 +1,15 @@
-import { Button } from '../../components/button/button';
 import Block from '../../utils/block';
 import template from './register.hbs';
-import './register.scss';
+import * as classes from './register.module.scss';
+
+console.log(classes);
 
 class Register extends Block {
   constructor() {
     super({
-      onRegisterClick: (e) => { alert('wanna register! '); console.log(e); },
+      classes,
+      onRegisterClick: () => { alert('wanna register! '); },
+      onSubmit: (e: Event) => {alert('submit'); e.preventDefault(); console.log(this.children); }
     });
   }
 

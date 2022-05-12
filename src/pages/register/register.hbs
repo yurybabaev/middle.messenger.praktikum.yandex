@@ -1,18 +1,18 @@
-<div class="container container__centered container__fullHeight">
-  <div class="register register__container shadowBox">
-    <span class="register__label">Register</span>
-    {{#Form}}
-    {{{ Field caption="Email" type="email" name="email" classModifier="field_register"}}}
-    {{{ Field caption="Login" type="text" name="login" classModifier="field_register"}}}
-    {{{ Field caption="First name" type="text" name="first_name" classModifier="field_register"}}}
+<div class="{{classes.container}} {{classes.container__centered}} {{classes.container__fullHeight}}">
+  <div class="{{classes.register}} {{classes.register__container}} {{classes.shadowBox}}">
+    <span class="{{classes.register__label}}">Register</span>
+    {{#Form onSubmit=onSubmit}}
+    {{{ Field caption="Email" type="email" name="email" validationErrorText="Wrong email" classModifier="register"}}}
+    {{{ Field caption="Login" type="text" name="login" classModifier="register"}}}
+    {{{ Field caption="First name" type="text" name="first_name" classModifier="register"}}}
     {{!-- {{ Field caption="Second name" type="text" name="second_name" classModifier="field_register"}} --}}
     {{!-- {{ Field caption="Phone" type="text" name="phone" classModifier="field_register"}} --}}
     {{!-- {{ Field caption="Password" type="password" name="password" classModifier="field_register"}} --}}
     {{!-- {{ Field caption="Repeat password" type="password" name="password_repeat" classModifier="field_register"}} --}}
-    <div class="register__buttonContainer">      
-      {{{Button caption="Register" classModifier="button_primary" onClick=onRegisterClick }}}
+    <div class="{{classes.register__buttonContainer}}">      
+      {{{Button caption="Register" classModifier=classes.button_primary onClick=onRegisterClick submit="true"}}}
     </div>
     {{/Form}}
-    {{> link caption="Sign in" url="/login" classModifier="register__link"}}
+    {{> link caption="Sign in" url="/login" classModifier=classes.register__link}}
   </div>
 </div>

@@ -1,7 +1,10 @@
 // import Handlebars from 'handlebars';
 import Block from '../../utils/block';
 import template from './button.hbs';
-import './button.scss';
+import * as classes from './button.module.scss';
+
+console.log(classes);
+
 
 // const registerPartial = () => Handlebars.registerPartial('button', template);
 // export { registerPartial };
@@ -17,7 +20,7 @@ export class Button extends Block {
   }
 
   constructor(props: ButtonProps) {
-    super(props, {
+    super({ ...props, classes }, {
       click: props.onClick,
     });
   }

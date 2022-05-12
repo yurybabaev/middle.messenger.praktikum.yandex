@@ -1,7 +1,7 @@
 @import "../../styles/common.scss";
+@import "./field.register.module.scss";
 
-.field {
-    margin: 0;
+.field {    
     font-family: inherit;
 
     &__label {
@@ -12,5 +12,5 @@
         font-family: inherit;
         outline: none;
         padding: 0;       
-    }
+    }     
 }
