@@ -1,8 +1,14 @@
-import Handlebars from 'handlebars';
+import Block from '../../utils/block';
 import template from './form.hbs';
 import './form.scss';
 
-const registerPartial = () => Handlebars.registerPartial('form', template);
-export { registerPartial };
+export class Form extends Block {
 
-export default () => template();
+  public static get ComponentName(): string {
+    return 'Form';
+  }
+
+  protected get template(): (data?: any) => string {
+    return template;
+  }
+}

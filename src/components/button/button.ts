@@ -8,7 +8,7 @@ import './button.scss';
 export interface ButtonProps {
   caption: string,
   class?: string,
-  onClick: any
+  onClick?: EventListenerOrEventListenerObject
 }
 
 export class Button extends Block {
@@ -17,19 +17,12 @@ export class Button extends Block {
   }
 
   constructor(props: ButtonProps) {
-    super({
-      ...props,
-      events: {
-        click: props.onClick,
-      },
+    super(props, {
+      click: props.onClick,
     });
   }
 
-  protected render() {
-    return /* html */ `
-    <button class="button {{classModifier}}" type="button">
-    <span class="button__text">{{caption}}</span>
-</button>
-    `;
+  protected get template(): (data?: any) => string {
+    return template;
   }
 }

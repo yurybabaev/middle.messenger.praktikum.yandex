@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid';
-import Handlebars from 'handlebars';
+import { type } from 'os';
 import EventBus from './eventBus';
 
 enum EVENTS {
@@ -11,14 +11,19 @@ enum EVENTS {
 
 interface Meta {
   propsChanged: boolean,
-  oldEvents: any
+  oldEvents: Events
 }
 
 type Props = any;
+type Events = Record<string, EventListenerOrEventListenerObject | undefined>;
 
 class Block {
   public static get ComponentName() {
     return '';
+  }
+
+  protected get template(): (data?: any) => string {
+    return () => '';
   }
 
   public id = nanoid(8);
@@ -33,19 +38,25 @@ class Block {
 
   private _children: Record<string, Block>;
 
+  private _events: Events;
+
   public get children(): Record<string, Block> {
     return this._children;
   }
 
-  constructor(propsAndChildren: any = {}) {
-    const { props, children } = this._getPropsAndChildren(propsAndChildren);
+  constructor(props: Props = {}, events: Events = {}) {
 
     this._props = this._makePropsProxy(props);
-    this._children = children;
+    this._children = {};
+    this._events = events;
+
+    // Object.entries(events).forEach(([key, event]) => {
+    //   this._events[key] = event;
+    // });
 
     this._meta = {
       propsChanged: false,
-      oldEvents: this._props.events,
+      oldEvents: this._events, // TODO: if we need to replace events in the future
     };
 
     this._eventBus = new EventBus();
@@ -59,41 +70,20 @@ class Block {
   }
 
   _addDomEvents() {
-    const propsEvents: Record<string, () => void> = this.props.events;
-    if (!propsEvents || !this._element) {
-      return;
-    }
-
-    Object.entries(propsEvents).forEach(([event, listener]) => {
-      this._element.addEventListener(event, listener);
+    Object.entries(this._events).forEach(([event, listener]) => {
+      if (listener) {
+        this._element.addEventListener(event, listener);
+      }
     });
     this._meta.oldEvents = this.props.events;
   }
 
   _removeDomEvents() {
-    const propsEvents: Record<string, () => void> = this._meta.oldEvents;
-    if (!propsEvents || !this._element) {
-      return;
-    }
-
-    Object.entries(propsEvents).forEach(([event, listener]) => {
-      this._element.removeEventListener(event, listener);
-    });
-  }
-
-  _getPropsAndChildren(propsAndChildren: any) {
-    const children: any = {};
-    const props: any = {};
-
-    Object.entries(propsAndChildren).forEach(([key, value]) => {
-      if (value instanceof Block) {
-        children[key] = value;
-      } else {
-        props[key] = value;
+    Object.entries(this._meta.oldEvents).forEach(([event, listener]) => {
+      if (listener) {
+        this._element.removeEventListener(event, listener);
       }
     });
-
-    return { props, children };
   }
 
   _registerEvents() {
@@ -151,9 +141,7 @@ class Block {
   }
 
   _render() {
-    const templateString = this.render();
-
-    const fragment = this.compile(templateString, { ...this.props });
+    const fragment = this._applyTemplate({ ...this.props });
 
     const newElement = fragment.firstElementChild as HTMLElement;
 
@@ -165,11 +153,6 @@ class Block {
     this._element = newElement;
 
     this._addDomEvents();
-  }
-
-  // Может переопределять пользователь, необязательно трогать
-  protected render(): string {
-    return '';
   }
 
   getContent() {
@@ -214,17 +197,13 @@ class Block {
     this.element.style.display = 'none';
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  compile(templateString: string, context: any) {
+  _applyTemplate(context: any) {
     const fragment = Block._createDocumentElement('template') as HTMLTemplateElement;
 
-    const template = Handlebars.compile(templateString);
-
-    const htmlString = template({ ...context, children: this.children });
+    const htmlString = this.template({ ...context, children: this.children });
 
     fragment.innerHTML = htmlString;
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     Object.entries(this._children).forEach(([_, child]) => {
       const stub = fragment.content.querySelector(`[data-id="id-${child.id}"]`);
 
@@ -233,6 +212,25 @@ class Block {
       }
 
       stub.replaceWith(child.getContent());
+    });
+
+    Object.entries(this._children).forEach(([_, child]) => {
+      const container = fragment.content.querySelector(`[data-container="id-${child.id}"]`);
+
+      if (!container) {
+        return;
+      }
+      const containerContent = child.getContent();
+      const containerContentPlaceholder = containerContent.querySelector('[data-content]');
+      if (!containerContentPlaceholder) {
+        return;
+      }
+      const newParent = containerContentPlaceholder.parentElement!;
+      while (container.hasChildNodes()) {
+        newParent.appendChild(container.removeChild(container.firstChild!));
+      }
+      containerContentPlaceholder.remove();
+      container.replaceWith(containerContent);
     });
 
     return fragment.content;
