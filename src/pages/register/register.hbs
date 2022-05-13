@@ -2,7 +2,7 @@
   <div class="{{classes.register}} {{classes.register__container}} {{classes.shadowBox}}">
     <span class="{{classes.register__label}}">Register</span>
     {{#Form onSubmit=onSubmit}}
-    {{{ Field caption="Email" type="email" name="email" validationErrorText="Wrong email" classModifier="register"}}}
+    {{{ Field caption="Email" type="text" value="asda" name="email" validationErrorText="Wrong email" classModifier="register" required="true" regexp="aaa" }}}
     {{{ Field caption="Login" type="text" name="login" classModifier="register"}}}
     {{{ Field caption="First name" type="text" name="first_name" classModifier="register"}}}
     {{!-- {{ Field caption="Second name" type="text" name="second_name" classModifier="field_register"}} --}}

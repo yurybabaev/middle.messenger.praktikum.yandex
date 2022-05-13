@@ -1,11 +1,13 @@
 import { nanoid } from 'nanoid';
 import { type } from 'os';
+import { emit } from 'process';
 import EventBus from './eventBus';
 
 enum EVENTS {
   INIT = 'init',
   FLOW_CDM = 'flow:component-did-mount',
   FLOW_RENDER = 'flow:render',
+  FLOW_CWU = 'flow:component-will-update',
   FLOW_CDU = 'flow:component-did-update',
 }
 
@@ -40,14 +42,20 @@ class Block {
 
   private _events: Events;
 
+  private _refs: Record<string, HTMLElement>;
+
   public get children(): Record<string, Block> {
     return this._children;
   }
 
-  constructor(props: Props = {}, events: Events = {}) {
+  public get refs() {
+    return this._refs;
+  }
 
+  constructor(props: Props = {}, events: Events = {}) {
     this._props = this._makePropsProxy(props);
     this._children = {};
+    this._refs = {};
     this._events = events;
 
     // Object.entries(events).forEach(([key, event]) => {
@@ -90,6 +98,7 @@ class Block {
     this._eventBus.on(EVENTS.INIT, this.init.bind(this));
     this._eventBus.on(EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     this._eventBus.on(EVENTS.FLOW_RENDER, this._render.bind(this));
+    this._eventBus.on(EVENTS.FLOW_CWU, this._componentWillUpdate.bind(this));
     this._eventBus.on(EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
   }
 
@@ -111,8 +120,8 @@ class Block {
     this._eventBus.emit(EVENTS.FLOW_CDM, this._props);
   }
 
-  _componentDidUpdate(oldProps: Props, newProps: Props) {
-    const response = this.componentDidUpdate(oldProps, newProps);
+  _componentWillUpdate(oldProps: Props, newProps: Props) {
+    const response = this.componentWillUpdate(oldProps, newProps);
     if (response) {
       this._eventBus.emit(EVENTS.FLOW_RENDER);
     }
@@ -120,8 +129,16 @@ class Block {
 
   // Может переопределять пользователь, необязательно трогать
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected componentDidUpdate(oldProps: Props, newProps: Props) {
+  protected componentWillUpdate(oldProps: Props, newProps: Props) {
     return true;
+  }
+
+  _componentDidUpdate(newProps: Props) {
+    this.componentDidUpdate(newProps);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  protected componentDidUpdate(newProps: Props) {
   }
 
   public setProps(nextProps: Props) {
@@ -132,7 +149,7 @@ class Block {
     const oldProps = { ...this._props };
     Object.assign(this._props, nextProps);
     if (this._meta.propsChanged) {
-      this._eventBus.emit(EVENTS.FLOW_CDU, oldProps, this._props);
+      this._eventBus.emit(EVENTS.FLOW_CWU, oldProps, this._props);
     }
   }
 
@@ -153,6 +170,8 @@ class Block {
     this._element = newElement;
 
     this._addDomEvents();
+
+    this._eventBus.emit(EVENTS.FLOW_CDU, this._props);
   }
 
   getContent() {
@@ -203,6 +222,13 @@ class Block {
     const htmlString = this.template({ ...context, children: this.children });
 
     fragment.innerHTML = htmlString;
+
+    // refs
+    fragment.content.querySelectorAll('[data-ref]').forEach((el) => {
+      if (el instanceof HTMLElement) {
+        this._refs[el.dataset.ref!] = el;
+      }
+    });
 
     // plain children elements
     Object.entries(this._children).forEach(([_, child]) => {
