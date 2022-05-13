@@ -1,4 +1,4 @@
-import Block from '../../utils/block';
+import DataBlock from '../../utils/dataBlock';
 import template from './field.hbs';
 import * as classes from './field.module.scss';
 
@@ -8,7 +8,7 @@ export interface FieldProps {
   regexp?: string;
 }
 
-export class Field extends Block {
+export class Field extends DataBlock {
   private _value: any;
 
   protected get value(): any {
@@ -55,18 +55,7 @@ export class Field extends Block {
     this.value = props.value;
   }
 
-  private _validationError = false;
-
-  public get validationError() {
-    return this._validationError;
-  }
-
-  public set validationError(value) {
-    this._validationError = value;
-    this.setProps({
-      validationError: this._validationError,
-    });
-  }
+ 
 
   protected get inputControl() {
     return this.refs.inputControl as HTMLInputElement;
@@ -81,9 +70,9 @@ export class Field extends Block {
     if (this.fieldProps.required && !this.inputControl.value) {
       validValue = false;
     }
-    if (this.fieldProps.regexp
-      && !String(this.inputControl.value).toLowerCase().match(this.fieldProps.regexp)) {
-      validValue = false;
+    if (this.fieldProps.regexp) {
+      const re = new RegExp(this.fieldProps.regexp, 'i');
+      validValue = re.test(this.inputControl.value);
     }
     this.validationError = !validValue;
   }
@@ -96,7 +85,6 @@ export class Field extends Block {
   }
 
   protected componentDidUpdate(newProps: any): void {
-    console.log(this._selectionStart);
     if (this._focus) {
       this.inputControl.focus();
       this.inputControl.selectionStart = this._selectionStart;

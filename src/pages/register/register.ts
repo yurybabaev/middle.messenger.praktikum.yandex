@@ -1,21 +1,23 @@
-import Block from '../../utils/block';
+import DataContainerBlock from '../../utils/dataContainerBlock';
 import template from './register.hbs';
 import * as classes from './register.module.scss';
 
-console.log(classes);
-
-class Register extends Block {
+class Register extends DataContainerBlock {
   constructor() {
     super({
       classes,
-      onRegisterClick: () => { alert('wanna register! '); },
-      onSubmit: (e: Event) => {alert('submit'); e.preventDefault(); console.log(this.children); }
+      onSubmit: (e: Event) => {
+        e.preventDefault();
+        if (this.validate()) {
+          console.log(this.getFormValues(e.target as HTMLFormElement));
+        }
+      },
     });
   }
 
   protected get template() {
     return template;
-  } 
+  }
 }
 
 export default Register;
