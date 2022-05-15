@@ -1,5 +1,5 @@
 import './index.scss';
-import login from '../src/pages/login/login';
+import Login from '../src/pages/login/login';
 import Register from '../src/pages/register/register';
 import mockMain from '../src/pages/mockMain/mockMain';
 import userView from '../src/pages/user/userView/userView';
@@ -10,7 +10,6 @@ import system from '../src/pages/system/system';
 import registerPartials from '../src/utils/registerPartials';
 import Block from '../src/utils/block';
 import renderDom from '../src/utils/renderDom';
-import { Button } from '../src/components/button/button';
 
 registerPartials();
 
@@ -32,9 +31,9 @@ const setContent = (
   }
 };
 
-const renderPage = (pathStart: string, page: Block) => {
+const renderPage = (pathStart: string, Page: typeof Block) => {
   if (route === pathStart) {
-    renderDom('#root', page);
+    renderDom('#root', new Page());
   }
 };
 
@@ -55,10 +54,8 @@ setContent(
 
 );
 
-const register = new Register();
-
-setContent('/login', login);
-renderPage('/register', register);
+renderPage('/login', Login);
+renderPage('/register', Register);
 setContent('/user/view', userView);
 setContent('/user/edit', userEdit);
 setContent('/user/changepassword', userChangePassword);

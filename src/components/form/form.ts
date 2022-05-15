@@ -7,9 +7,8 @@ export interface FormProps {
 }
 
 export class Form extends Block {
-
   constructor(props: FormProps) {
-    super({classes}, {
+    super({ classes }, {
       submit: props.onSubmit,
     });
   }

@@ -1,6 +1,4 @@
 import { nanoid } from 'nanoid';
-import { type } from 'os';
-import { emit } from 'process';
 import EventBus from './eventBus';
 
 enum EVENTS {
@@ -231,7 +229,7 @@ class Block {
     });
 
     // plain children elements
-    Object.entries(this._children).forEach(([_, child]) => {
+    Object.entries(this._children).forEach(([, child]) => {
       const stub = fragment.content.querySelector(`[data-id="id-${child.id}"]`);
 
       if (!stub) {
@@ -242,7 +240,7 @@ class Block {
     });
 
     // container children elements
-    Object.entries(this._children).forEach(([_, child]) => {
+    Object.entries(this._children).forEach(([, child]) => {
       const container = fragment.content.querySelector(`[data-container="id-${child.id}"]`);
 
       if (!container) {

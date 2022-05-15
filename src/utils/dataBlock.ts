@@ -1,4 +1,4 @@
-import Block from "./block";
+import Block from './block';
 
 export default class DataBlock extends Block {
   private _validationError = false;

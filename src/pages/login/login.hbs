@@ -1,13 +1,15 @@
-<div class="container container__centered container__fullHeight">
-    <div class="login login__container shadowBox">
-        <span class="login__label">Login</span>
-        {{#> form}}
-        {{> field caption="Login" type="text" name="login" classModifier="field_login"}}
-        {{> field caption="Password" type="password" name="password" classModifier="field_login"}}
-        <div class="login__buttonContainer">
-            {{> button caption="Sign in" classModifier="button_primary" }}
-        </div>
-        {{/form}}
-        {{> link caption="Register" url="/register" classModifier="login__link"}}        
+<div class="{{classes.container}} {{classes.container__centered}} {{classes.container__fullHeight}}">
+    <div class="{{classes.login}} {{classes.login__container}} {{classes.shadowBox}}">
+        <span class="{{classes.login__label}}">Login</span>
+        {{#Form onSubmit=onSubmit}}
+          {{{Field caption="Login" type="text" name="login" classModifier="login" required="true"
+            validationErrorText="Login required"}}}
+          {{{Field caption="Password" type="password" name="password" classModifier="login" required="true"
+            validationErrorText="Password required"}}}
+          <div class="{{classes.login__buttonContainer}}">
+              {{{Button caption="Sign in" type="submit" classModifier=classes.button_primary submit="true" }}}
+          </div>
+        {{/Form}}
+        {{{Link caption="Register" url="/register" classModifier=classes.login__link}}}
     </div>
 </div>

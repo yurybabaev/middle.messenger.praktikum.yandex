@@ -53,9 +53,8 @@ export class Field extends DataBlock {
       },
     );
     this.value = props.value;
+    this._selectionStart = String(props.value).length;
   }
-
- 
 
   protected get inputControl() {
     return this.refs.inputControl as HTMLInputElement;
@@ -77,14 +76,14 @@ export class Field extends DataBlock {
     this.validationError = !validValue;
   }
 
-  protected componentWillUpdate(oldProps: any, newProps: any): boolean {
+  protected componentWillUpdate(): boolean {
     this.setProps({
       value: this._value,
     });
     return true;
   }
 
-  protected componentDidUpdate(newProps: any): void {
+  protected componentDidUpdate(): void {
     if (this._focus) {
       this.inputControl.focus();
       this.inputControl.selectionStart = this._selectionStart;

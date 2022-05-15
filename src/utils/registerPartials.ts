@@ -1,3 +1,4 @@
+import Handlebars from 'handlebars';
 import { registerPartial as registerPartialLink } from '../components/link/link';
 import { registerPartial as registerPartialAvatar } from '../components/avatar/avatar';
 // import { registerPartial as registerPartialButton } from '../components/button/button';
@@ -10,6 +11,7 @@ import { registerPartial as registerPartialSearch } from '../pages/chat/componen
 import registerComponent from './registerComponent';
 
 export default () => {
+  Handlebars.registerHelper('ChildContent', () => '<div data-content></div>');
   registerPartialLink();
   registerPartialAvatar();
   // registerPartialButton();

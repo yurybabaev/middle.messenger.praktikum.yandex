@@ -9,7 +9,9 @@ class Register extends DataContainerBlock {
       onSubmit: (e: Event) => {
         e.preventDefault();
         if (this.validate()) {
-          console.log(this.getFormValues(e.target as HTMLFormElement));
+          const values = this.getFormValues(e.target as HTMLFormElement);
+          // eslint-disable-next-line no-console
+          console.log(values);
         }
       },
     });

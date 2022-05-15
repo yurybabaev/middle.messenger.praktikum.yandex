@@ -3,11 +3,6 @@ import Block from '../../utils/block';
 import template from './button.hbs';
 import * as classes from './button.module.scss';
 
-console.log(classes);
-
-
-// const registerPartial = () => Handlebars.registerPartial('button', template);
-// export { registerPartial };
 export interface ButtonProps {
   caption: string,
   class?: string,

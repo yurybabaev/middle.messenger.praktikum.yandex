@@ -1,0 +1,29 @@
+@import "../../styles/common.scss";
+
+.field {
+  &_login {
+    margin: 0  0 .15rem 0;
+  }
+
+  &_login &__label {
+      color: $font-color-secondary;
+      font-style: $font-style-base;
+      font-weight: $font-weight-base;
+      @include sameFontAndLineSize(0.75rem);
+  }
+
+  &_login &__input {
+      width: 100%;
+      height: 2rem;        
+
+      color: $font-color-primary;
+      border: none;
+      border-bottom: 1px solid #3369f3;
+      @include sameFontAndLineSize(1.1rem);
+  }
+
+  &_login &__errorLabel {
+    color: $font-color-error;
+    @include sameFontAndLineSize(0.75rem);
+  }
+}
