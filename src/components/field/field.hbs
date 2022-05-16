@@ -1,4 +1,4 @@
-<div class="{{classes.field}} {{#if classModifier}}{{classes.field}}_{{classModifier}}{{/if}}">
+<div class="{{modifyclass classes.field classModifier}}">
     <label class="{{classes.field__label}}">
         {{caption}}
         <input type="{{type}}" data-ref="inputControl" class="{{classes.field__input}}"  value="{{value}}" name="{{name}}" {{#if readOnly}} readonly {{/if}}/>

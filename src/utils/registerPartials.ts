@@ -1,4 +1,4 @@
-import Handlebars from 'handlebars';
+import Handlebars, { HelperOptions } from 'handlebars';
 import { Link } from '../components/link/link';
 import { registerPartial as registerPartialAvatar } from '../components/avatar/avatar';
 // import { registerPartial as registerPartialButton } from '../components/button/button';
@@ -12,7 +12,11 @@ import registerComponent from './registerComponent';
 
 export default () => {
   Handlebars.registerHelper('ChildContent', () => '<div data-content></div>');
-  
+  Handlebars.registerHelper(
+    'modifyclass',
+    (base: string, modifiers: string) => String(modifiers).split(' ').reduce((prev, mod) => `${prev} ${base}_${mod}`, base),
+  );
+
   registerComponent(Link);
   registerPartialAvatar();
   // registerPartialButton();

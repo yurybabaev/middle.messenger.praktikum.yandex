@@ -2,11 +2,10 @@
   <div class="{{classes.register}} {{classes.register__container}} {{classes.shadowBox}}">
     <span class="{{classes.register__label}}">Register</span>
     {{#Form onSubmit=onSubmit}}
-    {{{ Field caption="Email" type="text" name="email"
-        validationErrorText="Invalid email" classModifier="register" required="true"
-        regexp='^\S+@\S+\.\S+$' }}}
+    {{{ Field caption="Email" type="text" name="email" classModifier="register" required="true"
+        validationErrorText="Invalid email" regexp='^\S+@\S+\.\S+$' }}}
     {{{ Field caption="Login" type="text" name="login" classModifier="register" required="true"
-        validationErrorText="Invalid login"}}}
+        validationErrorText="Invalid login" regexp='^\[a-zA-Z0-9_-].{3,20}$'}}}
     {{{ Field caption="First name" type="text" name="first_name" classModifier="register" required="true"
       validationErrorText="Invalid first name"}}}
     {{{ Field caption="Second name" type="text" name="second_name" classModifier="register" required="true"
@@ -18,9 +17,11 @@
     {{{ Field caption="Repeat password" type="password" name="password_repeat" classModifier="register" required="true"
       validationErrorText="Invalid password"}}}
     <div class="{{classes.register__buttonContainer}}">      
-      {{{Button caption="Register" classModifier=classes.button_primary submit="true"}}}
+      {{{Button caption="Register" classModifier="primary" submit="true"}}}
     </div>
     {{/Form}}
-    {{{ Link caption="Sign in" url="/login" classModifier=classes.register__link}}}
+    <div class="{{classes.register__linkContainer}}">      
+      {{{ Link caption="Sign in" url="/login"}}}
+    </div>    
   </div>
 </div>

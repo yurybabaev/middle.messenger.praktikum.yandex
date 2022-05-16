@@ -1,15 +1,18 @@
 <div class="{{classes.container}} {{classes.container__centered}} {{classes.container__fullHeight}}">
-    <div class="{{classes.login}} {{classes.login__container}} {{classes.shadowBox}}">
-        <span class="{{classes.login__label}}">Login</span>
-        {{#Form onSubmit=onSubmit}}
-          {{{Field caption="Login" type="text" name="login" classModifier="login" required="true"
-            validationErrorText="Login required"}}}
-          {{{Field caption="Password" type="password" name="password" classModifier="login" required="true"
-            validationErrorText="Password required"}}}
-          <div class="{{classes.login__buttonContainer}}">
-              {{{Button caption="Sign in" type="submit" classModifier="primary" submit="true" }}}
-          </div>
-        {{/Form}}
-        {{{Link caption="Register" url="/register" classModifier="login"}}}
+  <div class="{{classes.login}} {{classes.login__container}} {{classes.shadowBox}}">
+    <span class="{{classes.login__label}}">Login</span>
+    {{#Form onSubmit=onSubmit}}
+    {{{Field caption="Login" type="text" name="login" classModifier="login" required="true"
+    validationErrorText="Login required"}}}
+    {{{Field caption="Password" type="password" name="password" classModifier="login" required="true"
+    validationErrorText="Password required"}}}
+    <div class="{{classes.login__buttonContainer}}">
+      {{{Button caption="Sign in" type="submit" classModifier="primary" submit="true" }}}
     </div>
+    {{/Form}}
+    <div class="{{classes.login__linkContainer}}">
+      {{{Link caption="Register" url="/register"}}}
+    </div>
+
+  </div>
 </div>
