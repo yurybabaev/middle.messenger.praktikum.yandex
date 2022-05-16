@@ -1,8 +1,19 @@
-import Handlebars from 'handlebars';
+import Block from '../../utils/block';
 import template from './link.hbs';
-import './link.scss';
+import * as classes from './link.module.scss';
 
-const registerPartial = () => Handlebars.registerPartial('link', template);
-export { registerPartial };
+export class Link extends Block {
+  constructor(props: any) {
+    super({ ...props, classes });
+  }
 
-export default () => template();
+  public static get ComponentName(): string {
+    return 'Link';
+  }
+
+  protected get template(): (data?: any) => string {
+    return template;
+  }
+}
+
+export default Link;

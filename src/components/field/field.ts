@@ -31,7 +31,6 @@ export class Field extends DataBlock {
     super(
       {
         ...props,
-        // value: props.value || "a",
         classes,
       },
       {
