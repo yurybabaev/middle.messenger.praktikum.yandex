@@ -6,10 +6,10 @@
         validationErrorText="Invalid email" regexp='^\S+@\S+\.\S+$' }}}
     {{{ Field caption="Login" type="text" name="login" classModifier="register" required="true"
         validationErrorText="Invalid login" regexp='^(?=.{3,20}$)[a-zA-Z0-9_-]*[a-zA-Z][a-zA-Z0-9_-]*$'}}}
-    {{{ Field caption="First name" type="text" name="first_name" classModifier="register" required="true"
-      validationErrorText="Invalid first name"}}}
+    {{{ Field caption="First name" type="text" name="first_name" classModifier="register" required="true"      
+      validationErrorText="Invalid first name" regexp="^[A-ZА-Я][a-zA-Zа-яА-Я-]*$"}}}
     {{{ Field caption="Second name" type="text" name="second_name" classModifier="register" required="true"
-      validationErrorText="Invalid second name"}}}
+      validationErrorText="Invalid second name" regexp="^[A-ZА-Я][a-zA-Zа-яА-Я-]*$"}}}
     {{{ Field caption="Phone" type="text" name="phone" classModifier="register" required="true"
       validationErrorText="Invalid phone"}}}
     {{{ Field caption="Password" type="password" name="password" classModifier="register" required="true"
