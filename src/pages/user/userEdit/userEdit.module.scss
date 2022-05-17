@@ -1,9 +1,10 @@
 @import "../../../styles/common.scss";
 @import "../../../styles/container.scss";
-@import "../../../components/field/field.user.scss";
-@import "../../../components/avatar/avatar.user.scss";
+@import "../../../components/field/field.module.scss";
+@import "../../../components/avatar/avatar.module.scss";
 
-.userChangePassword {    
+
+.userEdit {    
 
     &__container {        
         width: 100%;
@@ -29,14 +30,19 @@
 
     &__buttonContainer {
         width: 280px;
-        margin-top: 60px;        
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        align-items: flex-start;
+        margin-top: 60px;                        
+        align-self: center;      
     }
 
     &__link {
         margin-top: 12px;
+    }
+
+    &__fieldSeparator {
+      width: 100%;
+      border-width: 0;
+      padding: 0;
+      margin: 10px 0;
+      border-top: 1px solid $background-color-secondary;
     }
 }

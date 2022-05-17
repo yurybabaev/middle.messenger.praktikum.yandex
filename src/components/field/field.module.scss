@@ -1,17 +1,24 @@
 @import "../../styles/common.scss";
-@import "./field.register.module.scss";
 @import "./field.login.module.scss";
+@import "./field.user.module.scss";
 
-.field {    
+.field {
+  font-family: inherit;
+
+  &__label {
     font-family: inherit;
+  }
 
-    &__label {
-        font-family: inherit;
-    }
+  &__input {
+    font-family: inherit;
+    padding: 0;
+  }
 
-    &__input {
-        font-family: inherit;
-        outline: none;
-        padding: 0;       
-    }     
+  &__errorLabel {
+    display: none;
+  }
+
+  &_error &__errorLabel {
+    display: block;
+  }
 }

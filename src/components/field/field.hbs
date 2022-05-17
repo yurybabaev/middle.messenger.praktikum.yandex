@@ -1,7 +1,7 @@
-<div class="{{modifyclass classes.field classModifier}}">
+<div class="{{modifyclass classes.field classModifier}}{{#if validationError}} {{classes.field_error}}{{/if}}">
     <label class="{{classes.field__label}}">
         {{caption}}
         <input type="{{type}}" data-ref="inputControl" class="{{classes.field__input}}"  value="{{value}}" name="{{name}}" {{#if readOnly}} readonly {{/if}}/>
-        <span class="{{classes.field__errorLabel}}" style="visibility: {{#if validationError}}visible{{else}}hidden{{/if}}">{{validationErrorText}}</span>
+        <span class="{{classes.field__errorLabel}}">{{validationErrorText}}</span>
     </label>
 </div>

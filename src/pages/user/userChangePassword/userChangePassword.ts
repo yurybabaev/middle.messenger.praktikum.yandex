@@ -1,4 +1,31 @@
+import DataContainerBlock from '../../../utils/dataContainerBlock';
+import { validationRules } from '../../../utils/validationRules';
 import template from './userChangePassword.hbs';
-import './userChangePassword.scss';
+import * as classes from './userChangePassword.module.scss';
 
-export default () => template();
+export class UserChangePassword extends DataContainerBlock {
+  public static get ComponentName(): string {
+    return 'UserChangePassword';
+  }
+
+  constructor() {
+    super({
+      classes,
+      validationRules,
+      onSubmit: (e: Event) => {
+        e.preventDefault();
+        if (this.validate()) {
+          const values = this.getFormValues(e.target as HTMLFormElement);
+          // eslint-disable-next-line no-console
+          console.log(values);
+        }
+      },
+    });
+  }
+
+  protected get template(): (data?: any) => string {
+    return template;
+  }
+}
+
+export default UserChangePassword;

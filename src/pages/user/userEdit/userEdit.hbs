@@ -1,24 +1,36 @@
-{{#> flyout returnUrl="/user/view"}}
-<div class="userEdit userEdit__container">
-    {{> avatar avatarAlt="User avatar" classModifier="avatar_user"}}    
-    <span class="userEdit__userLabel"></span>
-    {{#> form}}
-    {{> field caption="Email" type="email" value="test@email.com" name="email" classModifier="field_user"}}
-    <hr class="field__separator_user">
-    {{> field caption="Login" type="text" value="ivan" name="login" classModifier="field_user"}}
-    <hr class="field__separator_user">
-    {{> field caption="First name" type="text" value="Ivan" name="first_name" classModifier="field_user"}}
-    <hr class="field__separator_user">
-    {{> field caption="Second name" type="text" value="Ivanov" name="second_name" classModifier="field_user"}}
-    <hr class="field__separator_user">
-    {{> field caption="Nickname" type="text" value="stardestroyer5000" name="nick" classModifier="field_user"}}
-    <hr class="field__separator_user">
-    {{> field caption="Phone" type="text" value="+71112223344" name="phone" classModifier="field_user"}}
-    {{/form}}
-    <div class="userEdit__buttonContainer">
-        {{> button caption="Save" classModifier="button_primary" }}
-    </div>
+{{#Flyout returnUrl="/user/view"}}
+<div class="{{classes.userEdit}} {{classes.userEdit__container}}">
+  {{{Avatar avatarAlt="User avatar" classModifier="user"}}}
+  <span class="{{classes.userEdit__userLabel}}"></span>
+  {{#Form onSubmit=onSubmit}}
+  {{{Field caption="Email" type="email" value="test@email.com" name="email" classModifier="user"
+  required=validationRules.email.required
+  validationErrorText=validationRules.email.errorMessage regexp=validationRules.email.regexp}}}
+  <hr class="{{classes.userEdit__fieldSeparator}}">
+  {{{Field caption="Login" type="text" value="ivan" name="login" classModifier="user"
+  required=validationRules.login.required
+  validationErrorText=validationRules.login.errorMessage regexp=validationRules.login.regexp}}}
+  <hr class="{{classes.userEdit__fieldSeparator}}">
+  {{{Field caption="First name" type="text" value="Ivan" name="first_name" classModifier="user"
+  required=validationRules.firstName.required
+  validationErrorText=validationRules.firstName.errorMessage regexp=validationRules.firstName.regexp}}}
+  <hr class="{{classes.userEdit__fieldSeparator}}">
+  {{{Field caption="Second name" type="text" value="Ivanov" name="second_name" classModifier="user"
+  required=validationRules.secondName.required
+  validationErrorText=validationRules.secondName.errorMessage regexp=validationRules.secondName.regexp}}}
+  <hr class="{{classes.userEdit__fieldSeparator}}">
+  {{{Field caption="Nickname" type="text" value="stardestroyer5000" name="nick" classModifier="user"
+  required=validationRules.nickname.required
+  validationErrorText=validationRules.nickname.errorMessage regexp=validationRules.nickname.regexp}}}
+  <hr class="{{classes.userEdit__fieldSeparator}}">
+  {{{Field caption="Phone" type="text" value="+71112223344" name="phone" classModifier="user"
+  required=validationRules.phone.required
+  validationErrorText=validationRules.phone.errorMessage regexp=validationRules.phone.regexp}}}
+  <div class="{{classes.userEdit__buttonContainer}}">
+    {{{Button caption="Save" classModifier="primary" submit="true"}}}
+  </div>
+  {{/Form}}
+
 
 </div>
-
-{{/flyout}}
+{{/Flyout}}

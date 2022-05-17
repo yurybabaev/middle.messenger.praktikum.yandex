@@ -1,12 +1,29 @@
-import Handlebars from 'handlebars';
 import defaultAvatar from 'url:./defaultAvatar.png';
+import Block from '../../utils/block';
 import template from './avatar.hbs';
-import './avatar.scss';
+import * as classes from './avatar.module.scss';
 
-const registerPartial = () => Handlebars.registerPartial('avatar', (params) => template({
-  ...params,
-  defaultAvatar,
-}));
-export { registerPartial };
+export interface AvatarProps {
+  avatarUrl?: string,
+  onClick?: EventListenerOrEventListenerObject
+}
 
-export default () => template();
+export class Avatar extends Block {
+  public static get ComponentName(): string {
+    return 'Avatar';
+  }
+
+  constructor(props: AvatarProps) {
+    super({
+      ...props,
+      classes,
+      defaultAvatar,
+    }, {
+      click: props.onClick,
+    });
+  }
+
+  protected get template(): (data?: any) => string {
+    return template;
+  }
+}

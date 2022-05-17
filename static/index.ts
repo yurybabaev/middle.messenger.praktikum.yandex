@@ -2,9 +2,9 @@ import './index.scss';
 import Login from '../src/pages/login/login';
 import Register from '../src/pages/register/register';
 import mockMain from '../src/pages/mockMain/mockMain';
-import userView from '../src/pages/user/userView/userView';
-import userEdit from '../src/pages/user/userEdit/userEdit';
-import userChangePassword from '../src/pages/user/userChangePassword/userChangePassword';
+import userView, { UserView } from '../src/pages/user/userView/userView';
+import userEdit, { UserEdit } from '../src/pages/user/userEdit/userEdit';
+import userChangePassword, { UserChangePassword } from '../src/pages/user/userChangePassword/userChangePassword';
 import chat from '../src/pages/chat/chat';
 import system from '../src/pages/system/system';
 import registerPartials from '../src/utils/registerPartials';
@@ -56,9 +56,9 @@ setContent(
 
 renderPage('/login', Login);
 renderPage('/register', Register);
-setContent('/user/view', userView);
-setContent('/user/edit', userEdit);
-setContent('/user/changepassword', userChangePassword);
+renderPage('/user/view', UserView);
+renderPage('/user/edit', UserEdit);
+renderPage('/user/changepassword', UserChangePassword);
 setContent('/chat', chat);
 setContent('/404', system, 404, 'No such page');
 setContent('/500', system, 500, 'Something went wrong');

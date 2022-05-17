@@ -1,10 +1,10 @@
 @import "../../../styles/common.scss";
 @import "../../../styles/container.scss";
-@import "../../../components/field/field.user.scss";
-@import "../../../components/avatar/avatar.user.scss";
+@import "../../../components/field/field.module.scss";
+@import "../../../components/avatar/avatar.module.scss";
 
 
-.userEdit {    
+.userView {    
 
     &__container {        
         width: 100%;
@@ -28,8 +28,8 @@
         @include sameFontAndLineSize(1.35rem);        
     }
 
-    &__buttonContainer {
-        width: 280px;
+    &__linkContainer {
+        width: 100%;
         margin-top: 60px;        
         display: flex;
         flex-direction: column;
@@ -39,5 +39,13 @@
 
     &__link {
         margin-top: 12px;
+    }
+
+    &__fieldSeparator {
+      width: 100%;
+      border-width: 0;
+      padding: 0;
+      margin: 10px 0;
+      border-top: 1px solid $background-color-secondary;
     }
 }

@@ -1,8 +1,26 @@
-import Handlebars from 'handlebars';
+import Block from '../utils/block';
 import template from './flyout.hbs';
-import './flyout.scss';
+import * as classes from './flyout.module.scss';
 
-const registerPartial = () => Handlebars.registerPartial('flyout', template);
-export { registerPartial };
+export interface FlyoutProps {
+  returnUrl: string;
+}
 
-export default () => template();
+export class Flyout extends Block {
+  public static get ComponentName(): string {
+    return 'Flyout';
+  }
+
+  constructor(props: FlyoutProps) {
+    super({
+      ...props,
+      classes,
+    });
+  }
+
+  protected get template(): (data?: any) => string {
+    return template;
+  }
+}
+
+export default Flyout;
