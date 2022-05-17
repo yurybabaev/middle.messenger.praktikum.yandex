@@ -1,4 +1,4 @@
-import Handlebars, { HelperOptions } from 'handlebars';
+import Handlebars from 'handlebars';
 import { Link } from '../components/link/link';
 import { registerPartial as registerPartialAvatar } from '../components/avatar/avatar';
 // import { registerPartial as registerPartialButton } from '../components/button/button';

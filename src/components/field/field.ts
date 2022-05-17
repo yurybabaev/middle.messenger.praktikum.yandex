@@ -69,7 +69,7 @@ export class Field extends DataBlock {
       validValue = false;
     }
     if (this.fieldProps.regexp) {
-      const re = new RegExp(this.fieldProps.regexp, 'i');
+      const re = new RegExp(this.fieldProps.regexp);
       validValue = re.test(this.inputControl.value);
     }
     this.validationError = !validValue;

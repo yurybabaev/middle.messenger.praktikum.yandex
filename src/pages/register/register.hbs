@@ -2,23 +2,23 @@
   <div class="{{classes.register}} {{classes.register__container}} {{classes.shadowBox}}">
     <span class="{{classes.register__label}}">Register</span>
     {{#Form onSubmit=onSubmit}}
-    {{{ Field caption="Email" type="text" name="email" classModifier="register" required="true"
-        validationErrorText="Invalid email" regexp='^\S+@\S+\.\S+$' }}}
-    {{{ Field caption="Login" type="text" name="login" classModifier="register" required="true"
-        validationErrorText="Invalid login" regexp='^(?=.{3,20}$)[a-zA-Z0-9_-]*[a-zA-Z][a-zA-Z0-9_-]*$'}}}
-    {{{ Field caption="First name" type="text" name="first_name" classModifier="register" required="true"      
-      validationErrorText="Invalid first name" regexp="^[A-ZА-Я][a-zA-Zа-яА-Я-]*$"}}}
-    {{{ Field caption="Second name" type="text" name="second_name" classModifier="register" required="true"
-      validationErrorText="Invalid second name" regexp="^[A-ZА-Я][a-zA-Zа-яА-Я-]*$"}}}
-    {{{ Field caption="Phone" type="text" name="phone" classModifier="register" required="true"
-      validationErrorText="Invalid phone"}}}
-    {{{ Field caption="Password" type="password" name="password" classModifier="register" required="true"
-      validationErrorText="Invalid password"}}}
-    {{{ Field caption="Repeat password" type="password" name="password_repeat" classModifier="register" required="true"
-      validationErrorText="Invalid password"}}}
-    <div class="{{classes.register__buttonContainer}}">      
-      {{{Button caption="Register" classModifier="primary" submit="true"}}}
-    </div>
+      {{{ Field caption="Email" type="text" name="email" classModifier="register" required=validationRules.email.required
+          validationErrorText=validationRules.email.errorMessage regexp=validationRules.email.regexp }}}
+      {{{ Field caption="Login" type="text" name="login" classModifier="register" required=validationRules.login.required
+          validationErrorText=validationRules.login.errorMessage regexp=validationRules.login.regexp}}}
+      {{{ Field caption="First name" type="text" name="first_name" classModifier="register" required=validationRules.firstName.required
+          validationErrorText=validationRules.firstName.errorMessage regexp=validationRules.firstName.regexp}}}
+      {{{ Field caption="Second name" type="text" name="second_name" classModifier="register" required=validationRules.secondName.required
+          validationErrorText=validationRules.secondName.errorMessage regexp=validationRules.secondName.regexp}}}
+      {{{ Field caption="Phone" type="text" name="phone" classModifier="register" required=validationRules.phone.required
+          validationErrorText=validationRules.phone.errorMessage regexp=validationRules.phone.regexp}}}
+      {{{ Field caption="Password" type="password" name="password" classModifier="register" required=validationRules.password.required
+          validationErrorText=validationRules.password.errorMessage regexp=validationRules.password.regexp}}}
+      {{{ Field caption="Repeat password" type="password" name="password_repeat" classModifier="register" required=validationRules.password.required
+          validationErrorText=validationRules.password.errorMessage regexp=validationRules.password.regexp}}}
+      <div class="{{classes.register__buttonContainer}}">      
+        {{{Button caption="Register" classModifier="primary" submit="true"}}}
+      </div>
     {{/Form}}
     <div class="{{classes.register__linkContainer}}">      
       {{{ Link caption="Sign in" url="/login"}}}

@@ -1,11 +1,13 @@
 import DataContainerBlock from '../../utils/dataContainerBlock';
 import template from './register.hbs';
 import * as classes from './register.module.scss';
+import { validationRules } from '../../utils/validationRules';
 
 class Register extends DataContainerBlock {
   constructor() {
     super({
       classes,
+      validationRules,
       onSubmit: (e: Event) => {
         e.preventDefault();
         if (this.validate()) {
