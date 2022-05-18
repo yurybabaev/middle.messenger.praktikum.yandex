@@ -1,4 +1,4 @@
-import Block from '../utils/block';
+import Block from '../../utils/block';
 import template from './flyout.hbs';
 import * as classes from './flyout.module.scss';
 

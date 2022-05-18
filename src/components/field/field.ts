@@ -1,5 +1,5 @@
 import DataBlock from '../../utils/dataBlock';
-import { ValidationRule, validationRules } from '../../utils/validationRules';
+import { ValidationRule } from '../../utils/validationRules';
 import template from './field.hbs';
 import * as classes from './field.module.scss';
 

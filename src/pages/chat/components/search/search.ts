@@ -1,12 +1,30 @@
-import Handlebars from 'handlebars';
 import searchIcon from 'url:./searchIcon.svg';
+import Block from '../../../../utils/block';
 import template from './search.hbs';
-import './search.scss';
-
-const registerPartial = () => Handlebars.registerPartial('search', (params) => template({
-  ...params,
-  searchIcon,
-}));
-export { registerPartial };
+import * as classes from './search.module.scss';
 
 export default () => template();
+
+export interface SearchProps {
+  onChange?: EventListenerOrEventListenerObject
+}
+
+export class Search extends Block {
+  public static get ComponentName(): string {
+    return 'Search';
+  }
+
+  constructor(props: SearchProps) {
+    super({
+      ...props,
+      classes,
+      searchIcon,
+    }, {
+      change: props.onChange,
+    });
+  }
+
+  protected get template(): (data?: any) => string {
+    return template;
+  }
+}
