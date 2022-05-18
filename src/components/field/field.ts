@@ -1,11 +1,14 @@
 import DataBlock from '../../utils/dataBlock';
+import { ValidationRule, validationRules } from '../../utils/validationRules';
 import template from './field.hbs';
 import * as classes from './field.module.scss';
 
 export interface FieldProps {
   value?: any;
   required?: boolean;
-  regexp?: string;
+  regexp?: string | RegExp;
+  validationErrorText?: string;
+  validationRule?: ValidationRule; // if present, overrides validation settings
 }
 
 export class Field extends DataBlock {
@@ -28,11 +31,17 @@ export class Field extends DataBlock {
   protected _selectionStart: number | null = 0;
 
   constructor(props: FieldProps) {
+    let actualProps = { ...props, classes };
+    if (props.validationRule) {
+      actualProps = {
+        ...actualProps,
+        regexp: props.validationRule.regexp,
+        required: props.validationRule.required,
+        validationErrorText: props.validationRule.errorMessage,
+      };
+    }
     super(
-      {
-        ...props,
-        classes,
-      },
+      actualProps,
       {
         change: (e: Event) => {
           const input = e.target as HTMLInputElement;

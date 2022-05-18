@@ -3,29 +3,17 @@
   {{{Avatar avatarAlt="User avatar" classModifier="user"}}}
   <span class="{{classes.userEdit__userLabel}}"></span>
   {{#Form onSubmit=onSubmit}}
-  {{{Field caption="Email" type="email" value="test@email.com" name="email" classModifier="user"
-  required=validationRules.email.required
-  validationErrorText=validationRules.email.errorMessage regexp=validationRules.email.regexp}}}
+  {{{Field caption="Email" type="email" value="test@email.com" name="email" classModifier="user" validationRule=validationRules.email}}}
   <hr class="{{classes.userEdit__fieldSeparator}}">
-  {{{Field caption="Login" type="text" value="ivan" name="login" classModifier="user"
-  required=validationRules.login.required
-  validationErrorText=validationRules.login.errorMessage regexp=validationRules.login.regexp}}}
+  {{{Field caption="Login" type="text" value="ivan" name="login" classModifier="user" validationRule=validationRules.login}}}
   <hr class="{{classes.userEdit__fieldSeparator}}">
-  {{{Field caption="First name" type="text" value="Ivan" name="first_name" classModifier="user"
-  required=validationRules.firstName.required
-  validationErrorText=validationRules.firstName.errorMessage regexp=validationRules.firstName.regexp}}}
+  {{{Field caption="First name" type="text" value="Ivan" name="first_name" classModifier="user" validationRule=validationRules.firstName}}}
   <hr class="{{classes.userEdit__fieldSeparator}}">
-  {{{Field caption="Second name" type="text" value="Ivanov" name="second_name" classModifier="user"
-  required=validationRules.secondName.required
-  validationErrorText=validationRules.secondName.errorMessage regexp=validationRules.secondName.regexp}}}
+  {{{Field caption="Second name" type="text" value="Ivanov" name="second_name" classModifier="user" validationRule=validationRules.secondName}}}
   <hr class="{{classes.userEdit__fieldSeparator}}">
-  {{{Field caption="Nickname" type="text" value="stardestroyer5000" name="nick" classModifier="user"
-  required=validationRules.nickname.required
-  validationErrorText=validationRules.nickname.errorMessage regexp=validationRules.nickname.regexp}}}
+  {{{Field caption="Nickname" type="text" value="stardestroyer5000" name="nick" classModifier="user" validationRule=validationRules.nickname}}}
   <hr class="{{classes.userEdit__fieldSeparator}}">
-  {{{Field caption="Phone" type="text" value="+71112223344" name="phone" classModifier="user"
-  required=validationRules.phone.required
-  validationErrorText=validationRules.phone.errorMessage regexp=validationRules.phone.regexp}}}
+  {{{Field caption="Phone" type="text" value="+71112223344" name="phone" classModifier="user" validationRule=validationRules.phone}}}
   <div class="{{classes.userEdit__buttonContainer}}">
     {{{Button caption="Save" classModifier="primary" submit="true"}}}
   </div>
