@@ -1,41 +1,30 @@
 import Block from '../../../../utils/block';
-import template from './chatItem.hbs';
-import * as classes from './chatItem.module.scss';
+import template from './chatContent.hbs';
+import * as classes from './chatContent.module.scss';
 import { GlobalEvents, globalEventBus } from '../../../../utils/globalEvents';
 import { Chat } from '../../../../models';
 
-export interface ChatItemProps {
+export interface ChatContentProps {
   chat: Chat;
-  isSelected: boolean;
-  onSelected: (chatItem: ChatItem) => void;
 }
 
-export class ChatItem extends Block {
+export class ChatContent extends Block {
   constructor(props: any) {
     super(
       {
         ...props,
         classes,
       },
-      {
-        click: () => {
-          this.onSelected();
-        },
-      },
     );
     globalEventBus.on(GlobalEvents.CURRENT_CHAT_CHANGED, (chat: Chat) => {
       this.setProps({
-        isSelected: chat.id === this.props.chat.id,
+        chat,
       });
     });
   }
 
-  private onSelected() {
-    globalEventBus.emit(GlobalEvents.CURRENT_CHAT_CHANGED, this.props.chat);
-  }
-
   public static get ComponentName(): string {
-    return 'ChatItem';
+    return 'ChatContent';
   }
 
   protected get template(): (data?: any) => string {

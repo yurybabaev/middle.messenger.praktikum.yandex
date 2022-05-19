@@ -8,6 +8,7 @@ import { Flyout } from '../layouts/flyout/flyout';
 import { ChatItem } from '../pages/chat/components/chatItem/chatItem';
 import { Search } from '../pages/chat/components/search/search';
 import registerComponent from './registerComponent';
+import { ChatContent } from '../pages/chat/components/chatContent/chatContent';
 
 export default () => {
   Handlebars.registerHelper('ChildContent', () => '<div data-content></div>');
@@ -24,4 +25,5 @@ export default () => {
   registerComponent(Flyout);
   registerComponent(ChatItem);
   registerComponent(Search);
+  registerComponent(ChatContent);
 };

@@ -1,19 +1,19 @@
-<div class="{{classes.chatItem}}">
-    <div class="{{classes.chatItem__avatarContainer}}">
-        {{{Avatar classModifier="chatItem"}}}
+<div class="{{classes.chatItem}}{{#if isSelected}} {{classes.chatItem_selected}}{{/if}}">
+  <div class="{{classes.chatItem__avatarContainer}}">
+    {{{Avatar classModifier="chatItem"}}}
+  </div>
+  <div class="{{classes.chatItem__container}}">
+    <div class="{{classes.chatItem__top}}">
+      <span class="{{classes.chatItem__user}}">{{chat.user.name}}</span>
+      <span class="{{classes.chatItem__date}}">{{chat.lastMessage.date}}</span>
     </div>
-    <div class="{{classes.chatItem__container}}">
-        <div class="{{classes.chatItem__top}}">
-            <span class="{{classes.chatItem__user}}">{{user}}</span>
-            <span class="{{classes.chatItem__date}}">{{date}}</span>
-        </div>
-        <div class="{{classes.chatItem__bottom}}">
-            <span class="{{classes.chatItem__text}}">{{text}}</span>
-            {{#if unreadCount}}
-            <div class="{{classes.chatItem__unread}}">                
-                    {{unreadCount}}                
-            </div>
-            {{/if}}
-        </div>
+    <div class="{{classes.chatItem__bottom}}">
+      <span class="{{classes.chatItem__text}}">{{chat.lastMessage.text}}</span>
+      {{#if unreadCount}}
+      <div class="{{classes.chatItem__unread}}">
+        {{unreadCount}}
+      </div>
+      {{/if}}
     </div>
+  </div>
 </div>

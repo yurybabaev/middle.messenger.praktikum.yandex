@@ -3,20 +3,28 @@ import DataContainerBlock from '../../utils/dataContainerBlock';
 import template from './chat.hbs';
 import * as classes from './chat.module.scss';
 import mockChatData from './mockChatData.json';
+import { Chat as ChatModel } from '../../models/Chat';
 
-class Chat extends DataContainerBlock {
+export class Chat extends DataContainerBlock {
   constructor() {
     super({
-      chats: mockChatData,
+      chats: mockChatData.map((c) => ({
+        id: c.id,
+        user: {
+          id: 0,
+          name: c.user,
+        },
+        lastMessage: {
+          id: 0,
+          text: c.text,
+          date: c.date,
+          user: {
+            id: 0,
+            name: c.user,
+          },
+        },
+      } as ChatModel)),
       classes,
-      onSubmit: (e: Event) => {
-        e.preventDefault();
-        if (this.validate()) {
-          const values = this.getFormValues(e.target as HTMLFormElement);
-          // eslint-disable-next-line no-console
-          console.log(values);
-        }
-      },
     });
   }
 

@@ -5,6 +5,9 @@
 
     display: flex;
     width: 100%;
+    padding: 10px 0px;
+    cursor: pointer;
+
 
     &__avatarContainer {
         width: auto;
@@ -66,4 +69,11 @@
         font-size: 0.9rem;   
         line-height: 1px;
     }
+}
+
+.chatItem.chatItem_selected {
+  background: #E4EDFD;    
+  .chatItem {
+    
+  }
 }

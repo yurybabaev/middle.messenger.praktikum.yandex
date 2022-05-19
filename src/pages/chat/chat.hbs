@@ -10,12 +10,12 @@
     {{{Search}}}
     <div class="{{classes.chat__list}}">
       {{#each chats}}
-      <hr class="{{../classes.chat__listSeparator}}">
-      {{{ChatItem user=this.user date=this.date text=this.text unreadCount=this.unreadCount}}}
+      <hr class="{{@root.classes.chat__listSeparator}}">            
+      {{{ChatItem chat=this}}}
       {{/each}}
     </div>
   </div>
-  <div
-    class="{{classes.flyout__placeholder}} {{classes.container}} {{classes.container__centeredHorizontal}} {{classes.container__fullHeight}}">
+  <div class="{{classes.container}} {{classes.container__fullHeight}}">
+    {{{ChatContent}}}    
   </div>
 </div>
