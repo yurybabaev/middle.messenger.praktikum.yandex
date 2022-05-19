@@ -20,10 +20,13 @@
         color: $font-color-inverse;
 
         &:hover {
-            background-color: $background-color-base;
-            color: $background-color-primary;
+            background-color: lighten($background-color-primary, 10%);            
             cursor: pointer;
         }
+
+        &:active {
+          background-color: lighten($background-color-primary, 30%);                   
+      }
 
         &:focus{
             outline-color: lighten($background-color-primary, 30%);

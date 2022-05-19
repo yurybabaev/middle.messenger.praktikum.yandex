@@ -115,7 +115,7 @@ class Block {
   }
 
   dispatchComponentDidMount() {
-    Object.entries(this.children).forEach(([_, child]) => {
+    Object.entries(this.children).forEach(([, child]) => {
       child.dispatchComponentDidMount();
     });
     this._eventBus.emit(EVENTS.FLOW_CDM, this._props);
@@ -159,7 +159,7 @@ class Block {
   }
 
   _render() {
-    console.log('render:', (this.constructor as typeof Block).ComponentName);
+    // console.log('render:', (this.constructor as typeof Block).ComponentName);
 
     const fragment = this._applyTemplate({ ...this.props });
 

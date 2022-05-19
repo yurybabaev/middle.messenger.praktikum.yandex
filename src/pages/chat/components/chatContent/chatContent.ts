@@ -10,7 +10,6 @@ export interface ChatContentProps {
 }
 
 export class ChatContent extends DataContainerBlock {
-
   get messageField() {
     return this.refs.messageField as Field;
   }
