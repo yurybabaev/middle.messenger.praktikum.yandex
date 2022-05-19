@@ -4,9 +4,8 @@ import template from './button.hbs';
 import * as classes from './button.module.scss';
 
 export interface ButtonProps {
-  caption: string,
-  class?: string,
-  onClick?: EventListenerOrEventListenerObject
+  caption: string;
+  onClick?: EventListener;
 }
 
 export class Button extends Block {

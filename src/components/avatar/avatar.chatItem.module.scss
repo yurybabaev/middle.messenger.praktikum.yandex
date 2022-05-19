@@ -1,8 +1,7 @@
 .avatar.avatar_chatItem {
+  width: 47px;
+  height: 47px;
   .avatar {
-    width: 47px;
-    height: 47px;
-
     &__image {
       object-fit: cover;
       border-radius: 50%;

@@ -3,12 +3,15 @@ import template from './form.hbs';
 import * as classes from './form.module.scss';
 
 export interface FormProps {
-  onSubmit: EventListener;
+  onSubmit?: EventListener;
 }
 
 export class Form extends Block {
   constructor(props: FormProps) {
-    super({ classes }, {
+    super({
+      ...props,
+      classes,
+    }, {
       submit: props.onSubmit,
     });
   }

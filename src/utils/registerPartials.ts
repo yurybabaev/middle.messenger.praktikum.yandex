@@ -14,7 +14,12 @@ export default () => {
   Handlebars.registerHelper('ChildContent', () => '<div data-content></div>');
   Handlebars.registerHelper(
     'modifyclass',
-    (base: string, modifiers: string) => String(modifiers).split(' ').reduce((prev, mod) => `${prev} ${base}_${mod}`, base),
+    (base: string, modifiers: string) => {
+      if (!modifiers) {
+        return base;
+      }
+      return String(modifiers).split(' ').reduce((prev, mod) => `${prev} ${base}_${mod}`, base);
+    },
   );
 
   registerComponent(Link);

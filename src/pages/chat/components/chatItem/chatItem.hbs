@@ -1,6 +1,6 @@
 <div class="{{classes.chatItem}}{{#if isSelected}} {{classes.chatItem_selected}}{{/if}}">
-  <div class="{{classes.chatItem__avatarContainer}}">
-    {{{Avatar classModifier="chatItem"}}}
+  <div class="{{classes.chatItem__avatarContainer}}">    
+    {{{Avatar avatarUrl=chat.user.avatarUrl classModifier="chatItem"}}}
   </div>
   <div class="{{classes.chatItem__container}}">
     <div class="{{classes.chatItem__top}}">

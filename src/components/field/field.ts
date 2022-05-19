@@ -14,15 +14,16 @@ export interface FieldProps {
 export class Field extends DataBlock {
   private _value: any;
 
-  protected get value(): any {
+  public get value(): any {
     return this._value;
   }
 
-  protected set value(val: any) {
+  public set value(val: any) {
     if (val === undefined) {
       this._value = null;
     } else {
       this._value = val;
+      this.inputControl.value = val;
     }
   }
 

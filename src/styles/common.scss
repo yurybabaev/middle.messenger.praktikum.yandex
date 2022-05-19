@@ -13,6 +13,7 @@ $font-color-error: #FF2F2F;
 $background-color-primary: #3369F3;
 $background-color-base: #FFFFFF;
 $background-color-secondary: #EAEAEA;
+$background-color-lighter: #EFEFEF;
 
 @mixin sameFontAndLineSize($size) {
     font-size: $size;

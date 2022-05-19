@@ -40,7 +40,7 @@ class Block {
 
   private _events: Events;
 
-  private _refs: Record<string, HTMLElement>;
+  private _refs: Record<string, HTMLElement | Block>;
 
   public get children(): Record<string, Block> {
     return this._children;
@@ -115,6 +115,9 @@ class Block {
   }
 
   dispatchComponentDidMount() {
+    Object.entries(this.children).forEach(([_, child]) => {
+      child.dispatchComponentDidMount();
+    });
     this._eventBus.emit(EVENTS.FLOW_CDM, this._props);
   }
 
@@ -233,6 +236,10 @@ class Block {
     // plain children elements
     Object.entries(this._children).forEach(([, child]) => {
       const stub = fragment.content.querySelector(`[data-id="id-${child.id}"]`);
+
+      if ('ref' in child.props) {
+        this._refs[child.props.ref] = child;
+      }
 
       if (!stub) {
         return;
