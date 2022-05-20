@@ -1,0 +1,23 @@
+@import "../../../../styles/container.scss";
+@import "../../../../styles/common.scss";
+@import "../../../../components/avatar/avatar.module.scss";
+@import "../../../../components/field/field.module.scss";
+
+.chatMessage {
+  max-width: 60%;
+  margin: 20px;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  color: $font-color-primary;
+  padding: 11px;
+
+  &_other {
+    margin-left: 20px;
+    border-radius: 0px 12px 12px 12px;
+    background-color: #F8F8F8;
+  }
+
+  &_mine {
+    align-self: flex-end;
+  }
+}

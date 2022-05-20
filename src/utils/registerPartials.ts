@@ -1,4 +1,5 @@
 import Handlebars from 'handlebars';
+import registerComponent from './registerComponent';
 import { Link } from '../components/link/link';
 import { Avatar } from '../components/avatar/avatar';
 import { Button } from '../components/button/button';
@@ -7,8 +8,9 @@ import { Form } from '../components/form/form';
 import { Flyout } from '../layouts/flyout/flyout';
 import { ChatItem } from '../pages/chat/components/chatItem/chatItem';
 import { Search } from '../pages/chat/components/search/search';
-import registerComponent from './registerComponent';
 import { ChatContent } from '../pages/chat/components/chatContent/chatContent';
+import { ChatFeed } from '../pages/chat/components/chatFeed/chatFeed';
+import { ChatMessage } from '../pages/chat/components/chatMessage/chatMessage';
 
 export default () => {
   Handlebars.registerHelper('ChildContent', () => '<div data-content></div>');
@@ -31,4 +33,6 @@ export default () => {
   registerComponent(ChatItem);
   registerComponent(Search);
   registerComponent(ChatContent);
+  registerComponent(ChatFeed);
+  registerComponent(ChatMessage);
 };

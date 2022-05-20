@@ -161,6 +161,7 @@ class Block {
   _render() {
     // console.log('render:', (this.constructor as typeof Block).ComponentName);
 
+    this._children = {};
     const fragment = this._applyTemplate({ ...this.props });
 
     const newElement = fragment.firstElementChild as HTMLElement;
