@@ -7,7 +7,7 @@ import { UserEdit } from '../src/pages/user/userEdit/userEdit';
 import { UserChangePassword } from '../src/pages/user/userChangePassword/userChangePassword';
 import Chat from '../src/pages/chat/chat';
 import { System } from '../src/pages/system/system';
-import registerPartials from '../src/utils/registerPartials';
+import registerPartials from '../src/utils/registerComponents';
 import Block from '../src/utils/block';
 import renderDom from '../src/utils/renderDom';
 
