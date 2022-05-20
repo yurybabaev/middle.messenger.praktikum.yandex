@@ -6,27 +6,30 @@ import * as classes from './chat.module.scss';
 import mockChatData from './mockChatData.json';
 import { Chat as ChatModel } from '../../models/Chat';
 import { GlobalEvents, globalEventBus } from '../../utils/globalEvents';
+import { Request } from '../../utils/request';
 
 export class Chat extends DataContainerBlock {
   constructor() {
-    super({
-      chats: mockChatData.map((c) => ({
-        id: c.id,
+    const chats = mockChatData.map((c) => ({
+      id: c.id,
+      user: {
+        id: 0,
+        name: c.user,
+        avatarUrl: `https://i.pravatar.cc/64?u=${nanoid(8)}`,
+      },
+      lastMessage: {
+        id: 0,
+        text: c.text,
+        date: c.date,
         user: {
           id: 0,
           name: c.user,
-          avatarUrl: `https://i.pravatar.cc/64?u=${nanoid(8)}`,
         },
-        lastMessage: {
-          id: 0,
-          text: c.text,
-          date: c.date,
-          user: {
-            id: 0,
-            name: c.user,
-          },
-        },
-      } as ChatModel)),
+      },
+    } as ChatModel));
+
+    super({
+      chats,
       classes,
     });
   }
