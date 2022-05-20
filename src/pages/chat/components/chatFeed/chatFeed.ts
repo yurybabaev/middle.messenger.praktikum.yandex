@@ -2,7 +2,7 @@ import template from './chatFeed.hbs';
 import * as classes from './chatFeed.module.scss';
 import { GlobalEvents, globalEventBus } from '../../../../utils/globalEvents';
 import { Chat, ChatMessage } from '../../../../models';
-import Block from '../../../../utils/Block';
+import Block from '../../../../utils/block';
 
 export interface ChatContentProps {
   chat: Chat;
