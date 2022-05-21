@@ -1,44 +1,45 @@
+@use "sass:color";
 @import "../../styles/common.scss";
 
 .button {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    min-height: 3rem;
-    border: 1px;
-    border-radius: 8px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  border: 1px;
+  border-radius: 8px;
 
-    &__text {
-        @include sameFontAndLineSize(1.1rem);
+  &__text {
+    @include same-font-and-line-size(1.1rem);
+  }
+
+  &_primary {
+    background-color: $background-color-primary;
+    border: 1px solid $background-color-primary;
+    outline-color: $background-color-primary;
+    color: $font-color-inverse;
+
+    &:hover {
+      background-color: color.adjust($background-color-primary, $lightness: 10%);
+      cursor: pointer;
     }
 
-    &_primary {
-        background-color: $background-color-primary;
-        border: 1px solid $background-color-primary;
-        outline-color: $background-color-primary;
-        color: $font-color-inverse;
-
-        &:hover {
-            background-color: lighten($background-color-primary, 10%);            
-            cursor: pointer;
-        }
-
-        &:active {
-          background-color: lighten($background-color-primary, 30%);                   
-      }
-
-        &:focus{
-            outline-color: lighten($background-color-primary, 30%);
-        }
+    &:active {
+      background-color: color.adjust($background-color-primary, $lightness: 30%);
     }
 
-    &_round {      
-      width: 28px;
-      height: 28px;
-      min-width: 28px;
-      min-height: 28px;
-      padding: 0;
-      border-radius: 50%;   
+    &:focus {
+      outline-color: color.adjust($background-color-primary, $lightness: 30%);
+    }
+  }
+
+  &_round {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    min-height: 28px;
+    padding: 0;
+    border-radius: 50%;
   }
 }

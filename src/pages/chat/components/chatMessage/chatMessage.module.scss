@@ -1,7 +1,5 @@
 @import "../../../../styles/container.scss";
 @import "../../../../styles/common.scss";
-@import "../../../../components/avatar/avatar.module.scss";
-@import "../../../../components/field/field.module.scss";
 
 .chatMessage {
   max-width: 60%;
@@ -13,8 +11,8 @@
 
   &_other {
     margin-left: 20px;
-    border-radius: 0px 12px 12px 12px;
-    background-color: #F8F8F8;
+    border-radius: 0 12px 12px;
+    background-color: #f8f8f8;
   }
 
   &_mine {

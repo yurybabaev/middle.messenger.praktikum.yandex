@@ -1,12 +1,12 @@
 @import "../../styles/common.scss";
 
-.link {    
+.link {
+  text-decoration: none;
+  color: $font-color-accent;
 
-    text-decoration: none;
-    color: $font-color-accent;
-    @include sameFontAndLineSize(1.1rem);
+  @include same-font-and-line-size(1.1rem);
 
-    &_danger {
-        color: $font-color-danger;
-    }
+  &_danger {
+    color: $font-color-danger;
+  }
 }

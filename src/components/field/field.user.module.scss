@@ -9,7 +9,8 @@
       color: $font-color-primary;
       font-style: $font-style-base;
       font-weight: $font-weight-base;
-      @include sameFontAndLineSize(1.1rem);
+
+      @include same-font-and-line-size(1.1rem);
     }
 
     &__input {
@@ -18,21 +19,23 @@
       color: $font-color-secondary;
       text-align: end;
       border: none;
-      @include sameFontAndLineSize(1.1rem);
 
-      &:focus {        
-        padding: 0.25rem 0.5rem;        
-        margin: -0.25rem 0 -0.25rem 20px;        
+      @include same-font-and-line-size(1.1rem);
+
+      &:focus {
+        padding: 0.25rem 0.5rem;
+        margin: -0.25rem 0 -0.25rem 20px;
         border-radius: 2px;
         border-bottom: none;
         outline: 1px solid $font-color-secondary;
       }
     }
-    
+
     &__errorLabel {
       color: $font-color-error;
       width: 100%;
-      @include sameFontAndLineSize(1rem);
+
+      @include same-font-and-line-size(1rem);
     }
   }
 }

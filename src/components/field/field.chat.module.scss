@@ -2,6 +2,7 @@
 
 .field.field_chat {
   flex: 1 1 auto;
+
   .field {
     &__label {
       margin-left: 10px;
@@ -12,21 +13,23 @@
       color: $font-color-primary;
       font-style: $font-style-base;
       font-weight: $font-weight-base;
-      @include sameFontAndLineSize(1.1rem);
+
+      @include same-font-and-line-size(1.1rem);
     }
 
     &__input {
-      flex: 1 1 auto;      
+      flex: 1 1 auto;
       color: $font-color-primary;
       text-align: start;
       border: none;
-      border-radius: 30px;    
-      min-height: 32px;  
+      border-radius: 30px;
+      min-height: 32px;
       padding: 0.25rem 20px;
       background-color: $background-color-lighter;
-      @include sameFontAndLineSize(1rem);
 
-      &:focus {                
+      @include same-font-and-line-size(1rem);
+
+      &:focus {
         outline: 1px solid $font-color-secondary;
       }
     }

@@ -20,10 +20,11 @@
     align-self: flex-end;
     display: flex;
     align-items: center;
-    margin: 21px 10px 23px 10px;
+    margin: 21px 10px 23px;
     text-decoration: none;
     color: $font-color-secondary;
-    @include sameFontAndLineSize(1rem);
+
+    @include same-font-and-line-size(1rem);
   }
 
   &__profileText {
@@ -45,7 +46,7 @@
   }
 
   &__list::-webkit-scrollbar-thumb {
-    background-color: #bbbbbb;
+    background-color: #bbb;
   }
 
   &__listSeparator {
@@ -56,6 +57,6 @@
   }
 
   &__listSeparator:first-child {
-    margin: 0 0 2px 0;
+    margin: 0 0 2px;
   }
 }
