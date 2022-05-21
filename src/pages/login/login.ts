@@ -2,7 +2,7 @@ import DataContainerBlock from '../../utils/dataContainerBlock';
 import template from './login.hbs';
 import * as classes from './login.module.scss';
 
-class Login extends DataContainerBlock {
+export class Login extends DataContainerBlock {
   constructor() {
     super({
       classes,
@@ -19,6 +19,10 @@ class Login extends DataContainerBlock {
 
   protected get template() {
     return template;
+  }
+
+  public static get ComponentName(): string {
+    return 'Login';
   }
 }
 

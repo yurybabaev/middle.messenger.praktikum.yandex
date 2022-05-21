@@ -6,7 +6,6 @@ import * as classes from './chat.module.scss';
 import mockChatData from './mockChatData.json';
 import { Chat as ChatModel } from '../../models/Chat';
 import { GlobalEvents, globalEventBus } from '../../utils/globalEvents';
-import { Request } from '../../utils/request';
 
 export class Chat extends DataContainerBlock {
   constructor() {
@@ -34,12 +33,16 @@ export class Chat extends DataContainerBlock {
     });
   }
 
+  componentDidMount(oldProps: any): void {
+    globalEventBus.emit(GlobalEvents.CURRENT_CHAT_CHANGED, this.props.chats[0]);
+  }
+
   protected get template() {
     return template;
   }
 
-  componentDidMount(oldProps: any): void {
-    globalEventBus.emit(GlobalEvents.CURRENT_CHAT_CHANGED, this.props.chats[0]);
+  public static get ComponentName(): string {
+    return 'Chat';
   }
 }
 

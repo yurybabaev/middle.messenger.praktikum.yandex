@@ -40,4 +40,8 @@ export class ChatContent extends DataContainerBlock {
   protected get template(): (data?: any) => string {
     return template;
   }
+
+  public static get ComponentName(): string {
+    return 'ChatContent';
+  }
 }

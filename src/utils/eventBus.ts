@@ -26,9 +26,6 @@ class EventBus {
   }
 
   emit(event: string, ...args: unknown[]) {
-    if (!this.listeners.has(event)) {
-      throw new Error(`No event to emit: ${event}`);
-    }
     this.listeners.get(event)!.forEach((handler) => {
       handler(...args);
     });

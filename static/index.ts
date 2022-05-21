@@ -1,11 +1,11 @@
 import './index.scss';
-import Login from '../src/pages/login/login';
-import Register from '../src/pages/register/register';
+import { Login } from '../src/pages/login/login';
+import { Register } from '../src/pages/register/register';
 import { MockMain } from '../src/pages/mockMain/mockMain';
 import { UserView } from '../src/pages/user/userView/userView';
 import { UserEdit } from '../src/pages/user/userEdit/userEdit';
 import { UserChangePassword } from '../src/pages/user/userChangePassword/userChangePassword';
-import Chat from '../src/pages/chat/chat';
+import { Chat } from '../src/pages/chat/chat';
 import { System } from '../src/pages/system/system';
 import registerPartials from '../src/utils/registerComponents';
 import Block from '../src/utils/block';

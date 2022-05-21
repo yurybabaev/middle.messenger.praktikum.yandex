@@ -18,4 +18,8 @@ export class Button extends Block {
   protected get template(): (data?: any) => string {
     return template;
   }
+
+  public static get ComponentName(): string {
+    return 'Button';
+  }
 }

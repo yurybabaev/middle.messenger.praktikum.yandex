@@ -22,6 +22,10 @@ export class UserChangePassword extends DataContainerBlock {
   protected get template(): (data?: any) => string {
     return template;
   }
+
+  public static get ComponentName(): string {
+    return 'UserChangePassword';
+  }
 }
 
 export default UserChangePassword;

@@ -17,6 +17,10 @@ export class Flyout extends Block {
   protected get template(): (data?: any) => string {
     return template;
   }
+
+  public static get ComponentName(): string {
+    return 'Flyout';
+  }
 }
 
 export default Flyout;

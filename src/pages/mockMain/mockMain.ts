@@ -17,4 +17,8 @@ export class MockMain extends Block {
   protected get template() {
     return template;
   }
+
+  public static get ComponentName(): string {
+    return 'MockMain';
+  }
 }

@@ -3,7 +3,7 @@ import template from './register.hbs';
 import * as classes from './register.module.scss';
 import { validationRules } from '../../utils/validationRules';
 
-class Register extends DataContainerBlock {
+export class Register extends DataContainerBlock {
   constructor() {
     super({
       classes,
@@ -21,6 +21,10 @@ class Register extends DataContainerBlock {
 
   protected get template() {
     return template;
+  }
+
+  public static get ComponentName(): string {
+    return 'Register';
   }
 }
 
