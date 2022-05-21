@@ -22,10 +22,6 @@ export class ChatMessage extends Block {
     );
   }
 
-  public static get ComponentName(): string {
-    return 'ChatMessage';
-  }
-
   protected get template(): (data?: any) => string {
     return template;
   }

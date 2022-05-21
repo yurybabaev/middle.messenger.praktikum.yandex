@@ -7,10 +7,6 @@ export interface FlyoutProps {
 }
 
 export class Flyout extends Block {
-  public static get ComponentName(): string {
-    return 'Flyout';
-  }
-
   constructor(props: FlyoutProps) {
     super({
       ...props,

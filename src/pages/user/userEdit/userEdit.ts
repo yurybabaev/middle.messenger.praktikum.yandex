@@ -4,10 +4,6 @@ import template from './userEdit.hbs';
 import * as classes from './userEdit.module.scss';
 
 export class UserEdit extends DataContainerBlock {
-  public static get ComponentName(): string {
-    return 'UserEdit';
-  }
-
   constructor() {
     super({
       classes,

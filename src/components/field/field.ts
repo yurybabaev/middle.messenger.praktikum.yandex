@@ -99,10 +99,6 @@ export class Field extends DataBlock {
     }
   }
 
-  public static get ComponentName(): string {
-    return 'Field';
-  }
-
   protected get template(): (data?: any) => string {
     return template;
   }

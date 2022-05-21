@@ -37,10 +37,6 @@ export class ChatContent extends DataContainerBlock {
     });
   }
 
-  public static get ComponentName(): string {
-    return 'ChatContent';
-  }
-
   protected get template(): (data?: any) => string {
     return template;
   }

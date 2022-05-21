@@ -4,10 +4,6 @@ import template from './userChangePassword.hbs';
 import * as classes from './userChangePassword.module.scss';
 
 export class UserChangePassword extends DataContainerBlock {
-  public static get ComponentName(): string {
-    return 'UserChangePassword';
-  }
-
   constructor() {
     super({
       classes,

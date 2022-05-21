@@ -19,7 +19,7 @@ type Events = Record<string, EventListenerOrEventListenerObject | undefined>;
 
 class Block {
   public static get ComponentName() {
-    return '';
+    return this.name;
   }
 
   protected get template(): (data?: any) => string {

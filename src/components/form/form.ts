@@ -16,10 +16,6 @@ export class Form extends Block {
     });
   }
 
-  public static get ComponentName(): string {
-    return 'Form';
-  }
-
   protected get template(): (data?: any) => string {
     return template;
   }

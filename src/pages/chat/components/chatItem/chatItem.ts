@@ -34,10 +34,6 @@ export class ChatItem extends Block {
     globalEventBus.emit(GlobalEvents.CURRENT_CHAT_CHANGED, this.props.chat);
   }
 
-  public static get ComponentName(): string {
-    return 'ChatItem';
-  }
-
   protected get template(): (data?: any) => string {
     return template;
   }

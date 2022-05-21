@@ -9,10 +9,6 @@ export interface ButtonProps {
 }
 
 export class Button extends Block {
-  public static get ComponentName(): string {
-    return 'Button';
-  }
-
   constructor(props: ButtonProps) {
     super({ ...props, classes }, {
       click: props.onClick,

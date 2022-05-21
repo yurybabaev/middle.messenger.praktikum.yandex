@@ -7,10 +7,6 @@ export class Link extends Block {
     super({ ...props, classes });
   }
 
-  public static get ComponentName(): string {
-    return 'Link';
-  }
-
   protected get template(): (data?: any) => string {
     return template;
   }

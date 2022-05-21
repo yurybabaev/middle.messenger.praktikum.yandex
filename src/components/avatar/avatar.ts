@@ -9,10 +9,6 @@ export interface AvatarProps {
 }
 
 export class Avatar extends Block {
-  public static get ComponentName(): string {
-    return 'Avatar';
-  }
-
   constructor(props: AvatarProps) {
     super({
       ...props,

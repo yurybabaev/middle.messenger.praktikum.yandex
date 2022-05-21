@@ -10,10 +10,6 @@ export interface SearchProps {
 }
 
 export class Search extends Block {
-  public static get ComponentName(): string {
-    return 'Search';
-  }
-
   constructor(props: SearchProps) {
     super({
       ...props,

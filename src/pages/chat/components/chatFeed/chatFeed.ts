@@ -31,10 +31,6 @@ export class ChatFeed extends Block {
     });
   }
 
-  public static get ComponentName(): string {
-    return 'ChatFeed';
-  }
-
   protected get template(): (data?: any) => string {
     return template;
   }
