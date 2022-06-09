@@ -1,24 +1,24 @@
-$font-family-base: 'Inter';
+$font-family-base: "Inter";
 $font-style-base: normal;
 $font-weight-base: 500;
 $font-weight-bolder: 600;
+$font-color-primary: #1e1e1e;
+$font-color-secondary: #999;
+$font-color-inverse: #fff;
+$font-color-accent: #3369f3;
+$font-color-danger: #f00;
+$font-color-error: #ff2f2f;
+$background-color-primary: #3369f3;
+$background-color-base: #fff;
+$background-color-secondary: #eaeaea;
+$background-color-lighter: #efefef;
 
-$font-color-primary: #1E1E1E;
-$font-color-secondary: #999999;
-$font-color-inverse: #FFFFFF;
-$font-color-accent: #3369F3;
-$font-color-danger: #FF0000;
-
-$background-color-primary: #3369F3;
-$background-color-base: #FFFFFF;
-$background-color-secondary: #EAEAEA;
-
-@mixin sameFontAndLineSize($size) {
-    font-size: $size;
-    line-height: $size;
+@mixin same-font-and-line-size($size) {
+  font-size: $size;
+  line-height: $size;
 }
 
 .shadowBox {
-    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
-    border-radius: 12px;
-} 
+  box-shadow: 0 0 6px rgb(0 0 0 / 14%);
+  border-radius: 12px;
+}

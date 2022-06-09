@@ -1,0 +1,13 @@
+.avatar.avatar_user {
+  .avatar {
+    width: 130px;
+    height: 130px;
+
+    &__image {
+      object-fit: cover;
+      border-radius: 50%;
+      width: 130px;
+      height: 130px;
+    }
+  }
+}

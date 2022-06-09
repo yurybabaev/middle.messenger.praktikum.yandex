@@ -1,0 +1,11 @@
+@import "../../../../styles/container.scss";
+@import "../../../../styles/common.scss";
+@import "../../../../components/avatar/avatar.module.scss";
+@import "../../../../components/field/field.module.scss";
+
+.chatFeed {
+  display: flex;
+  flex-direction: column-reverse;
+  width: 100%;
+  height: 100%;
+}

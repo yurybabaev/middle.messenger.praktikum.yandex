@@ -1,0 +1,52 @@
+@import "../../styles/common.scss";
+
+.field.field_login {
+  .field {
+    margin: 0 0 0.25rem;
+
+    &__label {
+      color: $font-color-secondary;
+      font-style: $font-style-base;
+      font-weight: $font-weight-base;
+
+      @include same-font-and-line-size(0.75rem);
+    }
+
+    &__input {
+      width: 100%;
+      height: 2rem;
+      margin-top: 0.25rem;
+      margin-bottom: 1.25rem;
+      color: $font-color-primary;
+      border: none;
+      border-bottom: 1px solid #3369f3;
+
+      @include same-font-and-line-size(1.1rem);
+
+      &:focus {
+        width: calc(0.5rem + 100%);
+        padding-left: 0.5rem;
+        margin-left: -0.5rem;
+        border-radius: 2px;
+        border-bottom: none;
+        outline: 1px solid #3369f3;
+      }
+    }
+
+    &__errorLabel {
+      color: $font-color-error;
+      margin-top: 0.25rem;
+      height: 1rem;
+
+      @include same-font-and-line-size(0.75rem);
+    }
+  }
+}
+
+.field.field_error.field_login {
+  .field {
+    &__input {
+      margin-bottom: 0;
+    }
+  }
+}

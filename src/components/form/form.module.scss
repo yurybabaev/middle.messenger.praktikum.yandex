@@ -1,0 +1,10 @@
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &_horizontal {
+    flex-direction: row;
+    align-items: center;
+  }
+}

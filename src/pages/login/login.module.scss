@@ -1,0 +1,36 @@
+@import "../../styles/common.scss";
+@import "../../styles/container.scss";
+@import "../../components/field/field.module.scss";
+@import "../../components/button/button.module.scss";
+
+.login {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    min-width: 340px;
+    min-height: 450px;
+    height: auto;
+    padding: 50px 30px 30px;
+  }
+
+  &__label {
+    margin-bottom: 40px;
+    font-style: $font-style-base;
+    font-weight: $font-weight-base;
+
+    @include same-font-and-line-size(1.65rem);
+  }
+
+  &__buttonContainer {
+    margin-top: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  &__linkContainer {
+    margin-top: 12px;
+  }
+}

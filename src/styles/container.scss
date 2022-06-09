@@ -1,21 +1,21 @@
 .container {
-    width: 100%;    
-    display: flex;
+  width: 100%;
+  display: flex;
 }
 
 .container__fullHeight {
-    height: 100%;        
+  height: 100%;
 }
 
 .container__centered {
-    align-items: center;
-    justify-content: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .container__centeredHorizontal {
-     justify-content: center;
+  justify-content: center;
 }
 
 .container__centeredVertical {
-    align-items: center; 
+  align-items: center;
 }

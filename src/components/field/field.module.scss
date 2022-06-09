@@ -1,0 +1,25 @@
+@import "../../styles/common.scss";
+@import "./field.login.module.scss";
+@import "./field.user.module.scss";
+@import "./field.chat.module.scss";
+
+.field {
+  font-family: inherit;
+
+  &__label {
+    font-family: inherit;
+  }
+
+  &__input {
+    font-family: inherit;
+    padding: 0;
+  }
+
+  &__errorLabel {
+    display: none;
+  }
+
+  &_error &__errorLabel {
+    display: block;
+  }
+}

@@ -1,28 +1,28 @@
-{{#> flyout returnUrl="/chat"}}
-<div class="userView userView__container">
-    {{> avatar avatarAlt="User avatar" classModifier="avatar_user"}}
-    <span class="userView__userLabel">Иван</span>
-    {{#> form}}
-    {{> field caption="Email" type="email" value="test@email.com" name="email" readOnly="true" classModifier="field_user"}}
-    <hr class="field__separator_user">
-    {{> field caption="Login" type="text" value="ivan" readOnly="true" name="login" classModifier="field_user"}}
-    <hr class="field__separator_user">
-    {{> field caption="First name" type="text" value="Ivan" readOnly="true" name="first_name" classModifier="field_user"}}
-    <hr class="field__separator_user">
-    {{> field caption="Second name" type="text" value="Ivanov" readOnly="true" name="second_name" classModifier="field_user"}}
-    <hr class="field__separator_user">
-    {{> field caption="Nickname" type="text" value="stardestroyer5000" readOnly="true" name="nick" classModifier="field_user"}}
-    <hr class="field__separator_user">
-    {{> field caption="Phone" type="text" value="+71112223344" readOnly="true" name="phone" classModifier="field_user"}}
-    {{/form}}
-    <div class="userView__linkContainer">
-        {{> link caption="Change properties" url="/user/edit"}}
-        <hr class="field__separator_user">
-        {{> link caption="Change password" url="/user/changePassword"}}
-        <hr class="field__separator_user">
-        {{> link caption="Logout" url="/" classModifier="link_danger"}}        
+{{#Flyout returnUrl="/chat"}}
+<div class="{{classes.userView}} {{classes.userView__container}}">
+    {{{Avatar avatarAlt="User avatar" classModifier="user"}}}
+    <span class="{{classes.userView__userLabel}}">Иван</span>
+    {{#Form}}
+    {{{Field caption="Email" type="text" value="test@email.com" name="email" readOnly="true" classModifier="user"}}}
+    <hr class="{{classes.userView__fieldSeparator}}">
+    {{{Field caption="Login" type="text" value="ivan" readOnly="true" name="login" classModifier="user"}}}
+    <hr class="{{classes.userView__fieldSeparator}}">
+    {{{Field caption="First name" type="text" value="Ivan" readOnly="true" name="first_name" classModifier="user"}}}
+    <hr class="{{classes.userView__fieldSeparator}}">
+    {{{Field caption="Second name" type="text" value="Ivanov" readOnly="true" name="second_name" classModifier="user"}}}
+    <hr class="{{classes.userView__fieldSeparator}}">
+    {{{Field caption="Nickname" type="text" value="stardestroyer5000" readOnly="true" name="nick" classModifier="user"}}}
+    <hr class="{{classes.userView__fieldSeparator}}">
+    {{{Field caption="Phone" type="text" value="+71112223344" readOnly="true" name="phone" classModifier="user"}}}
+    {{/Form}}
+    <div class="{{classes.userView__linkContainer}}">
+        {{{Link caption="Change properties" url="/user/edit"}}}
+        <hr class="{{classes.userView__fieldSeparator}}">
+        {{{Link caption="Change password" url="/user/changePassword"}}}
+        <hr class="{{classes.userView__fieldSeparator}}">
+        {{{Link caption="Logout" url="/" classModifier="danger"}}}       
     </div>
 
 </div>
 
-{{/flyout}}
+{{/Flyout}}
