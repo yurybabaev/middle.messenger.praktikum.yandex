@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Yandex middle frontend dev first project",
   "dependencies": {
+    "dotenv": "16.0.1",
     "handlebars": "4.7.7",
     "nanoid": "3.3.4"
   },
@@ -29,10 +30,10 @@
   },
   "scripts": {
     "clean": "npx rimraf dist",
-    "dev": "parcel static/index.html",
+    "dev": "npm run clean && parcel static/index.html",
     "build": "npm run clean && parcel build static/index.html",
     "start": "npm run build && node ./server.js",
-    "test": "npx eslint ./src/**/*.ts --fix && npx stylelint ./src/**/*.scss --fix"
+    "lint": "eslint ./src/**/*.ts --fix && stylelint ./src/**/*.scss --fix"
   },
   "repository": {
     "type": "git",
