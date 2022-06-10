@@ -66,7 +66,12 @@ export class Request {
 
       xhr.timeout = timeout;
       xhr.ontimeout = reject;
-      xhr.send(JSON.stringify(data));
+      if (data) {
+        xhr.send(JSON.stringify(data));
+      }
+      else {
+        xhr.send();
+      }
     });
   }
 }
