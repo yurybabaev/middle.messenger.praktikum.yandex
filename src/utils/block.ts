@@ -42,6 +42,8 @@ class Block {
 
   private _refs: Record<string, HTMLElement | Block>;
 
+  private _visibleDisplay = '';
+
   public get children(): Record<string, Block> {
     return this._children;
   }
@@ -105,6 +107,7 @@ class Block {
   }
 
   _componentDidMount(oldProps: Props): void {
+    this._visibleDisplay = window.getComputedStyle(this.element).display;
     this.componentDidMount(oldProps);
   }
 
@@ -213,7 +216,7 @@ class Block {
   }
 
   show() {
-    this.element.style.display = 'block';
+    this.element.style.display = this._visibleDisplay;
   }
 
   hide() {
