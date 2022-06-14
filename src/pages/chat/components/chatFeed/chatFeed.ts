@@ -1,8 +1,10 @@
 import template from './chatFeed.hbs';
 import * as classes from './chatFeed.module.scss';
-import { GlobalEvents, globalEventBus } from '../../../../utils/globalEvents';
-import { Chat, ChatMessage } from '../../../../models';
+import Chat from '../../../../models/chat';
+import ChatMessage from '../../../../models/chatMessage';
 import Block from '../../../../utils/block';
+import store from '../../../../utils/store';
+import StoreKeys from '../../../../utils/storeKeys';
 
 export interface ChatContentProps {
   chat: Chat;
@@ -24,7 +26,7 @@ export class ChatFeed extends Block {
         ] as ChatMessage[],
       },
     );
-    globalEventBus.on(GlobalEvents.CURRENT_CHAT_CHANGED, (chat: Chat) => {
+    store.watch(StoreKeys.CURRENT_CHAT, (chat: Chat) => {
       this.setProps({
         chat,
       });

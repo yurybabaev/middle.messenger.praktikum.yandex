@@ -4,8 +4,9 @@ import DataContainerBlock from '../../utils/dataContainerBlock';
 import template from './chat.hbs';
 import * as classes from './chat.module.scss';
 import mockChatData from './mockChatData.json';
-import { Chat as ChatModel } from '../../models/Chat';
-import { GlobalEvents, globalEventBus } from '../../utils/globalEvents';
+import ChatModel from '../../models/Chat';
+import store from '../../utils/store';
+import StoreKeys from '../../utils/storeKeys';
 
 export class Chat extends DataContainerBlock {
   constructor() {
@@ -34,7 +35,7 @@ export class Chat extends DataContainerBlock {
   }
 
   componentDidMount(oldProps: any): void {
-    globalEventBus.emit(GlobalEvents.CURRENT_CHAT_CHANGED, this.props.chats[0]);
+    store.put(StoreKeys.CURRENT_CHAT, this.props.chats[0]);
   }
 
   protected get template() {

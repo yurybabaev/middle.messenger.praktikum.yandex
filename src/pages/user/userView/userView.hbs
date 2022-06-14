@@ -16,11 +16,11 @@
     {{{Field caption="Phone" type="text" value="+71112223344" readOnly="true" name="phone" classModifier="user"}}}
     {{/Form}}
     <div class="{{classes.userView__linkContainer}}">
-        {{{Link caption="Change properties" url="/user/edit"}}}
+        {{{Link caption="Change properties" url="/user/edit" routed="true"}}}
         <hr class="{{classes.userView__fieldSeparator}}">
-        {{{Link caption="Change password" url="/user/changePassword"}}}
+        {{{Link caption="Change password" url="/user/changePassword" routed="true"}}}
         <hr class="{{classes.userView__fieldSeparator}}">
-        {{{Link caption="Logout" url="/" classModifier="danger"}}}       
+        {{{Link caption="Logout" url="/" classModifier="danger" routed="true"}}}       
     </div>
 
 </div>

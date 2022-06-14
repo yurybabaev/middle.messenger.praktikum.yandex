@@ -1,8 +1,9 @@
 import Block from '../../../../utils/block';
 import template from './chatItem.hbs';
 import * as classes from './chatItem.module.scss';
-import { GlobalEvents, globalEventBus } from '../../../../utils/globalEvents';
-import { Chat } from '../../../../models';
+import Chat from '../../../../models/chat';
+import store from '../../../../utils/store';
+import StoreKeys from '../../../../utils/storeKeys';
 
 export interface ChatItemProps {
   chat: Chat;
@@ -23,7 +24,7 @@ export class ChatItem extends Block {
         },
       },
     );
-    globalEventBus.on(GlobalEvents.CURRENT_CHAT_CHANGED, (chat: Chat) => {
+    store.watch(StoreKeys.CURRENT_CHAT, (chat: Chat) => {
       this.setProps({
         isSelected: chat.id === this.props.chat.id,
       });
@@ -31,7 +32,7 @@ export class ChatItem extends Block {
   }
 
   private onSelected() {
-    globalEventBus.emit(GlobalEvents.CURRENT_CHAT_CHANGED, this.props.chat);
+    store.put(StoreKeys.CURRENT_CHAT, this.props.chat);
   }
 
   protected get template(): (data?: any) => string {

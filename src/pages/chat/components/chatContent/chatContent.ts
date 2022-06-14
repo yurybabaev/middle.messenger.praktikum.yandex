@@ -1,9 +1,10 @@
 import template from './chatContent.hbs';
 import * as classes from './chatContent.module.scss';
-import { GlobalEvents, globalEventBus } from '../../../../utils/globalEvents';
-import { Chat } from '../../../../models';
+import Chat from '../../../../models/chat';
 import DataContainerBlock from '../../../../utils/dataContainerBlock';
 import { Field } from '../../../../components/field/field';
+import store from '../../../../utils/store';
+import StoreKeys from '../../../../utils/storeKeys';
 
 export interface ChatContentProps {
   chat: Chat;
@@ -30,7 +31,7 @@ export class ChatContent extends DataContainerBlock {
         },
       },
     );
-    globalEventBus.on(GlobalEvents.CURRENT_CHAT_CHANGED, (chat: Chat) => {
+    store.watch(StoreKeys.CURRENT_CHAT, (chat: Chat) => {
       this.setProps({
         chat,
       });
