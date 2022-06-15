@@ -3,14 +3,14 @@ import * as classes from './chatFeed.module.scss';
 import Chat from '../../../../models/chat';
 import ChatMessage from '../../../../models/chatMessage';
 import Block from '../../../../utils/block';
-import store from '../../../../utils/store';
 import StoreKeys from '../../../../utils/storeKeys';
+import storeAware from '../../../../utils/storeAware';
 
 export interface ChatContentProps {
   chat: Chat;
 }
 
-export class ChatFeed extends Block {
+class ChatFeed extends Block {
   constructor(props: any) {
     super(
       {
@@ -26,11 +26,11 @@ export class ChatFeed extends Block {
         ] as ChatMessage[],
       },
     );
-    store.watch(StoreKeys.CURRENT_CHAT, (chat: Chat) => {
-      this.setProps({
-        chat,
-      });
-    });
+    // store.watch(StoreKeys.CURRENT_CHAT, (chat: Chat) => {
+    //   this.setProps({
+    //     chat,
+    //   });
+    // });
   }
 
   protected get template(): (data?: any) => string {
@@ -41,3 +41,6 @@ export class ChatFeed extends Block {
     return 'ChatFeed';
   }
 }
+
+export const storeAwareChatFeed = storeAware(ChatFeed, { chat: StoreKeys.CURRENT_CHAT });
+export { storeAwareChatFeed as ChatFeed };

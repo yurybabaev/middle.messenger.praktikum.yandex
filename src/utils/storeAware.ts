@@ -1,10 +1,32 @@
-//import Block from "./block";
-//import StoreKeys from "./storeKeys";
+import Block, { Events } from './block';
+import store from './store';
+import StoreKeys from './storeKeys';
 
-//export default function storeAware(component: typeof Block, ...storeKeys: StoreKeys[]) {
-//  return class extends Block {
-//    constructor(props: unknown) {
-//      super(props);
-//    }
-//  }
-//}
+const getStoreValues = (propertyMap: Record<string, StoreKeys>) => (
+  Object.entries(propertyMap).reduce<Record<string, unknown>>((acc, [key, val]) => {
+    acc[key] = store.get(val);
+    return acc;
+  }, {})
+);
+
+export default function storeAware(
+  Component: typeof Block,
+  propertyMap: Record<string, StoreKeys>,
+) {
+  return class extends Component {
+    // public static get ComponentName(): string {
+    //   return Component.ComponentName;
+    // }
+
+    constructor(props: Record<string, unknown>, events: Events) {
+      super({ ...props, ...getStoreValues(propertyMap) }, events);
+      Object.entries(propertyMap).forEach(([key, val]) => {
+        store.watch(val, (obj) => {
+          this.setProps({
+            [key]: obj,
+          });
+        });
+      });
+    }
+  };
+}

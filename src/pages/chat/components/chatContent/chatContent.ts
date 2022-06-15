@@ -3,14 +3,14 @@ import * as classes from './chatContent.module.scss';
 import Chat from '../../../../models/chat';
 import DataContainerBlock from '../../../../utils/dataContainerBlock';
 import { Field } from '../../../../components/field/field';
-import store from '../../../../utils/store';
 import StoreKeys from '../../../../utils/storeKeys';
+import storeAware from '../../../../utils/storeAware';
 
 export interface ChatContentProps {
   chat: Chat;
 }
 
-export class ChatContent extends DataContainerBlock {
+class ChatContent extends DataContainerBlock {
   get messageField() {
     return this.refs.messageField as Field;
   }
@@ -31,11 +31,11 @@ export class ChatContent extends DataContainerBlock {
         },
       },
     );
-    store.watch(StoreKeys.CURRENT_CHAT, (chat: Chat) => {
-      this.setProps({
-        chat,
-      });
-    });
+    // store.watch(StoreKeys.CURRENT_CHAT, (chat: Chat) => {
+    //   this.setProps({
+    //     chat,
+    //   });
+    // });
   }
 
   protected get template(): (data?: any) => string {
@@ -46,3 +46,6 @@ export class ChatContent extends DataContainerBlock {
     return 'ChatContent';
   }
 }
+
+const chatContentStoreAware = storeAware(ChatContent, { chat: StoreKeys.CURRENT_CHAT });
+export { chatContentStoreAware as ChatContent };

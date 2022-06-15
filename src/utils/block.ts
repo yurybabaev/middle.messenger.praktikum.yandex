@@ -14,8 +14,8 @@ interface Meta {
   oldEvents: Events
 }
 
-type Props = any;
-type Events = Record<string, EventListenerOrEventListenerObject | undefined>;
+export type Props = any;
+export type Events = Record<string, EventListenerOrEventListenerObject | undefined>;
 
 class Block {
   public static get ComponentName() {
