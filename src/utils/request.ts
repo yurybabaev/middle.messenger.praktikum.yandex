@@ -17,23 +17,30 @@ export interface RequestOptions {
 }
 
 export class Request {
-  public static get(url: string | URL, options: RequestOptions) {
-    return Request.request(url, METHODS.GET, options.timeout, options.headers, options.data);
+
+  private _baseUrl: string | URL;
+
+  constructor(baseUrl: string | URL = '') {
+    this._baseUrl = baseUrl;
   }
 
-  public static post(url: string | URL, options: RequestOptions) {
-    return Request.request(url, METHODS.POST, options.timeout, options.headers, options.data);
+  public get(url: string | URL, options: RequestOptions) {
+    return this.request(url, METHODS.GET, options.timeout, options.headers, options.data);
   }
 
-  public static put(url: string | URL, options: RequestOptions) {
-    return Request.request(url, METHODS.PUT, options.timeout, options.headers, options.data);
+  public post(url: string | URL, options: RequestOptions) {
+    return this.request(url, METHODS.POST, options.timeout, options.headers, options.data);
   }
 
-  public static delete(url: string | URL, options: RequestOptions) {
-    return Request.request(url, METHODS.DELETE, options.timeout, options.headers, options.data);
+  public put(url: string | URL, options: RequestOptions) {
+    return this.request(url, METHODS.PUT, options.timeout, options.headers, options.data);
   }
 
-  public static request(
+  public delete(url: string | URL, options: RequestOptions) {
+    return this.request(url, METHODS.DELETE, options.timeout, options.headers, options.data);
+  }
+
+  public request(
     url: string | URL,
     method: METHODS,
     timeout = 5000,
@@ -47,8 +54,8 @@ export class Request {
       xhr.open(
         method,
         isGet && data
-          ? new URL(`${url}${queryStringify(data)}`)
-          : new URL(url),
+          ? new URL(`${url}${queryStringify(data)}`, this._baseUrl)
+          : new URL(url, this._baseUrl),
       );
 
       if (headers) {
