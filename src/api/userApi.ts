@@ -15,7 +15,7 @@ function userModelToApiUser(userModel: User): Record<string, unknown> {
   };
 }
 
-function apiUserTouserModel(apiUser: Record<string, unknown>): User {
+function apiUserToUserModel(apiUser: Record<string, unknown>): User {
   return {
     id: Number(apiUser.id),
     firstName: String(apiUser.first_name),
@@ -29,23 +29,47 @@ function apiUserTouserModel(apiUser: Record<string, unknown>): User {
   };
 }
 
-export default class UserApi extends BaseApi<User> {
+class UserApi extends BaseApi<User> {
   public async create(item: User): Promise<User> {
-    const res = await this.request.post('/auth/sign', {
+    const res = await this.request.post('/auth/signup', {
       data: userModelToApiUser(item),
     });
-    console.log(res.response);
+    if (res.status !== 200) {
+      throw new Error('Registration failed');
+    }
+    return apiUserToUserModel(JSON.parse(res.response));
   }
 
-  public read(): User | User[] {
-    throw new Error('Method not implemented.');
+  public async read(): Promise<User | User[]> {
+    const res = await this.request.get('/auth/user', {});
+    this.checkResponseStatus(res);
+    return apiUserToUserModel(JSON.parse(res.response));
   }
 
+  public async logout(): Promise<void> {
+    const res = await this.request.post('/auth/logout', {});
+    this.checkResponseStatus(res);
+  }
+
+  public async login(login: string, password: string): Promise<void> {
+    const res = await this.request.post('/auth/signin', {
+      data: {
+        login,
+        password,
+      },
+    });
+    this.checkResponseStatus(res);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public update(item: User): User {
     throw new Error('Method not implemented.');
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public delete(item: User): boolean {
     throw new Error('Method not implemented.');
   }
 }
+
+export default new UserApi();

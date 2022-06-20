@@ -26,7 +26,7 @@ class EventBus {
   }
 
   emit(event: string, ...args: unknown[]) {
-    this.listeners.get(event)!.forEach((handler) => {
+    this.listeners.get(event)?.forEach((handler) => {
       handler(...args);
     });
   }

@@ -8,6 +8,7 @@ export interface ILinkProps {
   url?: string;
   caption?: string;
   classModifier?: string;
+  clickHandler?: () => {};
 }
 
 export class Link extends Block {
@@ -19,6 +20,10 @@ export class Link extends Block {
       },
       {
         click: (event: MouseEvent) => {
+          if (props.clickHandler) {
+            props.clickHandler();
+            event.preventDefault();
+          }
           if (props.routed) {
             router.go(props.url!);
             event.preventDefault();

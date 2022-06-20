@@ -2,13 +2,13 @@
   <div class="{{classes.register}} {{classes.register__container}} {{classes.shadowBox}}">
     <span class="{{classes.register__label}}">Register</span>
     {{#Form onSubmit=onSubmit}}
-      {{{Field caption="Email" type="text" name="email" classModifier="login" validationRule=validationRules.email}}}
-      {{{Field caption="Login" type="text" name="login" classModifier="login" validationRule=validationRules.login}}}
-      {{{Field caption="First name" type="text" name="first_name" classModifier="login" validationRule=validationRules.firstName}}}
-      {{{Field caption="Second name" type="text" name="second_name" classModifier="login" validationRule=validationRules.secondName}}}
-      {{{Field caption="Phone" type="text" name="phone" classModifier="login" validationRule=validationRules.phone}}}
-      {{{Field caption="Password" type="password" name="password" classModifier="login" validationRule=validationRules.password}}}
-      {{{Field caption="Repeat password" type="password" name="password_repeat" classModifier="login" validationRule=validationRules.password}}}
+      {{{Field caption="Email" type="text" name="email" classModifier="login" value="prozerpina_ivanova1@testmail.ru" validationRule=validationRules.email}}}
+      {{{Field caption="Login" type="text" name="login" classModifier="login" value="prozerpina_ivanova1" validationRule=validationRules.login}}}
+      {{{Field caption="First name" type="text" name="firstName" classModifier="login" value="Prozerpina" validationRule=validationRules.firstName}}}
+      {{{Field caption="Second name" type="text" name="secondName" classModifier="login" value="Ivanova" validationRule=validationRules.secondName}}}
+      {{{Field caption="Phone" type="text" name="phone" classModifier="login" value="99944466622" validationRule=validationRules.phone}}}
+      {{{Field caption="Password" type="password" name="password" classModifier="login" value="123456qQ" validationRule=validationRules.password}}}
+      {{{Field caption="Repeat password" type="password" name="passwordRepeat" classModifier="login" value="123456qQ" validationRule=validationRules.password}}}
       <div class="{{classes.register__buttonContainer}}">      
         {{{Button caption="Register" classModifier="primary" submit="true"}}}
       </div>

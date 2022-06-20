@@ -1,10 +1,37 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request } from '../utils/request';
+
+interface FailReason {
+  reason: string;
+}
 
 export default abstract class BaseApi<T> {
   protected request = new Request('https://ya-praktikum.tech/api/v2');
 
-  public async create(item: T): Promise<T> { throw new Error('Not implemented'); }
-  public abstract read(params: unknown): T | T[];
+  public async create(item: T): Promise<T> {
+    throw new Error('Not implemented');
+  }
+
+  public async read(params?: unknown): Promise<T | T[]> {
+    throw new Error('Not implemented');
+  }
   public abstract update(item: T): T;
   public abstract delete(item: T): boolean;
+
+  protected checkResponseStatus(requestResult: XMLHttpRequest, normalStatus: number = 200) {
+    if (requestResult.status !== normalStatus) {
+      if (requestResult.status === 400) {
+        let failReason = '';
+        failReason = (JSON.parse(requestResult.response) as FailReason).reason;
+        throw new Error(`Bad request: ${failReason}`);
+      }
+      if (requestResult.status === 401) {
+        throw new Error('You are Unauthorized');
+      }
+      if (requestResult.status === 500) {
+        throw new Error('Server returned unexpected error');
+      }
+      throw new Error(`Server returned code ${requestResult.status} with status ${requestResult.status}`);
+    }
+  }
 }

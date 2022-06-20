@@ -17,7 +17,6 @@ export interface RequestOptions {
 }
 
 export class Request {
-
   private _baseUrl: string | URL;
 
   constructor(baseUrl: string | URL = '') {
@@ -40,6 +39,12 @@ export class Request {
     return this.request(url, METHODS.DELETE, options.timeout, options.headers, options.data);
   }
 
+  private combineURLs(baseURL: string, relativeURL?: string) {
+    return relativeURL
+      ? `${baseURL.replace(/\/+$/, '')}/${relativeURL.replace(/^\/+/, '')}`
+      : baseURL;
+  }
+
   public request(
     url: string | URL,
     method: METHODS,
@@ -49,14 +54,19 @@ export class Request {
   ) {
     return new Promise<XMLHttpRequest>((resolve, reject) => {
       const xhr = new XMLHttpRequest();
+      xhr.withCredentials = true;
       const isGet = method === METHODS.GET;
 
       xhr.open(
         method,
         isGet && data
-          ? new URL(`${url}${queryStringify(data)}`, this._baseUrl)
-          : new URL(url, this._baseUrl),
+          ? new URL(this.combineURLs(this._baseUrl.toString(), `${url}${queryStringify(data)}`))
+          : new URL(this.combineURLs(this._baseUrl.toString(), url.toString())),
       );
+
+      if (data) {
+        xhr.setRequestHeader('content-type', 'application/json');
+      }
 
       if (headers) {
         headers.forEach((value, key) => {

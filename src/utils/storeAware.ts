@@ -14,10 +14,6 @@ export default function storeAware(
   propertyMap: Record<string, StoreKeys>,
 ) {
   return class extends Component {
-    // public static get ComponentName(): string {
-    //   return Component.ComponentName;
-    // }
-
     constructor(props: Record<string, unknown>, events: Events) {
       super({ ...props, ...getStoreValues(propertyMap) }, events);
       Object.entries(propertyMap).forEach(([key, val]) => {

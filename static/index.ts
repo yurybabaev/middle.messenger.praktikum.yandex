@@ -8,6 +8,7 @@ import { Chat } from '../src/pages/chat/chat';
 import registerPartials from '../src/utils/registerComponents';
 import router from '../src/utils/router';
 import { SystemPageError, SystemPageNotFound } from '../src/pages/system';
+import userController from '../src/logic/userController';
 
 registerPartials();
 
@@ -21,3 +22,6 @@ router.setup('#root')
   .use('/404', SystemPageNotFound(), 'Not found')
   .use('/500', SystemPageError(), 'Error')
   .start();
+
+userController.ensureLogin().then(() => {
+});

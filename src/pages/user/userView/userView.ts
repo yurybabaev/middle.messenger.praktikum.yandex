@@ -1,3 +1,4 @@
+import userController from '../../../logic/userController';
 import Block from '../../../utils/block';
 import storeAware from '../../../utils/storeAware';
 import StoreKeys from '../../../utils/storeKeys';
@@ -6,7 +7,12 @@ import * as classes from './userView.module.scss';
 
 class UserView extends Block {
   constructor() {
-    super({ classes });
+    super({
+      classes,
+      logout: () => {
+        userController.logout();
+      },
+    });
   }
 
   protected get template(): (data?: any) => string {
