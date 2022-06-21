@@ -20,7 +20,7 @@ class UserController {
       store.put(StoreKeys.CURRENT_USER, null);
       router.go('/login');
     } catch (e) {
-      store.put(StoreKeys.LAST_ERROR, new ApplicationError(e));
+      store.putAndClear(StoreKeys.LAST_ERROR, new ApplicationError(e));
     }
   }
 
@@ -30,7 +30,7 @@ class UserController {
       await this.ensureLogin();
       router.go('/');
     } catch (e) {
-      store.put(StoreKeys.LAST_ERROR, new ApplicationError(e));
+      store.putAndClear(StoreKeys.LAST_ERROR, new ApplicationError(e));
     }
   }
 }

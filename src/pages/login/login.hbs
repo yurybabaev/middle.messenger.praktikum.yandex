@@ -2,11 +2,13 @@
   <div class="{{classes.login}} {{classes.login__container}} {{classes.shadowBox}}">
     <span class="{{classes.login__label}}">Login</span>
     {{#Form onSubmit=onSubmit}}
-    {{{Field caption="Login" type="text" name="login" classModifier="login" required="true"
+    {{{Field caption="Login" type="username" name="login" classModifier="login" required="true"
     validationErrorText="Login required"}}}
     {{{Field caption="Password" type="password" name="password" classModifier="login" required="true"
     validationErrorText="Password required"}}}
-    {{error.text}}
+    <div class="{{classes.login__errorLabel}}">
+      {{error.text}}
+    </div>
     <div class="{{classes.login__buttonContainer}}">
       {{{Button caption="Sign in" type="submit" classModifier="primary" submit="true" }}}
     </div>

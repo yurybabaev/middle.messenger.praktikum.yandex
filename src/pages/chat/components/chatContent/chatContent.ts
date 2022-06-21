@@ -31,11 +31,6 @@ class ChatContent extends DataContainerBlock {
         },
       },
     );
-    // store.watch(StoreKeys.CURRENT_CHAT, (chat: Chat) => {
-    //   this.setProps({
-    //     chat,
-    //   });
-    // });
   }
 
   protected get template(): (data?: any) => string {

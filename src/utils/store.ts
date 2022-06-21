@@ -9,6 +9,11 @@ export type StoreType = {
 class Store extends EventBus {
   private _store: StoreType = {};
 
+  public putAndClear(key: StoreKeys, model: BaseModel) {
+    this.put(key, model);
+    this.put(key, null, false);
+  }
+
   public put(key: StoreKeys, model: BaseModel | null, notify: boolean = true) {
     this._store[key] = model;
     if (notify) {

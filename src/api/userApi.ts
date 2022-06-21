@@ -34,9 +34,7 @@ class UserApi extends BaseApi<User> {
     const res = await this.request.post('/auth/signup', {
       data: userModelToApiUser(item),
     });
-    if (res.status !== 200) {
-      throw new Error('Registration failed');
-    }
+    this.checkResponseStatus(res);
     return apiUserToUserModel(JSON.parse(res.response));
   }
 

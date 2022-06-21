@@ -1,13 +1,12 @@
 import userController from '../../logic/userController';
-import ApplicationError from '../../models/error';
 import User from '../../models/user';
 import DataContainerBlock from '../../utils/dataContainerBlock';
-import store from '../../utils/store';
+import storeAware from '../../utils/storeAware';
 import StoreKeys from '../../utils/storeKeys';
 import template from './login.hbs';
 import * as classes from './login.module.scss';
 
-export class Login extends DataContainerBlock {
+class Login extends DataContainerBlock {
   constructor() {
     super({
       classes,
@@ -20,13 +19,6 @@ export class Login extends DataContainerBlock {
         }
       },
     });
-
-    store.on(StoreKeys.LAST_ERROR, (error: ApplicationError) => {
-      this.setProps({
-        error,
-      });
-      store.put(StoreKeys.LAST_ERROR, {}, false);
-    });
   }
 
   protected get template() {
@@ -38,4 +30,6 @@ export class Login extends DataContainerBlock {
   }
 }
 
-export default Login;
+const loginStoreAware = storeAware(Login, { error: StoreKeys.LAST_ERROR });
+// eslint-disable-next-line import/prefer-default-export
+export { loginStoreAware as Login };
