@@ -11,8 +11,8 @@ function queryStringify(data: Record<string, any>) {
 }
 
 export interface RequestOptions {
-  data?: Record<string, any>;
-  headers?: Headers;
+  data?: XMLHttpRequestBodyInit;
+  headers?: Record<string, string>;
   timeout?: number;
 }
 
@@ -39,7 +39,7 @@ export class Request {
     return this.request(url, METHODS.DELETE, options.timeout, options.headers, options.data);
   }
 
-  private combineURLs(baseURL: string, relativeURL?: string) {
+  public combineURLs(baseURL: string, relativeURL?: string) {
     return relativeURL
       ? `${baseURL.replace(/\/+$/, '')}/${relativeURL.replace(/^\/+/, '')}`
       : baseURL;
@@ -49,8 +49,8 @@ export class Request {
     url: string | URL,
     method: METHODS,
     timeout = 5000,
-    headers?: Headers,
-    data?: Record<string, any>,
+    headers?: Record<string, string>,
+    data?: XMLHttpRequestBodyInit,
   ) {
     return new Promise<XMLHttpRequest>((resolve, reject) => {
       const xhr = new XMLHttpRequest();
@@ -60,16 +60,16 @@ export class Request {
       xhr.open(
         method,
         isGet && data
-          ? new URL(this.combineURLs(this._baseUrl.toString(), `${url}${queryStringify(data)}`))
+          ? new URL(this.combineURLs(this._baseUrl.toString(), `${url}${queryStringify(data as Record<string, any>)}`))
           : new URL(this.combineURLs(this._baseUrl.toString(), url.toString())),
       );
 
-      if (data) {
-        xhr.setRequestHeader('content-type', 'application/json');
-      }
+      // if (data) {
+      //   xhr.setRequestHeader('content-type', 'application/json');
+      // }
 
       if (headers) {
-        headers.forEach((value, key) => {
+        Object.entries(headers).forEach(([key, value]) => {
           xhr.setRequestHeader(key, value);
         });
       }
@@ -84,7 +84,7 @@ export class Request {
       xhr.timeout = timeout;
       xhr.ontimeout = reject;
       if (data) {
-        xhr.send(JSON.stringify(data));
+        xhr.send(data);
       } else {
         xhr.send();
       }

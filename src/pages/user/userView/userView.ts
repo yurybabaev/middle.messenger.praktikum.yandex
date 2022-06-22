@@ -13,6 +13,9 @@ class UserView extends Block {
       logout: () => {
         userController.logout();
       },
+      avatarClick: () => {
+        (this.refs.fileSelectModal as Block).show();
+      },
     });
   }
 

@@ -11,6 +11,8 @@ import { Search } from '../pages/chat/components/search/search';
 import { ChatContent } from '../pages/chat/components/chatContent/chatContent';
 import { ChatFeed } from '../pages/chat/components/chatFeed/chatFeed';
 import { ChatMessage } from '../pages/chat/components/chatMessage/chatMessage';
+import { Modal } from '../components/modal/modal';
+import { ChangeAvatar } from '../pages/user/changeAvatar/changeAvatar';
 
 function registerComponent(Component: typeof Block) {
   Handlebars.registerHelper(Component.ComponentName, (options: HelperOptions) => {
@@ -51,4 +53,6 @@ export default () => {
   registerComponent(ChatContent);
   registerComponent(ChatFeed);
   registerComponent(ChatMessage);
+  registerComponent(Modal);
+  registerComponent(ChangeAvatar);
 };

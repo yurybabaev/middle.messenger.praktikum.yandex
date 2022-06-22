@@ -83,5 +83,20 @@ class UserController {
       store.putAndClear(StoreKeys.LAST_ERROR, new ApplicationError(e));
     }
   }
+
+  public async changeAvatar(avatar: File): Promise<void> {
+    try {
+      if (!avatar.size) {
+        store.putAndClear(StoreKeys.LAST_ERROR, new ApplicationError('You should select file first'));
+        return;
+      }
+      const currentUser = await userApi.changeAvatar(avatar);
+      store.put(StoreKeys.CURRENT_USER, currentUser);
+      store.put(StoreKeys.LAST_ERROR, null);
+      // router.go('/user/view');
+    } catch (e) {
+      store.putAndClear(StoreKeys.LAST_ERROR, new ApplicationError(e));
+    }
+  }
 }
 export default new UserController();

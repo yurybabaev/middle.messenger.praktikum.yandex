@@ -6,7 +6,11 @@ interface FailReason {
 }
 
 export default abstract class BaseApi<T> {
-  protected request = new Request('https://ya-praktikum.tech/api/v2');
+  protected baseUrl = 'https://ya-praktikum.tech/api/v2';
+
+  protected baseResourcesUrl = 'https://ya-praktikum.tech/api/v2/resources';
+
+  protected request = new Request(this.baseUrl);
 
   public async create(item: T): Promise<T> {
     throw new Error('Not implemented');

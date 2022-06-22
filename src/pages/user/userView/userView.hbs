@@ -1,28 +1,32 @@
 {{#Flyout returnUrl="/"}}
 <div class="{{classes.userView}} {{classes.userView__container}}">
-    {{{Avatar avatarAlt="User avatar" classModifier="user"}}}
-    <span class="{{classes.userView__userLabel}}">Иван</span>
-    {{#Form}}
-    {{{Field caption="Email" type="text" value=user.email name="email"  readOnly="true" classModifier="user"}}}
+  {{{Avatar avatarAlt="User avatar" avatarUrl=user.avatarUrl classModifier="user" onClick=avatarClick}}}
+  <span class="{{classes.userView__userLabel}}">{{user.displayName}}</span>
+  {{#Form}}
+  {{{Field caption="Email" type="text" value=user.email name="email" readOnly="true" classModifier="user"}}}
+  <hr class="{{classes.userView__fieldSeparator}}">
+  {{{Field caption="Login" type="text" value=user.login readOnly="true" name="login" classModifier="user"}}}
+  <hr class="{{classes.userView__fieldSeparator}}">
+  {{{Field caption="First name" type="text" value=user.firstName readOnly="true" name="firstName"
+  classModifier="user"}}}
+  <hr class="{{classes.userView__fieldSeparator}}">
+  {{{Field caption="Second name" type="text" value=user.secondName readOnly="true" name="secondName"
+  classModifier="user"}}}
+  <hr class="{{classes.userView__fieldSeparator}}">
+  {{{Field caption="Nickname" type="text" value=user.displayName readOnly="true" name="displayName"
+  classModifier="user"}}}
+  <hr class="{{classes.userView__fieldSeparator}}">
+  {{{Field caption="Phone" type="text" value=user.phone readOnly="true" name="phone" classModifier="user"}}}
+  {{/Form}}
+  <div class="{{classes.userView__linkContainer}}">
+    {{{Link caption="Change properties" url="/user/edit" routed="true"}}}
     <hr class="{{classes.userView__fieldSeparator}}">
-    {{{Field caption="Login" type="text" value=user.login readOnly="true" name="login" classModifier="user"}}}
+    {{{Link caption="Change password" url="/user/password" routed="true"}}}
     <hr class="{{classes.userView__fieldSeparator}}">
-    {{{Field caption="First name" type="text" value=user.firstName readOnly="true" name="firstName" classModifier="user"}}}
-    <hr class="{{classes.userView__fieldSeparator}}">
-    {{{Field caption="Second name" type="text" value=user.secondName readOnly="true" name="secondName" classModifier="user"}}}
-    <hr class="{{classes.userView__fieldSeparator}}">
-    {{{Field caption="Nickname" type="text" value=user.displayName readOnly="true" name="displayName" classModifier="user"}}}
-    <hr class="{{classes.userView__fieldSeparator}}">
-    {{{Field caption="Phone" type="text" value=user.phone readOnly="true" name="phone" classModifier="user"}}}
-    {{/Form}}
-    <div class="{{classes.userView__linkContainer}}">
-        {{{Link caption="Change properties" url="/user/edit" routed="true"}}}
-        <hr class="{{classes.userView__fieldSeparator}}">
-        {{{Link caption="Change password" url="/user/password" routed="true"}}}
-        <hr class="{{classes.userView__fieldSeparator}}">
-        {{{Link caption="Logout" url="/" classModifier="danger" clickHandler=logout}}}       
-    </div>
-
+    {{{Link caption="Logout" url="/" classModifier="danger" clickHandler=logout}}}
+  </div>
 </div>
-
+{{#Modal ref="fileSelectModal"}}
+{{{ChangeAvatar}}}
+{{/Modal}}
 {{/Flyout}}
