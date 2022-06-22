@@ -47,13 +47,12 @@ export default class Route {
   }
 
   render() {
+    document.title = this._windowTitle;
     if (!this._view) {
       this._view = new this._viewClass(this._props);
       renderDom(this._rootQuery, this._view);
       return;
     }
-
     this._view.show();
-    document.title = this._windowTitle;
   }
 }

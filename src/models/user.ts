@@ -18,4 +18,6 @@ export default class User extends BaseModel {
   avatarUrl?: string;
 
   password?: string;
+
+  passwordRepeat?: string;
 }

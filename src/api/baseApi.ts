@@ -15,7 +15,11 @@ export default abstract class BaseApi<T> {
   public async read(params?: unknown): Promise<T | T[]> {
     throw new Error('Not implemented');
   }
-  public abstract update(item: T): T;
+
+  public async update(item: T): Promise<T | T[]> {
+    throw new Error('Not implemented');
+  }
+
   public abstract delete(item: T): boolean;
 
   protected checkResponseStatus(requestResult: XMLHttpRequest, normalStatus: number = 200) {

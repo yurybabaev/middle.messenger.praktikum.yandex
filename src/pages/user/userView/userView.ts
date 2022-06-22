@@ -6,8 +6,9 @@ import template from './userView.hbs';
 import * as classes from './userView.module.scss';
 
 class UserView extends Block {
-  constructor() {
+  constructor(props: object) {
     super({
+      ...props,
       classes,
       logout: () => {
         userController.logout();

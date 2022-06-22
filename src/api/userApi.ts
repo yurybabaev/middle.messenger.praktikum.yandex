@@ -20,7 +20,7 @@ function apiUserToUserModel(apiUser: Record<string, unknown>): User {
     id: Number(apiUser.id),
     firstName: String(apiUser.first_name),
     secondName: String(apiUser.second_name),
-    displayName: String(apiUser.display_name),
+    displayName: apiUser.display_name ? String(apiUser.display_name) : undefined,
     login: String(apiUser.login),
     email: String(apiUser.email),
     phone: String(apiUser.phone),
@@ -59,9 +59,22 @@ class UserApi extends BaseApi<User> {
     this.checkResponseStatus(res);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public update(item: User): User {
-    throw new Error('Method not implemented.');
+  public async update(item: User): Promise<User> {
+    const res = await this.request.put('/user/profile', {
+      data: userModelToApiUser(item),
+    });
+    this.checkResponseStatus(res);
+    return apiUserToUserModel(JSON.parse(res.response));
+  }
+
+  public async changePassword(oldPassword: string, newPassword: string): Promise<void> {
+    const res = await this.request.put('/user/password', {
+      data: {
+        oldPassword,
+        newPassword,
+      },
+    });
+    this.checkResponseStatus(res);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

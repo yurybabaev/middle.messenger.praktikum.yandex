@@ -1,13 +1,16 @@
 <div class="{{classes.flyout}} {{classes.container}} {{classes.container__fullHeight}}">
-    <div class="{{classes.flyout__panel}} {{classes.container}} {{classes.container__centered}}">        
-        <a class="{{classes.flyout__link}}" href="{{returnUrl}}">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="20" y="14.8" width="11" height="1.6" transform="rotate(-180 20 14.8)" fill="white" />
-                <path d="M13 19L9 14L13 9" stroke="white" stroke-width="1.6" />
-            </svg>
-        </a>
+  <div class="{{classes.flyout__panel}} {{classes.container}} {{classes.container__centered}}">    
+    {{#Link url=returnUrl routed="true"}}
+    <div class="{{classes.flyout__link}}">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="14.8" width="11" height="1.6" transform="rotate(-180 20 14.8)" fill="white" />
+        <path d="M13 19L9 14L13 9" stroke="white" stroke-width="1.6" />
+      </svg>
     </div>
-    <div class="{{classes.flyout__placeholder}} {{classes.container}} {{classes.container__centeredHorizontal}} {{classes.container__fullHeight}}">
-        {{{ ChildContent }}}
-    </div>
+    {{/Link}}
+  </div>
+  <div
+    class="{{classes.flyout__placeholder}} {{classes.container}} {{classes.container__centeredHorizontal}} {{classes.container__fullHeight}}">
+    {{{ ChildContent }}}
+  </div>
 </div>

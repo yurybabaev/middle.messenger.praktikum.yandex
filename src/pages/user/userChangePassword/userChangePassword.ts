@@ -1,9 +1,12 @@
+import userController from '../../../logic/userController';
 import DataContainerBlock from '../../../utils/dataContainerBlock';
+import storeAware from '../../../utils/storeAware';
+import StoreKeys from '../../../utils/storeKeys';
 import { validationRules } from '../../../utils/validationRules';
 import template from './userChangePassword.hbs';
 import * as classes from './userChangePassword.module.scss';
 
-export class UserChangePassword extends DataContainerBlock {
+class UserChangePassword extends DataContainerBlock {
   constructor() {
     super({
       classes,
@@ -11,9 +14,12 @@ export class UserChangePassword extends DataContainerBlock {
       onSubmit: (e: Event) => {
         e.preventDefault();
         if (this.validate()) {
-          const values = this.getFormValues(e.target as HTMLFormElement);
-          // eslint-disable-next-line no-console
-          console.log(values);
+          const values = this.getRawFormValues(e.target as HTMLFormElement);
+          userController.changePassword(
+            values.oldPassword as string,
+            values.newPassword as string,
+            values.newPasswordRepeat as string,
+          );
         }
       },
     });
@@ -28,4 +34,5 @@ export class UserChangePassword extends DataContainerBlock {
   }
 }
 
-export default UserChangePassword;
+export const storeAwareUserView = storeAware(UserChangePassword, { error: StoreKeys.LAST_ERROR });
+export { storeAwareUserView as UserChangePassword };
