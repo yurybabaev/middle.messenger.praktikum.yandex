@@ -1,6 +1,6 @@
 {{#Flyout returnUrl="/"}}
 <div class="{{classes.userView}} {{classes.userView__container}}">
-  {{{Avatar avatarAlt="User avatar" avatarUrl=user.avatarUrl classModifier="user" onClick=avatarClick}}}
+  {{{Avatar avatarAlt="User avatar" avatarUrl=user.avatarUrl classModifier="user" onClick=avatarClick hasOverlay=true overlayText="Change avatar"}}}
   <span class="{{classes.userView__userLabel}}">{{user.displayName}}</span>
   {{#Form}}
   {{{Field caption="Email" type="text" value=user.email name="email" readOnly="true" classModifier="user"}}}

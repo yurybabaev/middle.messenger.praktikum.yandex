@@ -34,5 +34,8 @@ class UserChangePassword extends DataContainerBlock {
   }
 }
 
-export const storeAwareUserView = storeAware(UserChangePassword, { error: StoreKeys.LAST_ERROR });
+export const storeAwareUserView = storeAware(UserChangePassword, {
+  error: StoreKeys.LAST_ERROR,
+  user: StoreKeys.CURRENT_USER,
+});
 export { storeAwareUserView as UserChangePassword };

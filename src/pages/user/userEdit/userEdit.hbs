@@ -1,6 +1,6 @@
 {{#Flyout returnUrl="/user/view"}}
 <div class="{{classes.userEdit}} {{classes.userEdit__container}}">
-  {{{Avatar avatarAlt="User avatar" classModifier="user"}}}
+  {{{Avatar avatarAlt="User avatar" avatarUrl=user.avatarUrl classModifier="user"}}}
   <span class="{{classes.userEdit__userLabel}}"></span>
   {{#Form onSubmit=onSubmit}}
   {{{Field caption="Email" type="text" value=user.email name="email" classModifier="user" validationRule=validationRules.email}}}

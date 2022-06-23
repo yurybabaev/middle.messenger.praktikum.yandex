@@ -48,6 +48,13 @@ export default class Route {
 
   render() {
     document.title = this._windowTitle;
+    const root = document.getElementById('root');
+    if (root) {
+      root.classList.remove('visible');
+      setTimeout(() => {
+        root.classList.add('visible');
+      }, 250);
+    }
     if (!this._view) {
       this._view = new this._viewClass(this._props);
       renderDom(this._rootQuery, this._view);
