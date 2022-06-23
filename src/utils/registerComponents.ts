@@ -13,6 +13,7 @@ import { ChatFeed } from '../pages/chat/components/chatFeed/chatFeed';
 import { ChatMessage } from '../pages/chat/components/chatMessage/chatMessage';
 import { Modal } from '../components/modal/modal';
 import { ChangeAvatar } from '../pages/user/changeAvatar/changeAvatar';
+import { Dropdown } from '../components/dropdown/dropdown';
 
 function registerComponent(Component: typeof Block) {
   Handlebars.registerHelper(Component.ComponentName, (options: HelperOptions) => {
@@ -55,4 +56,5 @@ export default () => {
   registerComponent(ChatMessage);
   registerComponent(Modal);
   registerComponent(ChangeAvatar);
+  registerComponent(Dropdown);
 };

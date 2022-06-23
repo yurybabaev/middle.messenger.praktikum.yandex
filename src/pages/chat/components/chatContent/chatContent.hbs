@@ -3,12 +3,23 @@
   <div class="{{classes.chatContent__userContainer}}">
     {{{Avatar avatarUrl=chat.user.avatarUrl classModifier="chatContent"}}}
     <span class="{{classes.chatContent__userName}}">{{chat.user.name}}</span>
-    <div class="{{classes.chatContent__userMenu}}">
-      <svg width="3" height="16" viewBox="0 0 3 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="1.5" cy="2" r="1.5" fill="#1E1E1E" />
-        <circle cx="1.5" cy="8" r="1.5" fill="#1E1E1E" />
-        <circle cx="1.5" cy="14" r="1.5" fill="#1E1E1E" />
-      </svg>
+    <div class="{{classes.chatContent__chatMenuButtonContainer}}">
+      {{#Link clickHandler=onChatMenuClick}}
+      <div class="{{classes.chatContent__chatMenuButton}}" data-ref="chatMenuButton">
+        <svg width="3" height="16" viewBox="0 0 3 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="1.5" cy="2" r="1.5" fill="#1E1E1E" />
+          <circle cx="1.5" cy="8" r="1.5" fill="#1E1E1E" />
+          <circle cx="1.5" cy="14" r="1.5" fill="#1E1E1E" />
+        </svg>
+      </div>
+      {{/Link}}
+      {{#Dropdown ref="chatMenu"}}
+      <div class="{{classes.chatContent__chatMenuDropdownContent}}">
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+      </div>
+      {{/Dropdown}}
     </div>
   </div>
   <div class="{{classes.chatContent__messagesContainer}} {{classes.container}} {{classes.container__centered}}">

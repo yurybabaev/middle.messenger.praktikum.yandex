@@ -24,10 +24,29 @@
     @include same-font-and-line-size(1.1rem);
   }
 
-  &__userMenu {
-    line-height: 1px;
+  &__chatMenuButtonContainer {
     margin-left: auto;
     margin-right: 11px;
+  }
+
+  &__chatMenuButton {
+    line-height: 1px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: 0.3s ease;
+  }
+
+  &__chatMenu:hover {
+    background-color: rgb(0 0 0 / 20%);
+    cursor: pointer;
+  }
+  
+  &__chatMenuDropdownContent {
+    width: 210px;
   }
 
   &__messagesContainer {

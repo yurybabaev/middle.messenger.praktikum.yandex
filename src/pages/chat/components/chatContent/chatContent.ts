@@ -5,6 +5,8 @@ import DataContainerBlock from '../../../../utils/dataContainerBlock';
 import { Field } from '../../../../components/field/field';
 import StoreKeys from '../../../../utils/storeKeys';
 import storeAware from '../../../../utils/storeAware';
+import Block from '../../../../utils/block';
+import { Dropdown } from '../../../../components/dropdown/dropdown';
 
 export interface ChatContentProps {
   chat: Chat;
@@ -15,7 +17,7 @@ class ChatContent extends DataContainerBlock {
     return this.refs.messageField as Field;
   }
 
-  constructor(props: any) {
+  constructor(props: ChatContentProps) {
     super(
       {
         ...props,
@@ -28,6 +30,11 @@ class ChatContent extends DataContainerBlock {
             console.log(values);
             this.messageField.value = '';
           }
+        },
+        onChatMenuClick: () => {
+          const chatMenu = this.refs.chatMenu as Dropdown;
+          chatMenu.target = this.refs.chatMenuButton as HTMLElement;
+          chatMenu.show();
         },
       },
     );

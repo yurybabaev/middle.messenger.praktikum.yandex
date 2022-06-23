@@ -21,8 +21,8 @@ export class Link extends Block {
       {
         click: (event: MouseEvent) => {
           if (props.clickHandler) {
-            props.clickHandler();
             event.preventDefault();
+            props.clickHandler();
           }
           if (props.routed) {
             router.go(props.url!);
