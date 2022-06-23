@@ -3,7 +3,6 @@ import template from './modal.hbs';
 import * as classes from './modal.module.scss';
 
 export interface ModalProps {
-  avatarUrl?: string,
   onClick?: EventListenerOrEventListenerObject
 }
 
@@ -13,12 +12,15 @@ export class Modal extends Block {
       ...props,
       classes,
     });
-    this.hide();
-    window.onclick = (e: MouseEvent) => {
+    window.addEventListener('click', (e: MouseEvent) => {
       if (e.target === this.refs.modal) {
         this.hide();
       }
-    };
+    });
+  }
+
+  protected componentDidMount(oldProps: any): void {
+    this.hide();
   }
 
   protected get template(): (data?: any) => string {

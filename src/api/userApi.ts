@@ -36,6 +36,9 @@ class UserApi extends BaseApi<User> {
   public async create(item: User): Promise<User> {
     const res = await this.request.post('/auth/signup', {
       data: JSON.stringify(this.userModelToApiUser(item)),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
     this.checkResponseStatus(res);
     return this.apiUserToUserModel(JSON.parse(res.response));

@@ -1,0 +1,10 @@
+{{#Form onSubmit=onSubmit}}
+{{{Field caption="Chat name" type="text" name="title" classModifier="popup" required="true"
+validationErrorText="Chat name required"}}}
+<div class="{{classes.addChat__errorLabel}}">
+  {{error.text}}
+</div>
+<div class="{{classes.addChat__buttonContainer}}">
+  {{{Button caption="Create chat" type="submit" classModifier="primary" submit="true" }}}
+</div>
+{{/Form}}

@@ -49,7 +49,7 @@ class UserController {
       const currentUser = await userApi.create(user);
       store.put(StoreKeys.CURRENT_USER, currentUser);
       store.put(StoreKeys.LAST_ERROR, null);
-      router.go('/chat');
+      router.go('/');
     } catch (e) {
       store.putAndClear(StoreKeys.LAST_ERROR, new ApplicationError(e));
     }

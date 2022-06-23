@@ -1,22 +1,32 @@
 <div class="{{classes.chat}} {{classes.container}} {{classes.container__fullHeight}}">
   <div class="{{classes.chat__chatsPanel}} {{classes.container}}">
-    <div class="{{classes.chat__profileLink}}">
-    {{#Link url="/user/view" routed="true" classModifier="uncolored"}}    
-      <span class="{{classes.chat__profileText}}">Profile</span>
-      <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M1 9L5 5L1 1" stroke="#999999" />
-      </svg>    
-    {{/Link}}
+    <div class="{{classes.chat__chatTopLinksContainer}}">
+      <div class="{{classes.chat__addChatLink}}">
+        {{#Link classModifier="uncolored" clickHandler=onAddChat}}
+        <span class="{{classes.chat__profileText}}">Add chat</span>
+        {{/Link}}
+      </div>
+      <div class="{{classes.chat__profileLink}}">
+        {{#Link url="/user/view" routed="true" classModifier="uncolored"}}
+        <span class="{{classes.chat__profileText}}">Profile</span>
+        <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 9L5 5L1 1" stroke="#999999" />
+        </svg>
+        {{/Link}}
+      </div>
     </div>
     {{{Search}}}
     <div class="{{classes.chat__list}}">
       {{#each chats}}
-      <hr class="{{@root.classes.chat__listSeparator}}">            
+      <hr class="{{@root.classes.chat__listSeparator}}">
       {{{ChatItem chat=this}}}
       {{/each}}
     </div>
   </div>
   <div class="{{classes.container}} {{classes.container__fullHeight}}">
-    {{{ChatContent}}}    
+    {{{ChatContent}}}
   </div>
+  {{#Modal ref="addChatModal"}}
+  {{{AddChat}}}
+  {{/Modal}}
 </div>

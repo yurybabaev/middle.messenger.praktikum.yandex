@@ -16,8 +16,22 @@
     border-right: 1px solid $background-color-secondary;
   }
 
-  &__profileLink {
-    align-self: flex-end;
+  &__chatTopLinksContainer {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__addChatLink {
+    margin: 21px 21px;
+    text-decoration: none;
+    color: $font-color-secondary;
+
+    @include same-font-and-line-size(1rem);
+  }
+
+  &__profileLink {    
     display: flex;
     align-items: center;
     margin: 21px 10px 23px;
