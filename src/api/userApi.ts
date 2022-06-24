@@ -102,6 +102,28 @@ class UserApi extends BaseApi<User> {
     return this.apiUserToUserModel(JSON.parse(res.response));
   }
 
+  public async search(login: string): Promise<User | User[]> {
+    const res = await this.request.post('/user/search', {
+      data: JSON.stringify({
+        login,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    this.checkResponseStatus(res);
+    return (JSON.parse(res.response) as Array<Record<string, unknown>>)
+      .map(this.apiUserToUserModel.bind(this));
+  }
+
+  public async getChatUsers(chatId: number): Promise<User | User[]> {
+    const res = await this.request.get(`/chats/${chatId}/users`, {});
+    this.checkResponseStatus(res);
+    return (JSON.parse(res.response) as Array<Record<string, unknown>>)
+      .map(this.apiUserToUserModel.bind(this));
+  }
+
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public delete(item: User): boolean {
     throw new Error('Method not implemented.');

@@ -1,6 +1,6 @@
 {{#Form onSubmit=onSubmit}}
 {{{Field caption="Chat name" type="text" name="title" classModifier="popup" required="true"
-validationErrorText="Chat name required"}}}
+validationErrorText="Chat name required" ref=chatNameField}}}
 <div class="{{classes.addChat__errorLabel}}">
   {{error.text}}
 </div>

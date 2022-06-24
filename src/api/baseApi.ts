@@ -7,7 +7,7 @@ interface FailReason {
 
 export default abstract class BaseApi<T> {
   protected baseUrl = 'https://ya-praktikum.tech/api/v2';
-  
+
   protected baseResourcesUrl = 'https://ya-praktikum.tech/api/v2/resources';
 
   protected request = new Request(this.baseUrl);

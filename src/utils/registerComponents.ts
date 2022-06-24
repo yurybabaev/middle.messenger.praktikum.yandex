@@ -15,6 +15,8 @@ import { Modal } from '../components/modal/modal';
 import { ChangeAvatar } from '../pages/user/changeAvatar/changeAvatar';
 import { Dropdown } from '../components/dropdown/dropdown';
 import { AddChat } from '../pages/chat/components/addChat/addChat';
+import { AddUser } from '../pages/chat/components/addUser/addUser';
+import { DeleteUser } from '../pages/chat/components/deleteUser/deleteUser';
 
 function registerComponent(Component: typeof Block) {
   Handlebars.registerHelper(Component.ComponentName, (options: HelperOptions) => {
@@ -59,4 +61,6 @@ export default () => {
   registerComponent(ChangeAvatar);
   registerComponent(Dropdown);
   registerComponent(AddChat);
+  registerComponent(AddUser);
+  registerComponent(DeleteUser);
 };

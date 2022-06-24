@@ -1,4 +1,6 @@
+import chatApi from '../api/chatApi';
 import userApi from '../api/userApi';
+import Chat from '../models/chat';
 import ApplicationError from '../models/error';
 import User from '../models/user';
 import router from '../utils/router';
@@ -94,6 +96,21 @@ class UserController {
       store.put(StoreKeys.CURRENT_USER, currentUser);
       store.put(StoreKeys.LAST_ERROR, null);
       // router.go('/user/view');
+    } catch (e) {
+      store.putAndClear(StoreKeys.LAST_ERROR, new ApplicationError(e));
+    }
+  }
+
+  public async search(login: string, excludeFromCurrentChat: boolean = false): Promise<void> {
+    try {
+      let users = (await userApi.search(login)) as User[];
+      if (excludeFromCurrentChat) {
+        const currentChatUsers = await
+        userApi.getChatUsers(store.get<Chat>(StoreKeys.CURRENT_CHAT).id);
+        const currentChatUserIds = (currentChatUsers as User[]).map((u) => u.id);
+        users = users.filter((u) => !currentChatUserIds.includes(u.id));
+      }
+      store.putAndClear(StoreKeys.SEARCH_USERS_LIST, users);
     } catch (e) {
       store.putAndClear(StoreKeys.LAST_ERROR, new ApplicationError(e));
     }

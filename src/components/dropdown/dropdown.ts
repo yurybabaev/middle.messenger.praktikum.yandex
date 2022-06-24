@@ -1,4 +1,3 @@
-import { prototype } from 'events';
 import Block from '../../utils/block';
 import template from './dropdown.hbs';
 import * as classes from './dropdown.module.scss';

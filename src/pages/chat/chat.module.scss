@@ -24,14 +24,14 @@
   }
 
   &__addChatLink {
-    margin: 21px 21px;
+    margin: 21px;
     text-decoration: none;
     color: $font-color-secondary;
 
     @include same-font-and-line-size(1rem);
   }
 
-  &__profileLink {    
+  &__profileLink {
     display: flex;
     align-items: center;
     margin: 21px 10px 23px;

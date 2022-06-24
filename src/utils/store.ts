@@ -21,6 +21,10 @@ class Store extends EventBus {
     }
   }
 
+  public notify(key: StoreKeys) {
+    this.emit(key, this._store[key]);
+  }
+
   public get<T extends BaseModel>(key: StoreKeys) {
     return this._store[key] as T;
   }

@@ -36,20 +36,37 @@ class ChatApi extends BaseApi<Chat> {
   }
 
   public async read(): Promise<Chat | Chat[]> {
-    const res = await this.request.get('/auth/user', {});
+    const res = await this.request.get('/chats', {});
     this.checkResponseStatus(res);
-    return this.apiChatToChatModel(JSON.parse(res.response));
+    return (JSON.parse(res.response) as Array<Record<string, unknown>>)
+      .map(this.apiChatToChatModel);
   }
 
-  public async update(item: Chat): Promise<User> {
-    const res = await this.request.put('/user/profile', {
-      data: JSON.stringify(this.userModelToApiUser(item)),
+  public async addUser(users: number[], chatId: number): Promise<void> {
+    const res = await this.request.put('/chats/users', {
+      data: JSON.stringify({
+        users,
+        chatId,
+      }),
       headers: {
         'Content-Type': 'application/json',
       },
     });
     this.checkResponseStatus(res);
-    return this.apiChatToChatModel(JSON.parse(res.response));
+  }
+
+  
+  public async deleteUser(users: number[], chatId: number): Promise<void> {
+    const res = await this.request.delete('/chats/users', {
+      data: JSON.stringify({
+        users,
+        chatId,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    this.checkResponseStatus(res);
   }
 
   public async changeAvatar(avatar: File): Promise<Chat> {

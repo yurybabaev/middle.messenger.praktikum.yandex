@@ -5,8 +5,9 @@ import DataContainerBlock from '../../../../utils/dataContainerBlock';
 import { Field } from '../../../../components/field/field';
 import StoreKeys from '../../../../utils/storeKeys';
 import storeAware from '../../../../utils/storeAware';
-import Block from '../../../../utils/block';
 import { Dropdown } from '../../../../components/dropdown/dropdown';
+import Block from '../../../../utils/block';
+import chatController from '../../../../logic/chatController';
 
 export interface ChatContentProps {
   chat: Chat;
@@ -35,6 +36,13 @@ class ChatContent extends DataContainerBlock {
           const chatMenu = this.refs.chatMenu as Dropdown;
           chatMenu.target = this.refs.chatMenuButton as HTMLElement;
           chatMenu.show();
+        },
+        onAddUserClick: () => {
+          (this.refs.addUserModal as Block).show();
+        },
+        onDeleteUserClick: () => {
+          chatController.getCurrentChatUsers();
+          (this.refs.deleteUserModal as Block).show();
         },
       },
     );

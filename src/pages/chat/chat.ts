@@ -1,26 +1,24 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { nanoid } from 'nanoid';
 import DataContainerBlock from '../../utils/dataContainerBlock';
 import template from './chat.hbs';
 import * as classes from './chat.module.scss';
-import ChatModel from '../../models/Chat';
-import store from '../../utils/store';
-import StoreKeys from '../../utils/storeKeys';
 import Block from '../../utils/block';
+import storeAware from '../../utils/storeAware';
+import StoreKeys from '../../utils/storeKeys';
+import { AddChat } from './components/addChat/addChat';
+import chatController from '../../logic/chatController';
 
-export class Chat extends DataContainerBlock {
+class Chat extends DataContainerBlock {
   constructor() {
     super({
       classes,
       onAddChat: () => {
-        console.log(this.refs.addChatModal as Block);
         (this.refs.addChatModal as Block).show();
+        (this.refs.addChat as AddChat).clear();
       },
     });
+    chatController.getChats();
   }
 
-  componentDidMount(oldProps: any): void {
-  }
 
   protected get template() {
     return template;
@@ -31,4 +29,8 @@ export class Chat extends DataContainerBlock {
   }
 }
 
-export default Chat;
+const storeAwareChat = storeAware(Chat, {
+  chats: StoreKeys.CHAT_LIST,
+});
+// eslint-disable-next-line import/prefer-default-export
+export { storeAwareChat as Chat };

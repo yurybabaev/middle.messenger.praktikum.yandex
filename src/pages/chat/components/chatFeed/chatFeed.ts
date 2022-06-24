@@ -17,13 +17,7 @@ class ChatFeed extends Block {
         ...props,
         classes,
         messages: [
-          {
-            date: 'Today',
-            id: 0,
-            user: props.chat.user,
-            text: props.chat.lastMessage.text,
-          },
-        ] as ChatMessage[],
+        ],
       },
     );
     // store.watch(StoreKeys.CURRENT_CHAT, (chat: Chat) => {

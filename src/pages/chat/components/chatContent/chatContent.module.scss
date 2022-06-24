@@ -40,13 +40,32 @@
     transition: 0.3s ease;
   }
 
-  &__chatMenu:hover {
+  &__chatMenuButton:hover {
     background-color: rgb(0 0 0 / 20%);
     cursor: pointer;
   }
-  
+
   &__chatMenuDropdownContent {
     width: 210px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__chatMenuDropdownItem {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    margin-bottom: 20px;
+  }
+
+  &__chatMenuDropdownItem_last {
+    margin-bottom: 0;
+  }
+
+  &__chatMenuDropdownItemText {
+    margin-left: 15px;
+    color: $font-color-primary;
+    @include same-font-and-line-size(1rem);
   }
 
   &__messagesContainer {

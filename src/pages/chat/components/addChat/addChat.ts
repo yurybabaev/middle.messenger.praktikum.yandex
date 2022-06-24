@@ -1,3 +1,4 @@
+import { Field } from '../../../../components/field/field';
 import chatController from '../../../../logic/chatController';
 import Chat from '../../../../models/chat';
 import DataContainerBlock from '../../../../utils/dataContainerBlock';
@@ -21,6 +22,10 @@ class AddChat extends DataContainerBlock {
     });
   }
 
+  public clear() {
+    (this.refs.chatNameField as Field).value = null;
+  }
+
   protected get template(): (data?: any) => string {
     return template;
   }
@@ -30,7 +35,8 @@ class AddChat extends DataContainerBlock {
   }
 }
 
-export const storeAwareAddChat = storeAware(AddChat, {
+const storeAwareAddChat = storeAware(AddChat, {
   error: StoreKeys.LAST_ERROR,
 });
+// eslint-disable-next-line import/prefer-default-export
 export { storeAwareAddChat as AddChat };
