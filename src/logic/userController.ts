@@ -1,4 +1,3 @@
-import chatApi from '../api/chatApi';
 import userApi from '../api/userApi';
 import Chat from '../models/chat';
 import ApplicationError from '../models/error';

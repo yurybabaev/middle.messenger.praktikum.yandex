@@ -1,6 +1,7 @@
 import Chat from '../models/chat';
 import User from '../models/user';
 import BaseApi from './baseApi';
+import userApi from './userApi';
 
 class ChatApi extends BaseApi<Chat> {
   chatModelToApiChat(chatModel: Chat): Record<string, unknown> {
@@ -13,6 +14,7 @@ class ChatApi extends BaseApi<Chat> {
   }
 
   apiChatToChatModel(apiChat: Record<string, unknown>): Chat {
+    const apiLastMessage = apiChat.last_message as Record<string, unknown>;
     return {
       id: Number(apiChat.id),
       title: String(apiChat.title),
@@ -21,6 +23,11 @@ class ChatApi extends BaseApi<Chat> {
         this.baseResourcesUrl,
         String(apiChat.avatar),
       ) : undefined,
+      lastMessage: apiLastMessage ? {
+        user: userApi.apiUserToUserModel(apiLastMessage.user as Record<string, unknown>),
+        time: new Date(String(apiLastMessage.time)),
+        text: String(apiLastMessage.content),
+      } : undefined,
     };
   }
 
@@ -55,7 +62,6 @@ class ChatApi extends BaseApi<Chat> {
     this.checkResponseStatus(res);
   }
 
-  
   public async deleteUser(users: number[], chatId: number): Promise<void> {
     const res = await this.request.delete('/chats/users', {
       data: JSON.stringify({
@@ -77,6 +83,12 @@ class ChatApi extends BaseApi<Chat> {
     });
     this.checkResponseStatus(res);
     return this.apiChatToChatModel(JSON.parse(res.response));
+  }
+
+  public async getToken(chat: Chat): Promise<string> {
+    const res = await this.request.post(`/chats/token/${chat.id}`, {});
+    this.checkResponseStatus(res);
+    return JSON.parse(res.response).token;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

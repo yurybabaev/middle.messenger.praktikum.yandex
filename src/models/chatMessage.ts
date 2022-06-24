@@ -1,12 +1,11 @@
 import BaseModel from './baseModel';
-import User from './user';
 
 export default class ChatMessage extends BaseModel {
-  user: User;
+  userId: number;
 
-  id: number;
+  chatId: number;
 
   text?: string;
 
-  date: string; // TODO
+  time: Date;
 }

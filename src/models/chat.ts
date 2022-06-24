@@ -1,5 +1,5 @@
 import BaseModel from './baseModel';
-import ChatMessage from './ChatMessage';
+import User from './user';
 
 export default class Chat extends BaseModel {
   id: number;
@@ -10,5 +10,9 @@ export default class Chat extends BaseModel {
 
   unreadCount: number;
 
-  lastMessage?: ChatMessage;
+  lastMessage?: {
+    user: User,
+    time: Date,
+    text: string
+  };
 }

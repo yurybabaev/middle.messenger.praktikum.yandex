@@ -8,7 +8,6 @@ import template from './addUser.hbs';
 import * as classes from './addUser.module.scss';
 
 class AddUser extends DataContainerBlock {
-
   private get userNameField() {
     return this.refs.userNameField as Field;
   }
@@ -25,7 +24,7 @@ class AddUser extends DataContainerBlock {
       onAddUserClick: (tag: string) => {
         chatController.addUserToCurrentChat(Number(tag));
         this.setProps({
-          users: []
+          users: [],
         });
       },
     });

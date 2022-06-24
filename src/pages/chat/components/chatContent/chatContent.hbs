@@ -1,4 +1,9 @@
 <div class="{{classes.chatContent}}">
+  {{#if error}}
+  <div class="{{classes.chatContent__errorLabel}}">
+    {{error.text}}
+  </div>
+  {{/if}}
   {{#if chat}}
   <div class="{{classes.chatContent__userContainer}}">
     {{{Avatar avatarUrl=chat.avatarUrl classModifier="chatContent"}}}

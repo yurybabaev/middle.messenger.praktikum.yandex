@@ -20,7 +20,6 @@ export class Modal extends Block {
     this.hide();
   }
 
-
   protected get template(): (data?: any) => string {
     return template;
   }

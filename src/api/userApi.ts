@@ -16,7 +16,7 @@ class UserApi extends BaseApi<User> {
     };
   }
 
-  apiUserToUserModel(apiUser: Record<string, unknown>): User {
+  public apiUserToUserModel(apiUser: Record<string, unknown>): User {
     return {
       id: Number(apiUser.id),
       firstName: String(apiUser.first_name),
@@ -122,7 +122,6 @@ class UserApi extends BaseApi<User> {
     return (JSON.parse(res.response) as Array<Record<string, unknown>>)
       .map(this.apiUserToUserModel.bind(this));
   }
-
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public delete(item: User): boolean {

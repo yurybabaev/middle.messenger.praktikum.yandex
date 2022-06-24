@@ -4,8 +4,17 @@ import ApplicationError from '../models/error';
 import Chat from '../models/chat';
 import store from '../utils/store';
 import StoreKeys from '../utils/storeKeys';
+import messagingApi from '../api/messagingApi';
+import User from '../models/user';
+import ChatMessage from '../models/chatMessage';
 
 class ChatController {
+  constructor() {
+    messagingApi.on('message', (a: object) => {
+      // eslint-disable-next-line no-console
+      console.log(a);
+    });
+  }
 
   public async getChats(): Promise<void> {
     try {
@@ -64,6 +73,46 @@ class ChatController {
     try {
       const users = await userApi.getChatUsers(store.get<Chat>(StoreKeys.CURRENT_CHAT).id);
       store.put(StoreKeys.CHAT_USERS_LIST, users);
+    } catch (e) {
+      store.putAndClear(StoreKeys.LAST_ERROR, new ApplicationError(e));
+    }
+  }
+
+  public async changeCurrentChat(chat: Chat): Promise<void> {
+    if (store.get<Chat>(StoreKeys.CURRENT_CHAT)?.id === chat.id) {
+      return;
+    }
+    try {
+      store.put(StoreKeys.CURRENT_CHAT, chat);
+      store.put(StoreKeys.CURRENT_MESSAGES, []);
+      const token = await chatApi.getToken(chat);
+      messagingApi.initNewConnection(
+        store.get<User>(StoreKeys.CURRENT_USER).id,
+        chat.id,
+        token,
+      );
+    } catch (e) {
+      store.putAndClear(StoreKeys.LAST_ERROR, new ApplicationError(e));
+    }
+  }
+
+  public async postToCurrentChat(message: string) {
+    try {
+      messagingApi.sendMessage({
+        content: message,
+        type: 'message',
+      });
+    } catch (e) {
+      store.putAndClear(StoreKeys.LAST_ERROR, new ApplicationError(e));
+    }
+  }
+
+  public async getCurrentChatOldMessages() {
+    try {
+      messagingApi.sendMessage({
+        content: String(store.get<ChatMessage[]>(StoreKeys.CURRENT_MESSAGES).length),
+        type: 'get old',
+      });
     } catch (e) {
       store.putAndClear(StoreKeys.LAST_ERROR, new ApplicationError(e));
     }

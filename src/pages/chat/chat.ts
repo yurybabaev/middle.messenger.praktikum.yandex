@@ -19,7 +19,6 @@ class Chat extends DataContainerBlock {
     chatController.getChats();
   }
 
-
   protected get template() {
     return template;
   }

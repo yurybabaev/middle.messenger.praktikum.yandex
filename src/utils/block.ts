@@ -133,7 +133,7 @@ class Block {
 
   // Может переопределять пользователь, необязательно трогать
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected componentWillUpdate(oldProps: Props, newProps: Props) {
+  protected componentWillUpdate(oldProps: Props, newProps: Props): boolean {
     return true;
   }
 

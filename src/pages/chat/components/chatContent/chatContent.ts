@@ -26,9 +26,9 @@ class ChatContent extends DataContainerBlock {
         onSendMessage: (e: Event) => {
           e.preventDefault();
           if (this.validate()) {
-            const values = this.getFormValues(e.target as HTMLFormElement);
+            const values = this.getRawFormValues(e.target as HTMLFormElement);
             // eslint-disable-next-line no-console
-            console.log(values);
+            chatController.postToCurrentChat(values.message.toString());
             this.messageField.value = '';
           }
         },
@@ -57,5 +57,8 @@ class ChatContent extends DataContainerBlock {
   }
 }
 
-const chatContentStoreAware = storeAware(ChatContent, { chat: StoreKeys.CURRENT_CHAT });
+const chatContentStoreAware = storeAware(ChatContent, {
+  chat: StoreKeys.CURRENT_CHAT,
+  error: StoreKeys.LAST_ERROR,
+});
 export { chatContentStoreAware as ChatContent };

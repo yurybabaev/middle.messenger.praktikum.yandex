@@ -8,6 +8,16 @@
   flex-direction: column;
   width: 100%;
 
+  &__errorLabel {
+    color: $font-color-error;
+    margin-top: 1rem;
+    margin-left: 20px;
+    margin-bottom: 1rem;
+    height: 1rem;
+
+    @include same-font-and-line-size(1rem);
+  }
+
   &__userContainer {
     display: flex;
     align-items: center;
@@ -65,6 +75,7 @@
   &__chatMenuDropdownItemText {
     margin-left: 15px;
     color: $font-color-primary;
+
     @include same-font-and-line-size(1rem);
   }
 
