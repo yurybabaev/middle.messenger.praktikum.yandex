@@ -5,6 +5,7 @@ import Block from '../../../../utils/block';
 import StoreKeys from '../../../../utils/storeKeys';
 import storeAware from '../../../../utils/storeAware';
 import chatController from '../../../../logic/chatController';
+import { json } from 'stream/consumers';
 
 export interface ChatContentProps {
   chat: Chat;
@@ -20,9 +21,13 @@ class ChatFeed extends Block {
     );
   }
 
-  protected componentWillUpdate(oldProps: any, newProps: any): boolean {
-    if (oldProps.chat.id !== newProps.chat.id) {
-      chatController.getCurrentChatOldMessages();
+  private _lastChatId?: number;
+
+  protected componentDidUpdate(newProps: any): void {
+    if (this._lastChatId !== newProps.chat.id) {
+      //alert("New chat! " + (this._lastChatId === newProps.chat.id) + " " + JSON.stringify(newProps));
+      this._lastChatId = newProps.chat.id;
+      
     }
   }
 
@@ -37,6 +42,6 @@ class ChatFeed extends Block {
 
 export const storeAwareChatFeed = storeAware(ChatFeed, {
   chat: StoreKeys.CURRENT_CHAT,
-  messages: StoreKeys.CURRENT_MESSAGES,
+  //messages: StoreKeys.CURRENT_MESSAGES,
 });
 export { storeAwareChatFeed as ChatFeed };

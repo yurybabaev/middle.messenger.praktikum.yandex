@@ -28,13 +28,12 @@ export default abstract class BaseApi<T> {
 
   protected checkResponseStatus(requestResult: XMLHttpRequest, normalStatus: number = 200) {
     if (requestResult.status !== normalStatus) {
+      const failReason = (JSON.parse(requestResult.response) as FailReason)?.reason;
       if (requestResult.status === 400) {
-        let failReason = '';
-        failReason = (JSON.parse(requestResult.response) as FailReason).reason;
         throw new Error(`Bad request: ${failReason}`);
       }
       if (requestResult.status === 401) {
-        throw new Error('You are Unauthorized');
+        throw new Error(`Unauthorized: ${failReason}`);
       }
       if (requestResult.status === 500) {
         throw new Error('Server returned unexpected error');

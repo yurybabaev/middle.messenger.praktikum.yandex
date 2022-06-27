@@ -45,7 +45,12 @@ class UserController {
         store.putAndClear(StoreKeys.LAST_ERROR, new ApplicationError('Passwords do not match'));
         return;
       }
-      await userApi.logout();
+      try {
+        await userApi.logout();
+      // eslint-disable-next-line no-empty
+      } catch {
+
+      }
       store.put(StoreKeys.CURRENT_USER, null);
       const currentUser = await userApi.create(user);
       store.put(StoreKeys.CURRENT_USER, currentUser);

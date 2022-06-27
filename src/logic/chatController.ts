@@ -10,9 +10,11 @@ import ChatMessage from '../models/chatMessage';
 
 class ChatController {
   constructor() {
-    messagingApi.on('message', (a: object) => {
-      // eslint-disable-next-line no-console
-      console.log(a);
+    messagingApi.on('messages', (newMessages: ChatMessage[]) => {
+      store.put(
+        StoreKeys.CURRENT_MESSAGES,
+        store.get<ChatMessage[]>(StoreKeys.CURRENT_MESSAGES).concat(newMessages),
+      );
     });
   }
 
@@ -98,10 +100,7 @@ class ChatController {
 
   public async postToCurrentChat(message: string) {
     try {
-      messagingApi.sendMessage({
-        content: message,
-        type: 'message',
-      });
+      messagingApi.sendMessage(message);
     } catch (e) {
       store.putAndClear(StoreKeys.LAST_ERROR, new ApplicationError(e));
     }
@@ -109,10 +108,7 @@ class ChatController {
 
   public async getCurrentChatOldMessages() {
     try {
-      messagingApi.sendMessage({
-        content: String(store.get<ChatMessage[]>(StoreKeys.CURRENT_MESSAGES).length),
-        type: 'get old',
-      });
+      messagingApi.requestOldMessages(store.get<ChatMessage[]>(StoreKeys.CURRENT_MESSAGES).length);
     } catch (e) {
       store.putAndClear(StoreKeys.LAST_ERROR, new ApplicationError(e));
     }

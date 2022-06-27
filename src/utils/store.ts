@@ -17,6 +17,7 @@ class Store extends EventBus {
   public put(key: StoreKeys, model: BaseModel | BaseModel[] | null, notify: boolean = true) {
     this._store[key] = model;
     if (notify) {
+      console.log(`Notify: ${key}`);
       this.emit(key, model);
     }
   }
@@ -33,7 +34,7 @@ class Store extends EventBus {
     key: StoreKeys,
     callback: (obj: T) => void,
   ) {
-    return super.on(key, (a) => callback(a as T));
+    return super.on(key, callback);
   }
 }
 

@@ -7,6 +7,7 @@ enum EVENTS {
   FLOW_RENDER = 'flow:render',
   FLOW_CWU = 'flow:component-will-update',
   FLOW_CDU = 'flow:component-did-update',
+  FLOW_CWUM = 'flow:component-will-unmount',
 }
 
 interface Meta {
@@ -99,7 +100,8 @@ class Block {
     this._eventBus.on(EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     this._eventBus.on(EVENTS.FLOW_RENDER, this._render.bind(this));
     this._eventBus.on(EVENTS.FLOW_CWU, this._componentWillUpdate.bind(this));
-    this._eventBus.on(EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+    this._eventBus.on(EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));    
+    this._eventBus.on(EVENTS.FLOW_CWUM, this._componentWilUnmount.bind(this));
   }
 
   init() {
@@ -145,6 +147,19 @@ class Block {
   protected componentDidUpdate(newProps: Props) {
   }
 
+  public dispatchComponentWillUnmount() {
+    this._eventBus.emit(EVENTS.FLOW_CWUM);
+  }
+
+  _componentWilUnmount(): void {
+    this.componentWilUnmount();
+  }
+
+  // Может переопределять пользователь, необязательно трогать
+  protected componentWilUnmount(): void {
+
+  }
+
   public setProps(nextProps: Props) {
     if (!nextProps) {
       return;
@@ -162,8 +177,11 @@ class Block {
   }
 
   _render() {
-    // console.log('render:', (this.constructor as typeof Block).ComponentName);
+    console.log('render:', (this.constructor as typeof Block).ComponentName);
 
+    Object.values(this.children).forEach((child) => {
+      child.dispatchComponentWillUnmount();
+    });
     this._children = {};
     const fragment = this._applyTemplate({ ...this.props });
 

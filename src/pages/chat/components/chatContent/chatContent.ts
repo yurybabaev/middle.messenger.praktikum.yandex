@@ -30,6 +30,7 @@ class ChatContent extends DataContainerBlock {
             // eslint-disable-next-line no-console
             chatController.postToCurrentChat(values.message.toString());
             this.messageField.value = '';
+            //chatController.getCurrentChatOldMessages();
           }
         },
         onChatMenuClick: () => {

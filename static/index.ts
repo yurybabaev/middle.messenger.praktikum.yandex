@@ -23,5 +23,4 @@ router.setup('#root')
   .use('/500', SystemPageError(), 'Error')
   .start();
 
-userController.ensureLogin().then(() => {
-});
+userController.ensureLogin();
