@@ -60,6 +60,6 @@ class ChatContent extends DataContainerBlock {
 
 const chatContentStoreAware = storeAware(ChatContent, {
   chat: StoreKeys.CURRENT_CHAT,
-  error: StoreKeys.LAST_ERROR,
+  //error: StoreKeys.LAST_ERROR,
 });
 export { chatContentStoreAware as ChatContent };

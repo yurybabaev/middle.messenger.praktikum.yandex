@@ -15,7 +15,6 @@ export default function storeAware(
   propertyMap: Record<string, StoreKeys>,
 ) {
   return class extends Component {
-
     private _storeWatchers: Record<string, any> = {};
 
     constructor(props: Record<string, unknown>, events: Events) {
@@ -34,6 +33,7 @@ export default function storeAware(
     protected componentWilUnmount(): void {
       Object.entries(this._storeWatchers).forEach(([key, val]) => {
         store.off(key, val);
-    });
+      });
+    }
   };
 }

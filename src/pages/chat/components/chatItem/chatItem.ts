@@ -33,8 +33,8 @@ class ChatItem extends Block {
     return true;
   }
 
-  private onSelected() {
-    chatController.changeCurrentChat(this.props.chat);
+  private async onSelected() {
+    await chatController.changeCurrentChat(this.props.chat);
   }
 
   protected get template(): (data?: any) => string {

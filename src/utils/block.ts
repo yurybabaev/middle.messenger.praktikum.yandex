@@ -110,6 +110,7 @@ class Block {
 
   _componentDidMount(oldProps: Props): void {
     this._visibleDisplay = window.getComputedStyle(this.element).display;
+    // console.log('did mount:', (this.constructor as typeof Block).ComponentName);
     this.componentDidMount(oldProps);
   }
 
@@ -120,9 +121,9 @@ class Block {
   }
 
   dispatchComponentDidMount() {
-    Object.entries(this.children).forEach(([, child]) => {
-      child.dispatchComponentDidMount();
-    });
+    // Object.entries(this.children).forEach(([, child]) => {
+    //   child.dispatchComponentDidMount();
+    // });    
     this._eventBus.emit(EVENTS.FLOW_CDM, this._props);
   }
 
@@ -177,7 +178,7 @@ class Block {
   }
 
   _render() {
-    console.log('render:', (this.constructor as typeof Block).ComponentName);
+    // console.log('render:', (this.constructor as typeof Block).ComponentName);
 
     Object.values(this.children).forEach((child) => {
       child.dispatchComponentWillUnmount();
@@ -268,6 +269,7 @@ class Block {
       }
 
       stub.replaceWith(child.getContent());
+      child.dispatchComponentDidMount();
     });
 
     // container children elements
@@ -288,6 +290,7 @@ class Block {
       }
       containerContentPlaceholder.remove();
       container.replaceWith(containerContent);
+      child.dispatchComponentDidMount();
     });
 
     return fragment.content;

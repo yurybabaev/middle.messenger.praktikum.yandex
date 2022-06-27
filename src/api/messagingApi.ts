@@ -26,47 +26,51 @@ class MessagingApi extends EventBus {
     };
   }
 
-  public initNewConnection(userId: number, chatId: number, token: string) {
-    if (this._socket) {
-      this._socket.close();
-    }
-    this._socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${token}`);
-
-    this._socket.addEventListener('open', () => {
-      // eslint-disable-next-line no-console
-      console.log(`Connection created for user: ${userId} chat: ${chatId} token: ${token}`);
-    });
-
-    this._socket.addEventListener('close', (e) => {
-      // eslint-disable-next-line no-console
-      console.log(`Connection closed: ${e.wasClean ? 'clean' : 'dirty'}, with code: ${e.code} (${e.reason})`);
-    });
-
-    this._socket.addEventListener('message', (e) => {
-      // eslint-disable-next-line no-console
-      console.log(`Message received: ${e.data}`);
-      const dataParsed = JSON.parse(e.data);
-      if (Array.isArray(dataParsed)) {
-        this.emit('messages', (dataParsed as IncomingMessage[]).map(this.apiMessageToMessageModel));
-      } else {
-        const message = dataParsed as IncomingMessage;
-        switch (message.type) {
-          case 'pong':
-            break;
-          case 'user connected':
-            break; // todo
-          case 'message':
-            console.log(`SINGLE MESSAGE!: ${message.content}`);
-            this.emit('messages', [this.apiMessageToMessageModel(message)]);
-            break;
-          default:
-        }
+  public initNewConnection(userId: number, chatId: number, token: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      if (this._socket) {
+        this._socket.close();
       }
-    });
+      this._socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${token}`);
 
-    this._socket.addEventListener('error', (e) => {
-      // eslint-disable-next-line no-console
-      console.log(`Error: ${e}`);
+      this._socket.addEventListener('open', () => {
+        // eslint-disable-next-line no-console
+        console.log(`Connection created for user: ${userId} chat: ${chatId} token: ${token}`);
+        resolve();
+      });
+
+      this._socket.addEventListener('close', (e) => {
+        // eslint-disable-next-line no-console
+        console.log(`Connection closed: ${e.wasClean ? 'clean' : 'dirty'}, with code: ${e.code} (${e.reason})`);
+      });
+
+      this._socket.addEventListener('message', (e) => {
+        // eslint-disable-next-line no-console
+        console.log(`Message received: ${e.data}`);
+        const dataParsed = JSON.parse(e.data);
+        if (Array.isArray(dataParsed)) {
+          this.emit('messages', (dataParsed as IncomingMessage[]).map(this.apiMessageToMessageModel));
+        } else {
+          const message = dataParsed as IncomingMessage;
+          switch (message.type) {
+            case 'pong':
+              break;
+            case 'user connected':
+              break; // todo
+            case 'message':
+              console.log(`SINGLE MESSAGE!: ${message.content}`);
+              this.emit('messages', [this.apiMessageToMessageModel(message)]);
+              break;
+            default:
+          }
+        }
+      });
+
+      this._socket.addEventListener('error', (e) => {
+        // eslint-disable-next-line no-console
+        console.log(`Error: ${e}`);
+        reject();
+      });
     });
   }
 

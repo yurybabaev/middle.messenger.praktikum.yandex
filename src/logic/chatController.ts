@@ -11,9 +11,10 @@ import ChatMessage from '../models/chatMessage';
 class ChatController {
   constructor() {
     messagingApi.on('messages', (newMessages: ChatMessage[]) => {
+      const oldMessages = store.get<ChatMessage[]>(StoreKeys.CURRENT_MESSAGES) || [];
       store.put(
         StoreKeys.CURRENT_MESSAGES,
-        store.get<ChatMessage[]>(StoreKeys.CURRENT_MESSAGES).concat(newMessages),
+        oldMessages.concat(newMessages.reverse()),
       );
     });
   }
@@ -84,15 +85,18 @@ class ChatController {
     if (store.get<Chat>(StoreKeys.CURRENT_CHAT)?.id === chat.id) {
       return;
     }
-    try {
-      store.put(StoreKeys.CURRENT_CHAT, chat);
+    try {      
+      store.put(StoreKeys.LOADED_CHAT, null);
       store.put(StoreKeys.CURRENT_MESSAGES, []);
+      store.put(StoreKeys.CURRENT_CHAT, chat);
       const token = await chatApi.getToken(chat);
-      messagingApi.initNewConnection(
+      await messagingApi.initNewConnection(
         store.get<User>(StoreKeys.CURRENT_USER).id,
         chat.id,
         token,
       );
+      store.put(StoreKeys.LOADED_CHAT, chat);
+      
     } catch (e) {
       store.putAndClear(StoreKeys.LAST_ERROR, new ApplicationError(e));
     }
@@ -108,7 +112,8 @@ class ChatController {
 
   public async getCurrentChatOldMessages() {
     try {
-      messagingApi.requestOldMessages(store.get<ChatMessage[]>(StoreKeys.CURRENT_MESSAGES).length);
+      const oldMessages = store.get<ChatMessage[]>(StoreKeys.CURRENT_MESSAGES) || [];
+      messagingApi.requestOldMessages(oldMessages.length);
     } catch (e) {
       store.putAndClear(StoreKeys.LAST_ERROR, new ApplicationError(e));
     }

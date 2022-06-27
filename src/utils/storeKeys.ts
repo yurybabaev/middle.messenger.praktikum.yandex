@@ -7,6 +7,7 @@ enum StoreKeys {
   SEARCH_USERS_LIST = 'search.users.list',
   CHAT_USERS_LIST = 'chat.users.list',
   CURRENT_MESSAGES = 'current.messages',
+  LOADED_CHAT = 'chat.loaded',
 }
 
 export default StoreKeys;
