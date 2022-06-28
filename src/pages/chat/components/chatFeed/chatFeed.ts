@@ -17,18 +17,47 @@ class ChatFeed extends Block {
         ...props,
         classes,
       },
+      {
+        scroll: () => {
+          this._lastScrollHeight = this.chatFeed.scrollHeight;
+          if (this.chatFeed.scrollTop === 0) {
+            this._loadingRequested = true;
+            chatController.getCurrentChatOldMessages();
+          }
+        },
+      },
     );
   }
-  
+
   private _initialLoaded = false;
 
+  private _lastMessageCount = 0;
+
+  private _lastScrollHeight = 0;
+
+  private _loadingRequested = false;
+
+  protected get chatFeed() {
+    return this.refs.chatFeed as HTMLElement;
+  }
+
   protected componentDidUpdate(newProps: any): void {
-    console.log(newProps);
     if (newProps.loadedChat
       && newProps.loadedChat.Id === this.props.chat.Id
       && !this._initialLoaded) {
       this._initialLoaded = true;
       chatController.getCurrentChatOldMessages();
+    }
+    // console.log("Should maybe scroll: ", newProps.messages.length, this._lastMessageCount);
+    if (newProps.messages && newProps.messages.length !== this._lastMessageCount) {
+      this._lastMessageCount = newProps.messages.length;
+      //      console.log("Should scroll");
+      if (this._loadingRequested) {
+        this.chatFeed.scrollTo(0, this.chatFeed.scrollHeight - this._lastScrollHeight);
+        this._loadingRequested = false;
+      } else {
+        this.chatFeed.scrollTo(0, this.chatFeed.scrollHeight);
+      }
     }
   }
 

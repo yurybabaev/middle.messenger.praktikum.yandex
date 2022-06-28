@@ -7,16 +7,46 @@ import StoreKeys from '../utils/storeKeys';
 import messagingApi from '../api/messagingApi';
 import User from '../models/user';
 import ChatMessage from '../models/chatMessage';
+import UserDictionary from '../models/userDictionary';
 
 class ChatController {
   constructor() {
-    messagingApi.on('messages', (newMessages: ChatMessage[]) => {
-      const oldMessages = store.get<ChatMessage[]>(StoreKeys.CURRENT_MESSAGES) || [];
+    messagingApi.on('messages', async (newMessages: ChatMessage[] | ChatMessage) => {
+      const storedMessages = store.get<ChatMessage[]>(StoreKeys.CURRENT_MESSAGES) || [];
+      const currentUser = store.get<User>(StoreKeys.CURRENT_USER);
+      let newStoredMessages = [];
+      if (Array.isArray(newMessages)) {
+        newStoredMessages = newMessages.reverse().concat(storedMessages); // history messages
+      } else {
+        newStoredMessages = storedMessages.concat(newMessages); // new single message
+      }
+      const knownUsers = store.get<UserDictionary>(StoreKeys.KNOWN_USERS) || new UserDictionary();
+      const unknownUserIds = new Set<number>();
+      newStoredMessages.forEach(async (message) => {
+        if (!knownUsers.getUser(message.userId)) {
+          unknownUserIds.add(message.userId);
+        }
+      });
+      const userRequests = Array.from(unknownUserIds).map((id) => userApi.readById(id));
+      const userResults = await Promise.all(userRequests);
+      userResults.forEach((u) => {
+        knownUsers.setUser(u.id, u);
+      });
+      newStoredMessages = newStoredMessages.map((m) => ({
+        ...m,
+        isMine: m.userId === currentUser.id,
+        user: knownUsers.getUser(m.userId),
+      }));
+      store.put(StoreKeys.KNOWN_USERS, knownUsers);
       store.put(
         StoreKeys.CURRENT_MESSAGES,
-        oldMessages.concat(newMessages.reverse()),
+        newStoredMessages,
       );
     });
+  }
+
+  private updateMessageUserData(message: ChatMessage) {
+
   }
 
   public async getChats(): Promise<void> {
@@ -85,7 +115,7 @@ class ChatController {
     if (store.get<Chat>(StoreKeys.CURRENT_CHAT)?.id === chat.id) {
       return;
     }
-    try {      
+    try {
       store.put(StoreKeys.LOADED_CHAT, null);
       store.put(StoreKeys.CURRENT_MESSAGES, []);
       store.put(StoreKeys.CURRENT_CHAT, chat);
@@ -96,7 +126,6 @@ class ChatController {
         token,
       );
       store.put(StoreKeys.LOADED_CHAT, chat);
-      
     } catch (e) {
       store.putAndClear(StoreKeys.LAST_ERROR, new ApplicationError(e));
     }

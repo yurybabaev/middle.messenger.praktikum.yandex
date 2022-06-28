@@ -1,6 +1,9 @@
 import BaseModel from './baseModel';
+import User from './user';
 
 export default class ChatMessage extends BaseModel {
+  id: number;
+
   userId: number;
 
   chatId: number;
@@ -8,4 +11,8 @@ export default class ChatMessage extends BaseModel {
   text?: string;
 
   time: Date;
+
+  isMine: boolean;
+
+  user?: User;
 }

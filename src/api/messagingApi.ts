@@ -9,6 +9,7 @@ export interface OutgoingMessage {
 export interface IncomingMessage {
   type: 'user connected' | 'message' | 'pong';
   content: string;
+  id?: string;
   user_id?: string;
   chat_id?: number;
   time: string;
@@ -19,6 +20,7 @@ class MessagingApi extends EventBus {
 
   apiMessageToMessageModel(apiMessage: IncomingMessage): ChatMessage {
     return {
+      id: Number(apiMessage.id),
       userId: Number(apiMessage.user_id),
       chatId: Number(apiMessage.chat_id),
       text: apiMessage.content ? String(apiMessage.content) : '',
@@ -59,7 +61,7 @@ class MessagingApi extends EventBus {
               break; // todo
             case 'message':
               console.log(`SINGLE MESSAGE!: ${message.content}`);
-              this.emit('messages', [this.apiMessageToMessageModel(message)]);
+              this.emit('messages', this.apiMessageToMessageModel(message));
               break;
             default:
           }

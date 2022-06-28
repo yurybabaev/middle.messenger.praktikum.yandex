@@ -123,6 +123,12 @@ class UserApi extends BaseApi<User> {
       .map(this.apiUserToUserModel.bind(this));
   }
 
+  public async readById(id: number): Promise<User> {
+    const res = await this.request.get(`/user/${id}`, {});
+    this.checkResponseStatus(res);
+    return this.apiUserToUserModel(JSON.parse(res.response));
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public delete(item: User): boolean {
     throw new Error('Method not implemented.');

@@ -4,10 +4,20 @@
 .chatMessage {
   max-width: 60%;
   margin: 20px;
-  font-size: 1rem;
-  line-height: 1.25rem;
-  color: $font-color-primary;
   padding: 11px;
+
+  &__text {
+    font-size: 1rem;
+    line-height: 1.25rem;
+    color: $font-color-primary;
+    margin-top: 0.2rem;
+  }
+
+  &__user {
+    font-size: 0.9rem;
+    line-height: 1rem;
+    color: $font-color-secondary;
+  }
 
   &_other {
     margin-left: 20px;
@@ -16,6 +26,9 @@
   }
 
   &_mine {
+    margin-right: 20px;
+    border-radius: 12px 12px 0;
+    background-color: #e4edfd;
     align-self: flex-end;
   }
 }

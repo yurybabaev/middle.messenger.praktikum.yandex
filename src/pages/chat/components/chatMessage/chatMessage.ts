@@ -23,6 +23,7 @@ export class ChatMessage extends Block {
   }
 
   protected get template(): (data?: any) => string {
+    console.log(template);
     return template;
   }
 
