@@ -43,10 +43,10 @@ class ChatController {
         newStoredMessages,
       );
     });
-  }
 
-  private updateMessageUserData(message: ChatMessage) {
-
+    messagingApi.on('error', (e: Error) => {
+      store.putAndClear(StoreKeys.LAST_ERROR, new ApplicationError(e));
+    });
   }
 
   public async getChats(): Promise<void> {

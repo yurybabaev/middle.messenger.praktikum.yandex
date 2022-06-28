@@ -230,9 +230,8 @@ class ChatContent extends DataContainerBlock {
             // chatController.postToCurrentChat('TEST MESSAGE 100');
             // await new Promise(r => setTimeout(r, 400));
 
-
             this.messageField.value = '';
-            //chatController.getCurrentChatOldMessages();
+            // chatController.getCurrentChatOldMessages();
           }
         },
         onChatMenuClick: () => {
@@ -262,6 +261,5 @@ class ChatContent extends DataContainerBlock {
 
 const chatContentStoreAware = storeAware(ChatContent, {
   chat: StoreKeys.CURRENT_CHAT,
-  //error: StoreKeys.LAST_ERROR,
 });
 export { chatContentStoreAware as ChatContent };

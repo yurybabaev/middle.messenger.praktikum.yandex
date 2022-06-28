@@ -20,11 +20,4 @@ export default class User extends BaseModel {
   password?: string;
 
   passwordRepeat?: string;
-
-  get nameForDisplay() {
-    if (this.displayName) {
-      return this.displayName;
-    }
-    return this.login;
-  }
 }

@@ -12,7 +12,7 @@ export default class ChatMessage extends BaseModel {
 
   time: Date;
 
-  isMine: boolean;
+  isMine?: boolean;
 
   user?: User;
 }

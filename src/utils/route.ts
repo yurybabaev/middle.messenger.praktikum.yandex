@@ -38,7 +38,9 @@ export default class Route {
 
   leave() {
     if (this._view) {
-      this._view.hide();
+      // this._view.hide();
+      this._view.unmount();
+      this._view = null;
     }
   }
 

@@ -8,6 +8,8 @@ class Router {
 
   private _currentRoute: null | Route;
 
+  private _notFoundRoute: null | Route;
+
   private _rootQuery: string;
 
   constructor() {
@@ -29,6 +31,12 @@ class Router {
     return this;
   }
 
+  notFound(pathName: string, viewClass: typeof Block, windowTitle?: string) {
+    this._notFoundRoute = new Route(pathName, viewClass, this._rootQuery, windowTitle || '', {});
+
+    return this;
+  }
+
   start() {
     window.onpopstate = (event: PopStateEvent) => {
       this.onRoute((event.currentTarget as Window).location.pathname);
@@ -38,7 +46,7 @@ class Router {
   }
 
   private onRoute(pathName: string) {
-    const route = this.getRoute(pathName);
+    const route = this.getRoute(pathName) || this._notFoundRoute;
     if (!route) {
       return;
     }

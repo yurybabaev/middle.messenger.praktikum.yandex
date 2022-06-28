@@ -18,6 +18,8 @@ export interface IncomingMessage {
 class MessagingApi extends EventBus {
   private _socket: WebSocket;
 
+  private _interval: NodeJS.Timer;
+
   apiMessageToMessageModel(apiMessage: IncomingMessage): ChatMessage {
     return {
       id: Number(apiMessage.id),
@@ -31,6 +33,9 @@ class MessagingApi extends EventBus {
   public initNewConnection(userId: number, chatId: number, token: string): Promise<void> {
     return new Promise((resolve, reject) => {
       if (this._socket) {
+        if (this._interval) {
+          clearInterval(this._interval);
+        }
         this._socket.close();
       }
       this._socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${token}`);
@@ -38,6 +43,7 @@ class MessagingApi extends EventBus {
       this._socket.addEventListener('open', () => {
         // eslint-disable-next-line no-console
         console.log(`Connection created for user: ${userId} chat: ${chatId} token: ${token}`);
+        this._interval = setInterval(() => this.ping(), 1000);
         resolve();
       });
 
@@ -60,7 +66,6 @@ class MessagingApi extends EventBus {
             case 'user connected':
               break; // todo
             case 'message':
-              console.log(`SINGLE MESSAGE!: ${message.content}`);
               this.emit('messages', this.apiMessageToMessageModel(message));
               break;
             default:
@@ -71,8 +76,16 @@ class MessagingApi extends EventBus {
       this._socket.addEventListener('error', (e) => {
         // eslint-disable-next-line no-console
         console.log(`Error: ${e}`);
+        this.emit('error', e);
         reject();
       });
+    });
+  }
+
+  ping(): void {
+    this.checkConnectionAndSendMessage({
+      type: 'ping',
+      content: '',
     });
   }
 

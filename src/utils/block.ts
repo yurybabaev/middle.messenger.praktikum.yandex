@@ -100,12 +100,19 @@ class Block {
     this._eventBus.on(EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     this._eventBus.on(EVENTS.FLOW_RENDER, this._render.bind(this));
     this._eventBus.on(EVENTS.FLOW_CWU, this._componentWillUpdate.bind(this));
-    this._eventBus.on(EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));    
+    this._eventBus.on(EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
     this._eventBus.on(EVENTS.FLOW_CWUM, this._componentWilUnmount.bind(this));
   }
 
   init() {
     this._eventBus.emit(EVENTS.FLOW_RENDER);
+  }
+
+  unmount() {
+    this.dispatchComponentWillUnmount();
+    if (this._element) {
+      this._element.remove();
+    }
   }
 
   _componentDidMount(oldProps: Props): void {
@@ -123,7 +130,7 @@ class Block {
   dispatchComponentDidMount() {
     // Object.entries(this.children).forEach(([, child]) => {
     //   child.dispatchComponentDidMount();
-    // });    
+    // });
     this._eventBus.emit(EVENTS.FLOW_CDM, this._props);
   }
 
@@ -150,6 +157,9 @@ class Block {
 
   public dispatchComponentWillUnmount() {
     this._eventBus.emit(EVENTS.FLOW_CWUM);
+    Object.values(this.children).forEach((child) => {
+      child.dispatchComponentWillUnmount();
+    });
   }
 
   _componentWilUnmount(): void {

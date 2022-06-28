@@ -19,8 +19,8 @@ router.setup('#root')
   .use('/user/view', UserView, 'Your profile')
   .use('/user/edit', UserEdit, 'Edit your profile')
   .use('/user/password', UserChangePassword, 'Change your password')
-  .use('/404', SystemPageNotFound(), 'Not found')
   .use('/500', SystemPageError(), 'Error')
+  .notFound('/404', SystemPageNotFound(), 'Not found')
   .start();
 
 userController.ensureLogin();
