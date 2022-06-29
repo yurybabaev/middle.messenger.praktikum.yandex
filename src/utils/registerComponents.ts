@@ -46,6 +46,17 @@ export default () => {
     },
   );
 
+  Handlebars.registerHelper(
+    'formatTime',
+    (time: Date) => Intl.DateTimeFormat(
+      undefined,
+      {
+        hour: 'numeric',
+        minute: 'numeric',
+      },
+    ).format(time),
+  );
+
   registerComponent(Link);
   registerComponent(Avatar);
   registerComponent(Button);

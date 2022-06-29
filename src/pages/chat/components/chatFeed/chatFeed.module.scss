@@ -3,9 +3,7 @@
 @import "../../../../components/avatar/avatar.module.scss";
 @import "../../../../components/field/field.module.scss";
 
-.chatFeed {
-  display: flex;
-  flex-direction: column;
+.chatFeed {  
   position: absolute;
   top: 0;
   left: 0;
@@ -13,6 +11,15 @@
   bottom: 0;
   margin-right: 2px;
   overflow-y: scroll;
+
+  &__messageContainer {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: end;
+  }
 
   &::-webkit-scrollbar {
     width: 5px;

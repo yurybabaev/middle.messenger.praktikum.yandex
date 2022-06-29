@@ -7,5 +7,8 @@
     {{message.user.login}}
     {{/if}}
   </div>
-  <div class="{{classes.chatMessage__text}}">{{message.text}}</div>
+  <div class="{{classes.chatMessage__textContainer}}">
+    <div class="{{classes.chatMessage__text}}">{{message.text}}</div>
+    <div class="{{classes.chatMessage__time}}">{{formatTime message.time}}</div>
+  </div>
 </div>

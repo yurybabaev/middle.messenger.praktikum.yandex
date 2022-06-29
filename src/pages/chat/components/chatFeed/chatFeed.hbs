@@ -1,5 +1,7 @@
 <div class="{{classes.chatFeed}}" data-ref="chatFeed">
-  {{#each messages}}
-  {{{ ChatMessage message=this }}}
-  {{/each}}
+  <div class="{{classes.chatFeed__messageContainer}}">
+    {{#each messages}}
+    {{{ ChatMessage message=this }}}
+    {{/each}}
+  </div>
 </div>
