@@ -123,7 +123,7 @@ class Block {
 
   // Может переопределять пользователь, необязательно трогать
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected componentDidMount(oldProps: Props): void {
+  protected componentDidMount(_oldProps: Props): void {
 
   }
 
@@ -143,7 +143,7 @@ class Block {
 
   // Может переопределять пользователь, необязательно трогать
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected componentWillUpdate(oldProps: Props, newProps: Props): boolean {
+  protected componentWillUpdate(_oldProps: Props, _newProps: Props): boolean {
     return true;
   }
 
@@ -152,7 +152,7 @@ class Block {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected componentDidUpdate(newProps: Props) {
+  protected componentDidUpdate(_newProps: Props) {
   }
 
   public dispatchComponentWillUnmount() {
