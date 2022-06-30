@@ -1,7 +1,7 @@
 import Block from './block';
 import Route from './route';
 
-class Router {
+export class Router {
   private _routes: Route[];
 
   private _history: History;
@@ -14,7 +14,6 @@ class Router {
 
   constructor() {
     this._routes = [];
-    this._history = window.history;
     this._currentRoute = null;
   }
 
@@ -38,6 +37,7 @@ class Router {
   }
 
   start() {
+    this._history = window.history;
     window.onpopstate = (event: PopStateEvent) => {
       this.onRoute((event.currentTarget as Window).location.pathname);
     };
@@ -63,6 +63,14 @@ class Router {
   go(pathName: string) {
     this._history.pushState({}, '', pathName);
     this.onRoute(pathName);
+  }
+
+  back() {
+    window.history.back();
+  }
+
+  forward() {
+    window.history.forward();
   }
 
   getRoute(pathName: string) {

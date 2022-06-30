@@ -64,6 +64,10 @@ describe('Block', () => {
     renderDom('#root', block);
   });
 
+  afterEach(() => {
+    jsdom.window.close();
+  });
+
   it('Should be present in DOM after render', () => {
     expect(document.getElementById('root')!.childNodes.length).to.equal(1);
   });
