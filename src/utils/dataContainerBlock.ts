@@ -15,7 +15,11 @@ export default class DataContainerBlock extends Block {
     return validationOk;
   }
 
-  protected getFormValues(form: HTMLFormElement) {
+  protected getFormValues<T extends object>(form: HTMLFormElement) {
+    return this.getRawFormValues(form) as T;
+  }
+
+  protected getRawFormValues(form: HTMLFormElement) {
     return Object.fromEntries(new FormData(form));
   }
 }

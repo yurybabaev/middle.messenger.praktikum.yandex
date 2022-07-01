@@ -33,4 +33,12 @@
   &__linkContainer {
     margin-top: 12px;
   }
+
+  &__errorLabel {
+    color: $font-color-error;
+    margin-top: 0.25rem;
+    height: 1rem;
+
+    @include same-font-and-line-size(1rem);
+  }
 }

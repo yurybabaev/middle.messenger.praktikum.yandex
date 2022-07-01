@@ -1,8 +1,10 @@
-import Block from '../../../../utils/block';
+import Block, { Props } from '../../../../utils/block';
 import template from './chatItem.hbs';
 import * as classes from './chatItem.module.scss';
-import { GlobalEvents, globalEventBus } from '../../../../utils/globalEvents';
-import { Chat } from '../../../../models';
+import Chat from '../../../../models/chat';
+import StoreKeys from '../../../../utils/storeKeys';
+import chatController from '../../../../logic/chatController';
+import storeAware from '../../../../utils/storeAware';
 
 export interface ChatItemProps {
   chat: Chat;
@@ -10,7 +12,7 @@ export interface ChatItemProps {
   onSelected: (chatItem: ChatItem) => void;
 }
 
-export class ChatItem extends Block {
+class ChatItem extends Block {
   constructor(props: any) {
     super(
       {
@@ -23,15 +25,16 @@ export class ChatItem extends Block {
         },
       },
     );
-    globalEventBus.on(GlobalEvents.CURRENT_CHAT_CHANGED, (chat: Chat) => {
-      this.setProps({
-        isSelected: chat.id === this.props.chat.id,
-      });
-    });
   }
 
-  private onSelected() {
-    globalEventBus.emit(GlobalEvents.CURRENT_CHAT_CHANGED, this.props.chat);
+  protected componentWillUpdate(oldProps: Props, newProps: Props) {
+    // eslint-disable-next-line no-param-reassign
+    newProps.isSelected = newProps.currentChat.id === newProps.chat.id;
+    return true;
+  }
+
+  private async onSelected() {
+    await chatController.changeCurrentChat(this.props.chat);
   }
 
   protected get template(): (data?: any) => string {
@@ -42,3 +45,9 @@ export class ChatItem extends Block {
     return 'ChatItem';
   }
 }
+
+const storeAwareChatItem = storeAware(ChatItem, {
+  currentChat: StoreKeys.CURRENT_CHAT,
+});
+
+export { storeAwareChatItem as ChatItem };

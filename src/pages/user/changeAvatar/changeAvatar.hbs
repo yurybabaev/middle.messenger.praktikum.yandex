@@ -1,0 +1,14 @@
+<div class="{{classes.changeAvatar}}">
+  <span class="{{classes.changeAvatar__label}}">Select file</span>  
+  {{{Avatar avatarUrl=user.avatarUrl ref="avatar" classModifier="user hidden"}}}  
+  {{#Form onSubmit=onSubmit}}
+  <input type="file" name="avatarFile" class="{{classes.changeAvatar__input}}" data-ref="avatarFileInput" onchange={{selectFile}} />
+  <div class="{{classes.changeAvatar__linkContainer}}">
+    {{{Link caption="Select file from your device" clickHandler=selectFileClick}}}    
+  </div>
+  <div class="{{classes.changeAvatar__errorLabel}}">
+      {{error.text}}
+    </div>
+  {{{Button caption="Change avatar" classModifier="primary" submit="true"}}}
+  {{/Form}}
+</div>

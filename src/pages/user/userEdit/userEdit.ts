@@ -1,19 +1,23 @@
+import userController from '../../../logic/userController';
+import User from '../../../models/user';
 import DataContainerBlock from '../../../utils/dataContainerBlock';
+import storeAware from '../../../utils/storeAware';
+import StoreKeys from '../../../utils/storeKeys';
 import { validationRules } from '../../../utils/validationRules';
 import template from './userEdit.hbs';
 import * as classes from './userEdit.module.scss';
 
-export class UserEdit extends DataContainerBlock {
-  constructor() {
+class UserEdit extends DataContainerBlock {
+  constructor(props: object) {
     super({
+      ...props,
       classes,
       validationRules,
       onSubmit: (e: Event) => {
         e.preventDefault();
         if (this.validate()) {
-          const values = this.getFormValues(e.target as HTMLFormElement);
-          // eslint-disable-next-line no-console
-          console.log(values);
+          const user = this.getFormValues<User>(e.target as HTMLFormElement);
+          userController.editUser(user);
         }
       },
     });
@@ -28,4 +32,8 @@ export class UserEdit extends DataContainerBlock {
   }
 }
 
-export default UserEdit;
+export const storeAwareUserView = storeAware(UserEdit, {
+  user: StoreKeys.CURRENT_USER,
+  error: StoreKeys.LAST_ERROR,
+});
+export { storeAwareUserView as UserEdit };

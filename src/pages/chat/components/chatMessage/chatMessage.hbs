@@ -1,3 +1,14 @@
-<div class="{{modifyclass classes.chatMessage classModifier}}">
-  <div class="{{classes.chatMessage__text}}">{{message.text}}</div>
+<div
+  class="{{modifyclass classes.chatMessage classModifier}} {{#if message.isMine}}{{classes.chatMessage_mine}}{{else}}{{classes.chatMessage_other}}{{/if}}">
+  <div class="{{classes.chatMessage__user}}">
+    {{#if message.user.displayName}}
+    {{message.user.displayName}}
+    {{else}}
+    {{message.user.login}}
+    {{/if}}
+  </div>
+  <div class="{{classes.chatMessage__textContainer}}">
+    <div class="{{classes.chatMessage__text}}">{{message.text}}</div>
+    <div class="{{classes.chatMessage__time}}">{{formatTime message.time}}</div>
+  </div>
 </div>

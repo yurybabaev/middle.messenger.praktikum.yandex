@@ -1,19 +1,22 @@
 {{#Flyout returnUrl="/user/view"}}
 <div class="{{classes.userEdit}} {{classes.userEdit__container}}">
-  {{{Avatar avatarAlt="User avatar" classModifier="user"}}}
+  {{{Avatar avatarAlt="User avatar" avatarUrl=user.avatarUrl classModifier="user"}}}
   <span class="{{classes.userEdit__userLabel}}"></span>
   {{#Form onSubmit=onSubmit}}
-  {{{Field caption="Email" type="text" value="test@email.com" name="email" classModifier="user" validationRule=validationRules.email}}}
+  {{{Field caption="Email" type="text" value=user.email name="email" classModifier="user" validationRule=validationRules.email}}}
   <hr class="{{classes.userEdit__fieldSeparator}}">
-  {{{Field caption="Login" type="text" value="ivan" name="login" classModifier="user" validationRule=validationRules.login}}}
+  {{{Field caption="Login" type="text" value=user.login name="login" classModifier="user" validationRule=validationRules.login}}}
   <hr class="{{classes.userEdit__fieldSeparator}}">
-  {{{Field caption="First name" type="text" value="Ivan" name="first_name" classModifier="user" validationRule=validationRules.firstName}}}
+  {{{Field caption="First name" type="text" value=user.firstName name="firstName" classModifier="user" validationRule=validationRules.firstName}}}
   <hr class="{{classes.userEdit__fieldSeparator}}">
-  {{{Field caption="Second name" type="text" value="Ivanov" name="second_name" classModifier="user" validationRule=validationRules.secondName}}}
+  {{{Field caption="Second name" type="text" value=user.secondName name="secondName" classModifier="user" validationRule=validationRules.secondName}}}
   <hr class="{{classes.userEdit__fieldSeparator}}">
-  {{{Field caption="Nickname" type="text" value="stardestroyer5000" name="nick" classModifier="user" validationRule=validationRules.nickname}}}
+  {{{Field caption="Nickname" type="text" value=user.displayName name="displayName" classModifier="user" validationRule=validationRules.nickname}}}
   <hr class="{{classes.userEdit__fieldSeparator}}">
-  {{{Field caption="Phone" type="text" value="+71112223344" name="phone" classModifier="user" validationRule=validationRules.phone}}}
+  {{{Field caption="Phone" type="text" value=user.phone name="phone" classModifier="user" validationRule=validationRules.phone}}}
+  <div class="{{classes.userEdit__errorLabel}}">
+      {{error.text}}
+  </div>
   <div class="{{classes.userEdit__buttonContainer}}">
     {{{Button caption="Save" classModifier="primary" submit="true"}}}
   </div>

@@ -1,0 +1,16 @@
+@import "../../styles/common.scss";
+@import "../../styles/container.scss";
+
+.dropdown {
+  position: fixed;
+  background-color: $background-color-base;
+  box-shadow: 0 0 6px rgb(0 0 0 / 14%);
+  border-radius: 12px;
+  z-index: 10;
+
+  &__content {
+    background-color: $background-color-base;
+    padding: 30px;
+    border-radius: 12px;
+  }
+}

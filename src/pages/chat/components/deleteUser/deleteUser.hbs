@@ -1,0 +1,13 @@
+<div class="{{classes.deleteUser}}"> 
+  <div class="{{classes.deleteUser__searchResultsContainer}}">
+    {{#each users}}
+    <div class="{{@root.classes.deleteUser__searchResultContainer}}">
+      <span class="{{@root.classes.deleteUser__searchResultName}}">{{this.firstName}} {{this.secondName}} ({{this.login}}{{#if this.displayName}} aka {{this.displayName}} {{/if}})</span>
+      {{{Link tag=this.id caption="Удалить" clickHandler=@root.onDeleteUserClick}}}
+    </div>
+    {{/each}}
+  </div>
+  <div class="{{classes.deleteUser__errorLabel}}">
+    {{error.text}}
+  </div>
+</div>

@@ -1,8 +1,18 @@
-import { User } from './user';
+import BaseModel from './baseModel';
+import User from './user';
 
-export interface ChatMessage {
-  user: User;
+export default class ChatMessage extends BaseModel {
   id: number;
+
+  userId: number;
+
+  chatId: number;
+
   text?: string;
-  date: string; // TODO
+
+  time: Date;
+
+  isMine?: boolean;
+
+  user?: User;
 }

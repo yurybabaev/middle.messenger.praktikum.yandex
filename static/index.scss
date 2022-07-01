@@ -17,4 +17,12 @@ body {
 #root {
   height: 100%;
   width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.25s ease-in;
+}
+
+#root.visible {
+  visibility: visible;
+  opacity: 1;
 }
