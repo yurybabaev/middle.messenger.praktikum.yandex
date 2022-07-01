@@ -39,4 +39,6 @@ I use default design with slight modifications, it can be found [here](https://w
 | deploy      | Deploy                | https://preeminent-rabanadas-f8f10c.netlify.app/ |
 | sprint_1    | The first sprint      | https://github.com/yurybabaev/middle.messenger.praktikum.yandex/pull/1 |
 | sprint_2    | The second sprint     | https://github.com/yurybabaev/middle.messenger.praktikum.yandex/pull/2 |
+| sprint_3    | The third sprint      | https://github.com/yurybabaev/middle.messenger.praktikum.yandex/pull/3 |
+
 
