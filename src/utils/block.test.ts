@@ -52,6 +52,8 @@ class TestBlock extends Block {
 let jsdom: JSDOM;
 let block: TestBlock;
 let spy: sinon.SinonSpiedInstance<TestBlock>;
+const originalWindow = global.window;
+const originalDocument = global.document;
 
 describe('Block', () => {
   beforeEach(() => {
@@ -66,6 +68,8 @@ describe('Block', () => {
 
   afterEach(() => {
     jsdom.window.close();
+    global.window = originalWindow;
+    global.document = originalDocument;
   });
 
   it('Should be present in DOM after render', () => {

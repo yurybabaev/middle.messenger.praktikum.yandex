@@ -60,13 +60,9 @@ export class Request {
       xhr.open(
         method,
         isGet && data
-          ? new URL(this.combineURLs(this._baseUrl.toString(), `${url}${queryStringify(data as Record<string, any>)}`))
-          : new URL(this.combineURLs(this._baseUrl.toString(), url.toString())),
+          ? this.combineURLs(this._baseUrl.toString(), `${url}${queryStringify(JSON.parse(String(data)) as Record<string, any>)}`)
+          : this.combineURLs(this._baseUrl.toString(), url.toString()),
       );
-
-      // if (data) {
-      //   xhr.setRequestHeader('content-type', 'application/json');
-      // }
 
       if (headers) {
         Object.entries(headers).forEach(([key, value]) => {

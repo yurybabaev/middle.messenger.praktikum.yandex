@@ -25,6 +25,8 @@ class NotFoundPage extends Block {
 
 let jsdom: JSDOM;
 let router: Router;
+const originalWindow = global.window;
+const originalDocument = global.document;
 
 describe('Router', () => {
   beforeEach(() => {
@@ -44,6 +46,8 @@ describe('Router', () => {
 
   afterEach(() => {
     jsdom.window.close();
+    global.window = originalWindow;
+    global.document = originalDocument;
   });
 
   it('Should display page on go', () => {
