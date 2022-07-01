@@ -21,7 +21,7 @@
     "@typescript-eslint/eslint-plugin": "5.21.0",
     "@typescript-eslint/parser": "5.21.0",
     "chai": "4.3.6",
-    "chai-counter": "^1.0.0",
+    "chai-counter": "1.0.0",
     "cross-env": "7.0.3",
     "eslint": "8.14.0",
     "eslint-config-airbnb-base": "15.0.0",
@@ -38,7 +38,7 @@
     "stylelint-scss": "4.2.0",
     "ts-node": "10.8.1",
     "typescript": "4.6.4",
-    "xhr-mock": "^2.5.1"
+    "xhr-mock": "2.5.1"
   },
   "scripts": {
     "clean": "npx rimraf dist",
