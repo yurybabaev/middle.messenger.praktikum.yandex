@@ -11,48 +11,61 @@ function queryStringify(data: Record<string, any>) {
 }
 
 export interface RequestOptions {
-  data?: Record<string, any>;
-  headers?: Headers;
+  data?: XMLHttpRequestBodyInit;
+  headers?: Record<string, string>;
   timeout?: number;
 }
 
 export class Request {
-  public static get(url: string | URL, options: RequestOptions) {
-    return Request.request(url, METHODS.GET, options.timeout, options.headers, options.data);
+  private _baseUrl: string | URL;
+
+  constructor(baseUrl: string | URL = '') {
+    this._baseUrl = baseUrl;
   }
 
-  public static post(url: string | URL, options: RequestOptions) {
-    return Request.request(url, METHODS.POST, options.timeout, options.headers, options.data);
+  public get(url: string | URL, options: RequestOptions) {
+    return this.request(url, METHODS.GET, options.timeout, options.headers, options.data);
   }
 
-  public static put(url: string | URL, options: RequestOptions) {
-    return Request.request(url, METHODS.PUT, options.timeout, options.headers, options.data);
+  public post(url: string | URL, options: RequestOptions) {
+    return this.request(url, METHODS.POST, options.timeout, options.headers, options.data);
   }
 
-  public static delete(url: string | URL, options: RequestOptions) {
-    return Request.request(url, METHODS.DELETE, options.timeout, options.headers, options.data);
+  public put(url: string | URL, options: RequestOptions) {
+    return this.request(url, METHODS.PUT, options.timeout, options.headers, options.data);
   }
 
-  public static request(
+  public delete(url: string | URL, options: RequestOptions) {
+    return this.request(url, METHODS.DELETE, options.timeout, options.headers, options.data);
+  }
+
+  public combineURLs(baseURL: string, relativeURL?: string) {
+    return relativeURL
+      ? `${baseURL.replace(/\/+$/, '')}/${relativeURL.replace(/^\/+/, '')}`
+      : baseURL;
+  }
+
+  public request(
     url: string | URL,
     method: METHODS,
     timeout = 5000,
-    headers?: Headers,
-    data?: Record<string, any>,
+    headers?: Record<string, string>,
+    data?: XMLHttpRequestBodyInit,
   ) {
     return new Promise<XMLHttpRequest>((resolve, reject) => {
       const xhr = new XMLHttpRequest();
+      xhr.withCredentials = true;
       const isGet = method === METHODS.GET;
 
       xhr.open(
         method,
         isGet && data
-          ? new URL(`${url}${queryStringify(data)}`)
-          : new URL(url),
+          ? this.combineURLs(this._baseUrl.toString(), `${url}${queryStringify(JSON.parse(String(data)) as Record<string, any>)}`)
+          : this.combineURLs(this._baseUrl.toString(), url.toString()),
       );
 
       if (headers) {
-        headers.forEach((value, key) => {
+        Object.entries(headers).forEach(([key, value]) => {
           xhr.setRequestHeader(key, value);
         });
       }
@@ -66,7 +79,11 @@ export class Request {
 
       xhr.timeout = timeout;
       xhr.ontimeout = reject;
-      xhr.send(JSON.stringify(data));
+      if (data) {
+        xhr.send(data);
+      } else {
+        xhr.send();
+      }
     });
   }
 }

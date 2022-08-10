@@ -1,6 +1,6 @@
 import template from './chatMessage.hbs';
 import * as classes from './chatMessage.module.scss';
-import { ChatMessage as ChatMessageModel } from '../../../../models';
+import ChatMessageModel from '../../../../models/chatMessage';
 import Block from '../../../../utils/block';
 import { Field } from '../../../../components/field/field';
 

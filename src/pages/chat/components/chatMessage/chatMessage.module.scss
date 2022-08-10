@@ -4,10 +4,33 @@
 .chatMessage {
   max-width: 60%;
   margin: 20px;
-  font-size: 1rem;
-  line-height: 1.25rem;
-  color: $font-color-primary;
   padding: 11px;
+
+  &__user {
+    font-size: 0.9rem;
+    line-height: 1rem;
+    color: $font-color-secondary;
+  }
+
+  &__textContainer {
+    margin-top: 0.2rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: end;
+  }
+
+  &__text {
+    font-size: 1rem;
+    line-height: 1.25rem;
+    color: $font-color-primary;
+  }
+
+  &__time {
+    font-size: 0.8rem;
+    line-height: 0.4rem;
+    color: $font-color-secondary;
+    margin-left: 4px;
+  }
 
   &_other {
     margin-left: 20px;
@@ -16,6 +39,9 @@
   }
 
   &_mine {
+    margin-right: 20px;
+    border-radius: 12px 12px 0;
+    background-color: #e4edfd;
     align-self: flex-end;
   }
 }

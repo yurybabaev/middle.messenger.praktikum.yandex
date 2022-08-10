@@ -7,6 +7,7 @@ enum EVENTS {
   FLOW_RENDER = 'flow:render',
   FLOW_CWU = 'flow:component-will-update',
   FLOW_CDU = 'flow:component-did-update',
+  FLOW_CWUM = 'flow:component-will-unmount',
 }
 
 interface Meta {
@@ -14,8 +15,8 @@ interface Meta {
   oldEvents: Events
 }
 
-type Props = any;
-type Events = Record<string, EventListenerOrEventListenerObject | undefined>;
+export type Props = any;
+export type Events = Record<string, EventListenerOrEventListenerObject | undefined>;
 
 class Block {
   public static get ComponentName() {
@@ -41,6 +42,8 @@ class Block {
   private _events: Events;
 
   private _refs: Record<string, HTMLElement | Block>;
+
+  private _visibleDisplay = '';
 
   public get children(): Record<string, Block> {
     return this._children;
@@ -98,26 +101,36 @@ class Block {
     this._eventBus.on(EVENTS.FLOW_RENDER, this._render.bind(this));
     this._eventBus.on(EVENTS.FLOW_CWU, this._componentWillUpdate.bind(this));
     this._eventBus.on(EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+    this._eventBus.on(EVENTS.FLOW_CWUM, this._componentWilUnmount.bind(this));
   }
 
   init() {
     this._eventBus.emit(EVENTS.FLOW_RENDER);
   }
 
+  unmount() {
+    this.dispatchComponentWillUnmount();
+    if (this._element) {
+      this._element.remove();
+    }
+  }
+
   _componentDidMount(oldProps: Props): void {
+    this._visibleDisplay = window.getComputedStyle(this.element).display;
+    // console.log('did mount:', (this.constructor as typeof Block).ComponentName);
     this.componentDidMount(oldProps);
   }
 
   // Может переопределять пользователь, необязательно трогать
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected componentDidMount(oldProps: Props): void {
+  protected componentDidMount(_oldProps: Props): void {
 
   }
 
   dispatchComponentDidMount() {
-    Object.entries(this.children).forEach(([, child]) => {
-      child.dispatchComponentDidMount();
-    });
+    // Object.entries(this.children).forEach(([, child]) => {
+    //   child.dispatchComponentDidMount();
+    // });
     this._eventBus.emit(EVENTS.FLOW_CDM, this._props);
   }
 
@@ -130,7 +143,7 @@ class Block {
 
   // Может переопределять пользователь, необязательно трогать
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected componentWillUpdate(oldProps: Props, newProps: Props) {
+  protected componentWillUpdate(_oldProps: Props, _newProps: Props): boolean {
     return true;
   }
 
@@ -139,7 +152,23 @@ class Block {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected componentDidUpdate(newProps: Props) {
+  protected componentDidUpdate(_newProps: Props) {
+  }
+
+  public dispatchComponentWillUnmount() {
+    this._eventBus.emit(EVENTS.FLOW_CWUM);
+    Object.values(this.children).forEach((child) => {
+      child.dispatchComponentWillUnmount();
+    });
+  }
+
+  _componentWilUnmount(): void {
+    this.componentWilUnmount();
+  }
+
+  // Может переопределять пользователь, необязательно трогать
+  protected componentWilUnmount(): void {
+
   }
 
   public setProps(nextProps: Props) {
@@ -161,6 +190,9 @@ class Block {
   _render() {
     // console.log('render:', (this.constructor as typeof Block).ComponentName);
 
+    Object.values(this.children).forEach((child) => {
+      child.dispatchComponentWillUnmount();
+    });
     this._children = {};
     const fragment = this._applyTemplate({ ...this.props });
 
@@ -213,7 +245,7 @@ class Block {
   }
 
   show() {
-    this.element.style.display = 'block';
+    this.element.style.display = this._visibleDisplay;
   }
 
   hide() {
@@ -247,6 +279,7 @@ class Block {
       }
 
       stub.replaceWith(child.getContent());
+      child.dispatchComponentDidMount();
     });
 
     // container children elements
@@ -267,6 +300,7 @@ class Block {
       }
       containerContentPlaceholder.remove();
       container.replaceWith(containerContent);
+      child.dispatchComponentDidMount();
     });
 
     return fragment.content;

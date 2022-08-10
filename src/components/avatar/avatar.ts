@@ -5,7 +5,9 @@ import * as classes from './avatar.module.scss';
 
 export interface AvatarProps {
   avatarUrl?: string,
-  onClick?: EventListenerOrEventListenerObject
+  onClick?: EventListenerOrEventListenerObject,
+  hasOverlay: boolean,
+  overlayText: string
 }
 
 export class Avatar extends Block {

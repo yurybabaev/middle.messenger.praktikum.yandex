@@ -2,19 +2,29 @@
   <div class="{{classes.register}} {{classes.register__container}} {{classes.shadowBox}}">
     <span class="{{classes.register__label}}">Register</span>
     {{#Form onSubmit=onSubmit}}
-      {{{Field caption="Email" type="text" name="email" classModifier="login" validationRule=validationRules.email}}}
-      {{{Field caption="Login" type="text" name="login" classModifier="login" validationRule=validationRules.login}}}
-      {{{Field caption="First name" type="text" name="first_name" classModifier="login" validationRule=validationRules.firstName}}}
-      {{{Field caption="Second name" type="text" name="second_name" classModifier="login" validationRule=validationRules.secondName}}}
-      {{{Field caption="Phone" type="text" name="phone" classModifier="login" validationRule=validationRules.phone}}}
-      {{{Field caption="Password" type="password" name="password" classModifier="login" validationRule=validationRules.password}}}
-      {{{Field caption="Repeat password" type="password" name="password_repeat" classModifier="login" validationRule=validationRules.password}}}
-      <div class="{{classes.register__buttonContainer}}">      
-        {{{Button caption="Register" classModifier="primary" submit="true"}}}
-      </div>
+    {{{Field caption="Email" type="text" name="email" classModifier="login" value=newUser.email
+    validationRule=validationRules.email}}}
+    {{{Field caption="Login" type="text" name="login" classModifier="login" value=newUser.login
+    validationRule=validationRules.login}}}
+    {{{Field caption="First name" type="text" name="firstName" classModifier="login" value=newUser.firstName
+    validationRule=validationRules.firstName}}}
+    {{{Field caption="Second name" type="text" name="secondName" classModifier="login" value=newUser.secondName
+    validationRule=validationRules.secondName}}}
+    {{{Field caption="Phone" type="text" name="phone" classModifier="login" value=newUser.phone
+    validationRule=validationRules.phone}}}
+    {{{Field caption="Password" type="password" name="password" classModifier="login" value=newUser.password
+    validationRule=validationRules.password}}}
+    {{{Field caption="Repeat password" type="password" name="passwordRepeat" classModifier="login" value=""
+    validationRule=validationRules.password}}}
+    <div class="{{classes.register__errorLabel}}">
+      {{error.text}}
+    </div>
+    <div class="{{classes.register__buttonContainer}}">
+      {{{Button caption="Register" classModifier="primary" submit="true"}}}
+    </div>
     {{/Form}}
-    <div class="{{classes.register__linkContainer}}">      
-      {{{ Link caption="Sign in" url="/login"}}}
-    </div>    
+    <div class="{{classes.register__linkContainer}}">
+      {{{ Link caption="Sign in" url="/login" routed="true"}}}
+    </div>
   </div>
 </div>

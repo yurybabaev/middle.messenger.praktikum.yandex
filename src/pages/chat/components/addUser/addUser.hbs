@@ -1,0 +1,19 @@
+<div class="{{classes.addUser}}">
+  <div class="{{classes.addUser__searchContainer}}">
+    {{{Field caption="" type="text" name="title" classModifier="popup" ref="userNameField"}}}
+    <div class="{{classes.addUser__searchLinkContainer}}">
+      {{{Link caption="Search" clickHandler=onSearchClick}}}
+    </div>
+  </div>
+  <div class="{{classes.addUser__searchResultsContainer}}">
+    {{#each users}}
+    <div class="{{@root.classes.addUser__searchResultContainer}}">
+      <span class="{{@root.classes.addUser__searchResultName}}">{{this.firstName}} {{this.secondName}} ({{this.login}}{{#if this.displayName}} aka {{this.displayName}} {{/if}})</span>
+      {{{Link tag=this.id caption="Добавить" clickHandler=@root.onAddUserClick}}}
+    </div>
+    {{/each}}
+  </div>
+  <div class="{{classes.addUser__errorLabel}}">
+    {{error.text}}
+  </div>
+</div>

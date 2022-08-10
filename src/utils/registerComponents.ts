@@ -11,6 +11,12 @@ import { Search } from '../pages/chat/components/search/search';
 import { ChatContent } from '../pages/chat/components/chatContent/chatContent';
 import { ChatFeed } from '../pages/chat/components/chatFeed/chatFeed';
 import { ChatMessage } from '../pages/chat/components/chatMessage/chatMessage';
+import { Modal } from '../components/modal/modal';
+import { ChangeAvatar } from '../pages/user/changeAvatar/changeAvatar';
+import { Dropdown } from '../components/dropdown/dropdown';
+import { AddChat } from '../pages/chat/components/addChat/addChat';
+import { AddUser } from '../pages/chat/components/addUser/addUser';
+import { DeleteUser } from '../pages/chat/components/deleteUser/deleteUser';
 
 function registerComponent(Component: typeof Block) {
   Handlebars.registerHelper(Component.ComponentName, (options: HelperOptions) => {
@@ -40,6 +46,17 @@ export default () => {
     },
   );
 
+  Handlebars.registerHelper(
+    'formatTime',
+    (time: Date) => Intl.DateTimeFormat(
+      undefined,
+      {
+        hour: 'numeric',
+        minute: 'numeric',
+      },
+    ).format(time),
+  );
+
   registerComponent(Link);
   registerComponent(Avatar);
   registerComponent(Button);
@@ -51,4 +68,10 @@ export default () => {
   registerComponent(ChatContent);
   registerComponent(ChatFeed);
   registerComponent(ChatMessage);
+  registerComponent(Modal);
+  registerComponent(ChangeAvatar);
+  registerComponent(Dropdown);
+  registerComponent(AddChat);
+  registerComponent(AddUser);
+  registerComponent(DeleteUser);
 };

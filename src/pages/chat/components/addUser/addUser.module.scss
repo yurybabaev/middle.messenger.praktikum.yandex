@@ -1,0 +1,47 @@
+@import "../../../../styles/common.scss";
+@import "../../../../styles/container.scss";
+
+.addUser {
+  width: 100%;
+  max-width: 300px;
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+
+  &__errorLabel {
+    color: $font-color-error;
+    margin-top: 0.25rem;
+    height: 1rem;
+
+    @include same-font-and-line-size(1rem);
+  }
+
+  &__searchContainer {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+  }
+
+  &__searchLinkContainer {
+    margin-left: 20px;
+  }
+
+  &__searchResultsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    overflow: auto;
+  }
+
+  &__searchResultContainer {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__searchResultName {
+    margin-right: 20px;
+  }
+}
