@@ -48,10 +48,8 @@ class ChatFeed extends Block {
       this._initialLoaded = true;
       chatController.getCurrentChatOldMessages();
     }
-    // console.log("Should maybe scroll: ", newProps.messages.length, this._lastMessageCount);
     if (newProps.messages && newProps.messages.length !== this._lastMessageCount) {
       this._lastMessageCount = newProps.messages.length;
-      //      console.log("Should scroll");
       if (this._loadingRequested) {
         this.chatFeed.scrollTo(0, this.chatFeed.scrollHeight - this._lastScrollHeight);
         this._loadingRequested = false;

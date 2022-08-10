@@ -19,7 +19,7 @@
       margin-bottom: 1.25rem;
       color: $font-color-primary;
       border: none;
-      border-bottom: 1px solid #3369f3;
+      border-bottom: 1px solid $background-color-primary;
 
       @include same-font-and-line-size(1.1rem);
 
@@ -29,7 +29,7 @@
         margin-left: -0.5rem;
         border-radius: 2px;
         border-bottom: none;
-        outline: 1px solid #3369f3;
+        outline: 1px solid $background-color-primary;
       }
     }
 
