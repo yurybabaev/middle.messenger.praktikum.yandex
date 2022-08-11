@@ -12,15 +12,15 @@ export default abstract class BaseApi<T> {
 
   protected request = new Request(this.baseUrl);
 
-  public async create(item: T): Promise<T> {
+  public async create(_item: T): Promise<T> {
     throw new Error('Not implemented');
   }
 
-  public async read(params?: unknown): Promise<T | T[]> {
+  public async read(_params?: unknown): Promise<T | T[]> {
     throw new Error('Not implemented');
   }
 
-  public async update(item: T): Promise<T | T[]> {
+  public async update(_item: T): Promise<T | T[]> {
     throw new Error('Not implemented');
   }
 

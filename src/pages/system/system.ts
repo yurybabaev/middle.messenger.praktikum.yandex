@@ -1,6 +1,6 @@
 import Block from '../../utils/block';
 import template from './system.hbs';
-import * as classes from './system.module.scss';
+import classes from './system.module.scss';
 
 export interface SystemProps {
   code: string,

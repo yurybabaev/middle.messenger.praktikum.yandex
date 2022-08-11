@@ -1,7 +1,7 @@
-import defaultAvatar from 'url:./defaultAvatar.png';
+import defaultAvatar from './defaultAvatar.png';
 import Block from '../../utils/block';
 import template from './avatar.hbs';
-import * as classes from './avatar.module.scss';
+import classes from './avatar.module.scss';
 
 export interface AvatarProps {
   avatarUrl?: string,

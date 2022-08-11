@@ -92,7 +92,7 @@ class ChatApi extends BaseApi<Chat> {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public delete(item: User): boolean {
+  public delete(_item: User): boolean {
     throw new Error('Method not implemented.');
   }
 }

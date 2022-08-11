@@ -1,6 +1,6 @@
 import Block, { Props } from '../../../../utils/block';
 import template from './chatItem.hbs';
-import * as classes from './chatItem.module.scss';
+import classes from './chatItem.module.scss';
 import Chat from '../../../../models/chat';
 import StoreKeys from '../../../../utils/storeKeys';
 import chatController from '../../../../logic/chatController';
@@ -27,7 +27,7 @@ class ChatItem extends Block {
     );
   }
 
-  protected componentWillUpdate(oldProps: Props, newProps: Props) {
+  protected componentWillUpdate(_oldProps: Props, newProps: Props) {
     // eslint-disable-next-line no-param-reassign
     newProps.isSelected = newProps.currentChat.id === newProps.chat.id;
     return true;

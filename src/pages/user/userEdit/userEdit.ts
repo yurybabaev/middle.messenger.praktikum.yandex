@@ -5,7 +5,7 @@ import storeAware from '../../../utils/storeAware';
 import StoreKeys from '../../../utils/storeKeys';
 import { validationRules } from '../../../utils/validationRules';
 import template from './userEdit.hbs';
-import * as classes from './userEdit.module.scss';
+import classes from './userEdit.module.scss';
 
 class UserEdit extends DataContainerBlock {
   constructor(props: object) {

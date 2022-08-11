@@ -4,7 +4,9 @@ import DataContainerBlock from '../../utils/dataContainerBlock';
 import storeAware from '../../utils/storeAware';
 import StoreKeys from '../../utils/storeKeys';
 import template from './login.hbs';
-import * as classes from './login.module.scss';
+import classes from './login.module.scss';
+
+console.log(classes);
 
 class Login extends DataContainerBlock {
   constructor() {

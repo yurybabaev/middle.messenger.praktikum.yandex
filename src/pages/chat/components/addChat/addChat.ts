@@ -5,7 +5,7 @@ import DataContainerBlock from '../../../../utils/dataContainerBlock';
 import storeAware from '../../../../utils/storeAware';
 import StoreKeys from '../../../../utils/storeKeys';
 import template from './addChat.hbs';
-import * as classes from './addChat.module.scss';
+import classes from './addChat.module.scss';
 
 class AddChat extends DataContainerBlock {
   constructor(props: object) {
@@ -40,3 +40,4 @@ const storeAwareAddChat = storeAware(AddChat, {
 });
 // eslint-disable-next-line import/prefer-default-export
 export { storeAwareAddChat as AddChat };
+export { AddChat as AddChatType };

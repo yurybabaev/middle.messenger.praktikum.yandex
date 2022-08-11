@@ -1,7 +1,7 @@
-import searchIcon from 'url:./searchIcon.svg';
+import searchIcon from './searchIcon.svg';
 import Block from '../../../../utils/block';
 import template from './search.hbs';
-import * as classes from './search.module.scss';
+import classes from './search.module.scss';
 
 export default () => template();
 

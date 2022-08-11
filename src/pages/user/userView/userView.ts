@@ -3,7 +3,7 @@ import Block from '../../../utils/block';
 import storeAware from '../../../utils/storeAware';
 import StoreKeys from '../../../utils/storeKeys';
 import template from './userView.hbs';
-import * as classes from './userView.module.scss';
+import classes from './userView.module.scss';
 
 class UserView extends Block {
   constructor(props: object) {

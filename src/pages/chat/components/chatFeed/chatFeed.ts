@@ -1,5 +1,5 @@
 import template from './chatFeed.hbs';
-import * as classes from './chatFeed.module.scss';
+import classes from './chatFeed.module.scss';
 import Chat from '../../../../models/chat';
 import Block from '../../../../utils/block';
 import StoreKeys from '../../../../utils/storeKeys';

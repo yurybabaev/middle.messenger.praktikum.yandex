@@ -1,7 +1,7 @@
 // import Handlebars from 'handlebars';
 import Block from '../../utils/block';
 import template from './button.hbs';
-import * as classes from './button.module.scss';
+import classes from './button.module.scss';
 
 export interface ButtonProps {
   caption: string;

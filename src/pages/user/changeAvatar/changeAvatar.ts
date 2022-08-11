@@ -4,7 +4,7 @@ import DataContainerBlock from '../../../utils/dataContainerBlock';
 import storeAware from '../../../utils/storeAware';
 import StoreKeys from '../../../utils/storeKeys';
 import template from './changeAvatar.hbs';
-import * as classes from './changeAvatar.module.scss';
+import classes from './changeAvatar.module.scss';
 
 export interface ChangeAvatarProps {
 
