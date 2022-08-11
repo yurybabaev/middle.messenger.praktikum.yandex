@@ -50,7 +50,7 @@
   "scripts": {
     "clean": "npx rimraf dist",
     "dev": "webpack serve --mode=development --progress",
-    "build": "webpack",
+    "build": "webpack --mode=production",
     "start": "npm run build && node ./server.js",
     "lint": "eslint ./src/**/*.ts --fix && stylelint ./src/**/*.scss --fix",
     "test": "cross-env TS_NODE_COMPILER_OPTIONS={\\\"module\\\":\\\"commonjs\\\"} mocha -r ts-node/register \"src/**/*test.ts\""
