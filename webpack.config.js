@@ -45,9 +45,6 @@ module.exports = {
           },
           {
             loader: 'css-loader',
-            // options: {
-            //   modules: true,
-            // },
           },          
           'sass-loader',
         ],
@@ -60,15 +57,6 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    // new CopyWebpackPlugin({
-    //   patterns: [
-    //     {
-    //       from: '**/*',
-    //       context: path.resolve(__dirname, 'src', 'assets'),
-    //       to: './assets',
-    //     },
-    //   ],
-    // }),
     new HtmlWebpackPlugin({
       template: 'static/index.html',
       filename: 'index.html',
