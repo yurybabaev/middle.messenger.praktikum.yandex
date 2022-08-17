@@ -1,7 +1,7 @@
 import DataBlock from '../../utils/dataBlock';
 import { ValidationRule } from '../../utils/validationRules';
 import template from './field.hbs';
-import * as classes from './field.module.scss';
+import classes from './field.module.scss';
 
 export interface FieldProps {
   value?: any;

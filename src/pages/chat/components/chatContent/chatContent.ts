@@ -1,5 +1,5 @@
 import template from './chatContent.hbs';
-import * as classes from './chatContent.module.scss';
+import classes from './chatContent.module.scss';
 import Chat from '../../../../models/chat';
 import DataContainerBlock from '../../../../utils/dataContainerBlock';
 import { Field } from '../../../../components/field/field';

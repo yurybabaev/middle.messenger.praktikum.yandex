@@ -4,7 +4,7 @@ import storeAware from '../../../utils/storeAware';
 import StoreKeys from '../../../utils/storeKeys';
 import { validationRules } from '../../../utils/validationRules';
 import template from './userChangePassword.hbs';
-import * as classes from './userChangePassword.module.scss';
+import classes from './userChangePassword.module.scss';
 
 class UserChangePassword extends DataContainerBlock {
   constructor() {

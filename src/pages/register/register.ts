@@ -1,6 +1,6 @@
 import DataContainerBlock from '../../utils/dataContainerBlock';
 import template from './register.hbs';
-import * as classes from './register.module.scss';
+import classes from './register.module.scss';
 import { validationRules } from '../../utils/validationRules';
 import User from '../../models/user';
 import storeAware from '../../utils/storeAware';

@@ -130,7 +130,7 @@ class UserApi extends BaseApi<User> {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public delete(item: User): boolean {
+  public delete(_items: User): boolean {
     throw new Error('Method not implemented.');
   }
 }

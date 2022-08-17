@@ -1,6 +1,6 @@
 import Block from '../../utils/block';
 import template from './form.hbs';
-import * as classes from './form.module.scss';
+import classes from './form.module.scss';
 
 export interface FormProps {
   onSubmit?: EventListener;

@@ -1,11 +1,11 @@
 import DataContainerBlock from '../../utils/dataContainerBlock';
 import template from './chat.hbs';
-import * as classes from './chat.module.scss';
+import classes from './chat.module.scss';
 import Block from '../../utils/block';
 import storeAware from '../../utils/storeAware';
 import StoreKeys from '../../utils/storeKeys';
-import { AddChat } from './components/addChat/addChat';
 import chatController from '../../logic/chatController';
+import { AddChatType } from './components/addChat/addChat';
 
 class Chat extends DataContainerBlock {
   constructor() {
@@ -13,7 +13,7 @@ class Chat extends DataContainerBlock {
       classes,
       onAddChat: () => {
         (this.refs.addChatModal as Block).show();
-        (this.refs.addChat as AddChat).clear();
+        (this.refs.addChat as AddChatType).clear();
       },
     });
     chatController.getChats();

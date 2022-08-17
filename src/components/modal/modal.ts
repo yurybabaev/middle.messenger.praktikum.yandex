@@ -1,6 +1,6 @@
 import Block from '../../utils/block';
 import template from './modal.hbs';
-import * as classes from './modal.module.scss';
+import classes from './modal.module.scss';
 
 export interface ModalProps {
   onClick?: EventListenerOrEventListenerObject

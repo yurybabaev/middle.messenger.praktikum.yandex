@@ -66,7 +66,7 @@ class UserController {
       const currentUser = await userApi.update(user);
       store.put(StoreKeys.CURRENT_USER, currentUser);
       store.put(StoreKeys.LAST_ERROR, null);
-      router.go('/user/view');
+      router.go('/userview');
     } catch (e) {
       store.putAndClear(StoreKeys.LAST_ERROR, new ApplicationError(e));
     }
@@ -84,7 +84,7 @@ class UserController {
       }
       await userApi.changePassword(oldPassword, newPassword);
       store.put(StoreKeys.LAST_ERROR, null);
-      router.go('/user/view');
+      router.go('/userview');
     } catch (e) {
       store.putAndClear(StoreKeys.LAST_ERROR, new ApplicationError(e));
     }

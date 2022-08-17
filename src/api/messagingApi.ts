@@ -1,4 +1,4 @@
-import ChatMessage from '../models/ChatMessage';
+import ChatMessage from '../models/chatMessage';
 import EventBus from '../utils/eventBus';
 
 export interface OutgoingMessage {

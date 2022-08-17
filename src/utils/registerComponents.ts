@@ -38,11 +38,14 @@ export default () => {
   Handlebars.registerHelper('ChildContent', () => '<div data-content></div>');
   Handlebars.registerHelper(
     'modifyclass',
-    (base: string, modifiers: string) => {
+    (classes: Record<string, string>, base: string, modifiers: string) => {
       if (!modifiers) {
-        return base;
+        return classes[base];
       }
-      return String(modifiers).split(' ').reduce((prev, mod) => `${prev} ${base}_${mod}`, base);
+      return String(modifiers).split(' ').reduce(
+        (prev, mod) => `${prev} ${classes[`${base}_${mod}`]}`,
+        classes[base],
+      );
     },
   );
 

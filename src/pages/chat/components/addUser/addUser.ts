@@ -5,7 +5,7 @@ import DataContainerBlock from '../../../../utils/dataContainerBlock';
 import storeAware from '../../../../utils/storeAware';
 import StoreKeys from '../../../../utils/storeKeys';
 import template from './addUser.hbs';
-import * as classes from './addUser.module.scss';
+import classes from './addUser.module.scss';
 
 class AddUser extends DataContainerBlock {
   private get userNameField() {

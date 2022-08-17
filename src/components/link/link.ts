@@ -1,6 +1,6 @@
 import Block from '../../utils/block';
 import template from './link.hbs';
-import * as classes from './link.module.scss';
+import classes from './link.module.scss';
 import router from '../../utils/router';
 
 export interface ILinkProps {

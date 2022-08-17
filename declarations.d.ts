@@ -3,8 +3,13 @@ declare module '*.scss' {
   export default value;
 }
 
-declare module 'url:*' {
-  const value: string;
+declare module '*.png' {
+  const value: (data?: unknown) => string;
+  export default value;
+}
+
+declare module '*.svg' {
+  const value: (data?: unknown) => string;
   export default value;
 }
 

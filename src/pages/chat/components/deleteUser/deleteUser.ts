@@ -3,7 +3,7 @@ import DataContainerBlock from '../../../../utils/dataContainerBlock';
 import storeAware from '../../../../utils/storeAware';
 import StoreKeys from '../../../../utils/storeKeys';
 import template from './deleteUser.hbs';
-import * as classes from './deleteUser.module.scss';
+import classes from './deleteUser.module.scss';
 
 class DeleteUser extends DataContainerBlock {
   constructor(props: object) {

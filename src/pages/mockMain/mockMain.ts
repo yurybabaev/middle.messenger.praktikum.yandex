@@ -1,6 +1,6 @@
 import Block from '../../utils/block';
 import template from './mockMain.hbs';
-import * as classes from './mockMain.module.scss';
+import classes from './mockMain.module.scss';
 
 export interface MockMainProps {
   links: { text: string, url: string }[];
